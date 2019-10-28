@@ -9,19 +9,34 @@ public class WorksheetBuilderClass implements WorksheetReader.WorksheetBuilder {
 
   @Override
   public WorksheetReader.WorksheetBuilder createCell(int col, int row, String contents) {
-    int value;
+    Double value;
+    boolean value2;
     Cell c;
-    try {
-      value = Integer.parseInt(contents);
-      c = new ValueCell(value);
+    if (contents == null) {
+      c = null;
     }
-    catch (Exception e) {
+    else if (contents.substring(0, 1).equals("=")) {
+      c = new
+      c = c.determineFormulaType(contents);
+    }
+    else {
       try {
-        if (contents instanceof )
+        value = Double.parseDouble(contents);
+        c = new NumberCell(value);
+        this.worksheet.addCell(row, col, c);
+      }
+      catch (Exception e) {
+        if (contents.equalsIgnoreCase("true")) {
+          c = new BooleanCell(true);
+          this.worksheet.addCell(row, col, c);
+        }
+        else if (contents.equalsIgnoreCase("false")) {
+          c = new BooleanCell(false);
+          this.worksheet.addCell(row, col, c);
+        }
       }
     }
-
-    return null;
+    return this;
   }
 
   @Override

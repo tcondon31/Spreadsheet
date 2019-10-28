@@ -9,4 +9,9 @@ public class Worksheet {
   public Worksheet() {
     this.sheet = new HashMap<>();
   }
+
+  public void addCell(int row, int col, Cell c) {
+    Coord temp = new Coord(row, col);
+    this.sheet.put(temp.toString(), c);
+  }
 }
