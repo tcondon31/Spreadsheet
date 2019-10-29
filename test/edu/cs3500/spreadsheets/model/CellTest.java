@@ -14,6 +14,9 @@ public class CellTest {
   Cell c3;
   Cell c4;
   Cell c5;
+  Cell c6;
+  Cell c7;
+  Cell c8;
 
   public void initCells() {
     c1 = new Cell("4");
@@ -21,15 +24,32 @@ public class CellTest {
     c3 = new Cell("= (SUM 4 5)");
     c4 = new Cell("(SUM 4 5)");
     c5 = new Cell("=(< (SUM 4 5) 10)");
+    c6 = new Cell("=(< 10 \"hello\")");
+    c7 = new Cell("=(PRODUCT cheese 5)");
+    c8 = new Cell("=(CONCAT \"cheese\" (PRODUCT 6 5))");
   }
 
   @Test
-  public void evaluateCell() {
+  public void evaluateCellTest() {
     initCells();
     assertEquals(new SNumber(4), c1.evaluateCell());
     assertEquals(new SBoolean(true), c2.evaluateCell());
     assertEquals(new SNumber(9), c3.evaluateCell());
-    assertEquals(new SSymbol("(SUM 4 5)"), c4.evaluateCell());
+    assertEquals(new SString("(SUM 4 5)"), c4.evaluateCell());
     assertEquals(new SBoolean(true), c5.evaluateCell());
+    //TODO: Not sure if we want the slashes but thats how toString for SString works
+    assertEquals(new SString("\"cheese\"30.0"), c8.evaluateCell());
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void evaluateCellTestFail1() {
+    initCells();
+    c6.evaluateCell();
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void evaluateCellTestFail2() {
+    initCells();
+    c7.evaluateCell();
   }
 }

@@ -1,9 +1,6 @@
 package edu.cs3500.spreadsheets.model;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 public class Worksheet {
 
@@ -19,6 +16,6 @@ public class Worksheet {
   }
 
   public void evaluateAll() {
-    this.sheet.forEach((k, v) -> v.evaluateCell());
+    //this.sheet.forEach((k, v) -> v.evaluateCell());
   }
 }
