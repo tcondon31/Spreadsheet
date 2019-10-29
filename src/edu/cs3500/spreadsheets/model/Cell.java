@@ -1,5 +1,6 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.sexp.EvaluateCellVisitor;
 import edu.cs3500.spreadsheets.sexp.Parser;
 import edu.cs3500.spreadsheets.sexp.SNumber;
 import edu.cs3500.spreadsheets.sexp.Sexp;
@@ -25,6 +26,6 @@ public class Cell {
   }
 
   public Sexp evaluateCell() {
-    return this.parseCell().accept(EvaluateVisitor<Sexp>());
+    return this.parseCell().accept(new EvaluateCellVisitor());
   }
 }
