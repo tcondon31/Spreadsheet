@@ -19,13 +19,7 @@ public class EvaluateCellVisitor implements SexpVisitor<Sexp> {
 
   @Override
   public Sexp visitSymbol(String s) {
-    switch (s.toUpperCase()) {
-      case "SUM" :
-
-      case "PRODUCT" :
-
-      case "<" :
-    }
+    throw new IllegalArgumentException("Cannot evaluate symbol");
   }
 
   @Override
@@ -34,7 +28,64 @@ public class EvaluateCellVisitor implements SexpVisitor<Sexp> {
   }
 
   @Override
-  public Object visitSList(List l) {
+  public Sexp visitSList(List l) {
+    try {
+      SSymbol first = (SSymbol)l.get(0);
+      String firstString = first.toString();
+      List<Sexp> rest = l.subList(1, l.size());
+      if (rest.size() <= 1) {
+        throw new IllegalArgumentException("Not enough arguments");
+      }
+      switch (firstString.toUpperCase()) {
+        case "SUM" :
+          double totalSum = 0;
+          for (Sexp s : rest) {
+            try {
+              totalSum += Double.parseDouble(s.accept(new EvaluateCellVisitor()).toString());
+            }
+            catch (Exception e) {
+              throw new IllegalArgumentException("Not a number");
+            }
+          }
+          return new SNumber(totalSum);
+        case "PRODUCT" :
+          double totalProd = 1;
+          for (Sexp s : rest) {
+            try {
+              totalProd *= Double.parseDouble(s.accept(new EvaluateCellVisitor()).toString());
+            }
+            catch (Exception e) {
+              throw new IllegalArgumentException("Not a number");
+            }
+          }
+          return new SNumber(totalProd);
+        case "<" :
+          double curElement;
+          try {
+            curElement = Double.parseDouble(rest.get(0).toString());
+          }
+          catch (Exception e) {
+            throw new IllegalArgumentException("Not a number");
+          }
+          List<Sexp> rest2 = rest.subList(1, rest.size());
+          for (Sexp s : rest2) {
+            try {
+              double nextElement = Double.parseDouble(s.accept(new EvaluateCellVisitor()).toString());
+              if (nextElement <= curElement) {
+                return new SBoolean(false);
+              }
+              curElement = nextElement;
+            }
+            catch (Exception e) {
+              throw new IllegalArgumentException("Not a number");
+            }
+          }
+          return new SBoolean(true);
+      }
+    }
+    catch (Exception e) {
+
+    }
     return null;
   }
 }
