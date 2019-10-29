@@ -13,21 +13,14 @@ public class CellTest {
   Cell c2;
   Cell c3;
   Cell c4;
+  Cell c5;
 
   public void initCells() {
     c1 = new Cell("4");
     c2 = new Cell("true");
     c3 = new Cell("= (SUM 4 5)");
     c4 = new Cell("(SUM 4 5)");
-  }
-
-  @Test
-  public void parseCell() {
-    initCells();
-    assertEquals(new SNumber(4), c1.parseCell());
-    assertEquals(new SBoolean(true), c2.parseCell());
-    assertEquals(new SList(Arrays.asList(new SSymbol("SUM"), new SNumber(4), new SNumber(5))), c3.parseCell());
-    assertEquals(new SList(Arrays.asList(new SSymbol("SUM"), new SNumber(4), new SNumber(5))), c4.parseCell());
+    c5 = new Cell("=(< (SUM 4 5) 10)");
   }
 
   @Test
@@ -36,6 +29,7 @@ public class CellTest {
     assertEquals(new SNumber(4), c1.evaluateCell());
     assertEquals(new SBoolean(true), c2.evaluateCell());
     assertEquals(new SNumber(9), c3.evaluateCell());
-    assertEquals(new SNumber(9), c4.evaluateCell());
+    assertEquals(new SSymbol("(SUM 4 5)"), c4.evaluateCell());
+    assertEquals(new SBoolean(true), c5.evaluateCell());
   }
 }

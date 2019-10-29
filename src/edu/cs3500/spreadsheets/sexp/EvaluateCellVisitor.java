@@ -37,34 +37,31 @@ public class EvaluateCellVisitor implements SexpVisitor<Sexp> {
         throw new IllegalArgumentException("Not enough arguments");
       }
       switch (firstString.toUpperCase()) {
-        case "SUM" :
+        case "SUM":
           double totalSum = 0;
           for (Sexp s : rest) {
             try {
               totalSum += Double.parseDouble(s.accept(new EvaluateCellVisitor()).toString());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
               throw new IllegalArgumentException("Not a number");
             }
           }
           return new SNumber(totalSum);
-        case "PRODUCT" :
+        case "PRODUCT":
           double totalProd = 1;
           for (Sexp s : rest) {
             try {
               totalProd *= Double.parseDouble(s.accept(new EvaluateCellVisitor()).toString());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
               throw new IllegalArgumentException("Not a number");
             }
           }
           return new SNumber(totalProd);
-        case "<" :
+        case "<":
           double curElement;
           try {
-            curElement = Double.parseDouble(rest.get(0).toString());
-          }
-          catch (Exception e) {
+            curElement = Double.parseDouble(rest.get(0).accept(new EvaluateCellVisitor()).toString());
+          } catch (Exception e) {
             throw new IllegalArgumentException("Not a number");
           }
           List<Sexp> rest2 = rest.subList(1, rest.size());
@@ -75,17 +72,17 @@ public class EvaluateCellVisitor implements SexpVisitor<Sexp> {
                 return new SBoolean(false);
               }
               curElement = nextElement;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
               throw new IllegalArgumentException("Not a number");
             }
           }
           return new SBoolean(true);
+        default:
+          throw new IllegalArgumentException("Invalid Function");
       }
     }
     catch (Exception e) {
-
+      throw new IllegalArgumentException("Invalid Symbol");
     }
-    return null;
   }
 }
