@@ -77,6 +77,12 @@ public class EvaluateCellVisitor implements SexpVisitor<Sexp> {
             }
           }
           return new SBoolean(true);
+        case "CONCAT" :
+          String total = "";
+          for (Sexp s : rest) {
+            total += s.accept(new EvaluateCellVisitor()).toString();
+          }
+          return new SString(total);
         default:
           throw new IllegalArgumentException("Invalid Function");
       }

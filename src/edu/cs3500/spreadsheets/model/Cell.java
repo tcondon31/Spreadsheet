@@ -14,12 +14,12 @@ public class Cell {
   }
 
   public Sexp evaluateCell() {
-    if (contents.startsWith("=")) {
-      return Parser.parse(contents.substring(1)).accept(new EvaluateCellVisitor());
+    if (this.contents.startsWith("=")) {
+      return Parser.parse(this.contents.substring(1)).accept(new EvaluateCellVisitor());
     }
     else {
       try {
-        double value = Double.parseDouble(contents);
+        double value = Double.parseDouble(this.contents);
         return new SNumber(value);
       }
       catch (Exception e) {
@@ -29,7 +29,7 @@ public class Cell {
           case "false" :
             return new SBoolean(false);
           default :
-            return new SSymbol(this.contents);
+            return new SString(this.contents);
         }
       }
     }
