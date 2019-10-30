@@ -18,6 +18,7 @@ public class CellTest {
   Cell c7;
   Cell c8;
   Cell c9;
+  Cell c10;
 
   public void initCells() {
     c1 = new Cell("4");
@@ -29,6 +30,7 @@ public class CellTest {
     c7 = new Cell("=(PRODUCT cheese 5)");
     c8 = new Cell("=(CONCAT \"cheese\" (PRODUCT 6 5))");
     c9 = new Cell("=(CHEESE \"cheese\" (PRODUCT 6 5))");
+    c10 = new Cell("=(\"CHEESE\" 5 (PRODUCT 6 5))");
   }
 
   @Test
@@ -59,5 +61,11 @@ public class CellTest {
   public void evaluateCellTestFail3() {
     initCells();
     c9.evaluateCell();
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void evaluateCellTestFail4() {
+    initCells();
+    c10.evaluateCell();
   }
 }
