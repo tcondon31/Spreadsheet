@@ -92,7 +92,7 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
       }
     }
     catch (Exception e) {
-      throw new IllegalArgumentException("Invalid Symbol");
+      throw new IllegalArgumentException("Invalid S-Expression");
     }
   }
 }
