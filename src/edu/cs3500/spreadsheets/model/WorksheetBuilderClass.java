@@ -18,7 +18,7 @@ public class WorksheetBuilderClass implements WorksheetReader.WorksheetBuilder {
 
   @Override
   public Object createWorksheet() {
-    //this.worksheet.evaluateAll();
+    this.worksheet.evaluateAll();
     return this.worksheet;
   }
 }

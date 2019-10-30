@@ -1,6 +1,12 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.sexp.EvaluateCell;
+import edu.cs3500.spreadsheets.sexp.SList;
+import edu.cs3500.spreadsheets.sexp.SSymbol;
+import edu.cs3500.spreadsheets.sexp.Sexp;
+
 import java.util.HashMap;
+import java.util.List;
 
 public class Worksheet {
 
@@ -17,5 +23,24 @@ public class Worksheet {
 
   public void evaluateAll() {
     //this.sheet.forEach((k, v) -> v.evaluateCell());
+  }
+
+  public Sexp evaluateReference(SSymbol s) {
+    String key = s.toString();
+    if (this.sheet.containsKey(key)) {
+      Cell c = this.sheet.get(key);
+      return c.evaluateCell();
+    }
+    else if (key.contains(":")) {
+      String left = key.substring(0, key.indexOf(":"));
+      String right = key.substring(key.indexOf(":") + 1);
+      if (this.sheet.containsKey(left) && this.sheet.containsKey(right)) {
+        List<Cell> references = this.getAllReferences(left, right);
+      }
+    }
+  }
+
+  public List<Cell> getAllReferences() {
+
   }
 }
