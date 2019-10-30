@@ -24,7 +24,7 @@ public class Worksheet {
   public void evaluateAll() {
     //this.sheet.forEach((k, v) -> v.evaluateCell());
   }
-/*
+
   public Sexp evaluateReference(SSymbol s) {
     String key = s.toString();
     if (this.sheet.containsKey(key)) {
@@ -44,6 +44,4 @@ public class Worksheet {
   // a valid reference
   private List<Cell> getAllReferences() {
   }
-
- */
 }
