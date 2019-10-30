@@ -24,7 +24,7 @@ public class Worksheet {
   public void evaluateAll() {
     //this.sheet.forEach((k, v) -> v.evaluateCell());
   }
-
+/*
   public Sexp evaluateReference(SSymbol s) {
     String key = s.toString();
     if (this.sheet.containsKey(key)) {
@@ -40,7 +40,10 @@ public class Worksheet {
     }
   }
 
-  public List<Cell> getAllReferences() {
-
+  // returns a list of all cells in a given reference and throws exception if its not
+  // a valid reference
+  private List<Cell> getAllReferences() {
   }
+
+ */
 }
