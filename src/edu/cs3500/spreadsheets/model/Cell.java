@@ -15,7 +15,7 @@ public class Cell {
 
   public Sexp evaluateCell() {
     if (this.contents.startsWith("=")) {
-      return Parser.parse(this.contents.substring(1)).accept(new EvaluateCellVisitor());
+      return new EvaluateCell().apply(Parser.parse(this.contents.substring(1)));
     }
     else {
       try {

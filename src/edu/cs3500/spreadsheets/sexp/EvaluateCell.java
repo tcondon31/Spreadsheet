@@ -2,11 +2,15 @@ package edu.cs3500.spreadsheets.sexp;
 
 import java.util.List;
 
-import edu.cs3500.spreadsheets.sexp.SBoolean;
-import edu.cs3500.spreadsheets.sexp.Sexp;
-import edu.cs3500.spreadsheets.sexp.SexpVisitor;
+import edu.cs3500.spreadsheets.model.Func;
 
-public class EvaluateCellVisitor implements SexpVisitor<Sexp> {
+public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
+
+  @Override
+  public Sexp apply(Sexp arg) {
+    return arg.accept(this);
+  }
+
   @Override
   public SBoolean visitBoolean(boolean b) {
     return new SBoolean(b);
@@ -41,7 +45,7 @@ public class EvaluateCellVisitor implements SexpVisitor<Sexp> {
           double totalSum = 0;
           for (Sexp s : rest) {
             try {
-              totalSum += Double.parseDouble(s.accept(new EvaluateCellVisitor()).toString());
+              totalSum += Double.parseDouble(s.accept(new EvaluateCell()).toString());
             } catch (Exception e) {
               throw new IllegalArgumentException("Not a number");
             }
@@ -51,7 +55,7 @@ public class EvaluateCellVisitor implements SexpVisitor<Sexp> {
           double totalProd = 1;
           for (Sexp s : rest) {
             try {
-              totalProd *= Double.parseDouble(s.accept(new EvaluateCellVisitor()).toString());
+              totalProd *= Double.parseDouble(s.accept(new EvaluateCell()).toString());
             } catch (Exception e) {
               throw new IllegalArgumentException("Not a number");
             }
@@ -60,14 +64,14 @@ public class EvaluateCellVisitor implements SexpVisitor<Sexp> {
         case "<":
           double curElement;
           try {
-            curElement = Double.parseDouble(rest.get(0).accept(new EvaluateCellVisitor()).toString());
+            curElement = Double.parseDouble(rest.get(0).accept(new EvaluateCell()).toString());
           } catch (Exception e) {
             throw new IllegalArgumentException("Not a number");
           }
           List<Sexp> rest2 = rest.subList(1, rest.size());
           for (Sexp s : rest2) {
             try {
-              double nextElement = Double.parseDouble(s.accept(new EvaluateCellVisitor()).toString());
+              double nextElement = Double.parseDouble(s.accept(new EvaluateCell()).toString());
               if (nextElement <= curElement) {
                 return new SBoolean(false);
               }
@@ -80,7 +84,7 @@ public class EvaluateCellVisitor implements SexpVisitor<Sexp> {
         case "CONCAT" :
           StringBuilder total = new StringBuilder();
           for (Sexp s : rest) {
-            total.append(s.accept(new EvaluateCellVisitor()).toString());
+            total.append(s.accept(new EvaluateCell()).toString());
           }
           return new SString(total.toString());
         default:
