@@ -47,6 +47,13 @@ public class CellTest {
     assertEquals(new SString("\"cheese\"30.0"), c8.evaluateCell());
   }
 
+  @Test
+  public void testSumFunc() {
+    initCells();
+    Func sum = new SumFunc(0);
+    assertEquals(new SNumber(9), c3.evaluateCell());
+  }
+
   @Test (expected = IllegalArgumentException.class)
   public void evaluateCellTestFail1() {
     initCells();

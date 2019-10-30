@@ -42,6 +42,9 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
       }
       switch (firstString.toUpperCase()) {
         case "SUM":
+          double tot = new SumFunc(0).apply(new SList(rest));
+          return new SNumber(tot);
+          /*
           double totalSum = 0;
           for (Sexp s : rest) {
             try {
@@ -51,6 +54,7 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
             }
           }
           return new SNumber(totalSum);
+           */
         case "PRODUCT":
           double totalProd = 1;
           for (Sexp s : rest) {
@@ -92,7 +96,7 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
       }
     }
     catch (Exception e) {
-      throw new IllegalArgumentException("Invalid Symbol");
+      throw new IllegalArgumentException("Invalid S-Expression");
     }
   }
 }
