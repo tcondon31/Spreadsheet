@@ -1,12 +1,6 @@
 package edu.cs3500.spreadsheets.model;
 
-import edu.cs3500.spreadsheets.sexp.EvaluateCell;
-import edu.cs3500.spreadsheets.sexp.Parser;
-import edu.cs3500.spreadsheets.sexp.SBoolean;
-import edu.cs3500.spreadsheets.sexp.SNumber;
-import edu.cs3500.spreadsheets.sexp.SString;
-import edu.cs3500.spreadsheets.sexp.SSymbol;
-import edu.cs3500.spreadsheets.sexp.Sexp;
+import edu.cs3500.spreadsheets.sexp.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,10 +34,15 @@ public class Worksheet {
 
   /**
    * Returns an Sexp containing the evaluation of the cell based on its contents.
-   * @param c the cell to be evaluated
+   * @param key the key to be evaluated
    * @return Sexp the evaluated contents in an S-expression
    */
-  public Sexp evaluateCell(Cell c) {
+  public Sexp evaluateCell(String key) {
+    Cell c = this.sheet.getOrDefault(key, new Cell(""));
+    List<String> ref = this.getListOfReferences(c);
+    if (ref.contains(key)) {
+      throw new IllegalArgumentException("Cyclic reference in cell");
+    }
     if (c.getContents().startsWith("=")) {
       return new EvaluateCell(this).apply(Parser.parse(c.getContents().substring(1)));
     }
@@ -102,6 +101,18 @@ public class Worksheet {
       }
     }
     return references;
+  }
+
+  public List<String> getListOfReferences(Cell c) {
+    return this.getLoRAcc(c, new ArrayList<String>());
+  }
+
+  public List<String> getLoRAcc(Cell c, List<String> list) {
+    if (c.getContents().substring(0,1).equals("=")) {
+      Sexp s = Parser.parse(c.getContents().substring(1));
+      return new GetAllRef(this, list).apply(s);
+    }
+    return new ArrayList<String>();
   }
 
   public boolean containsKey(String key) {

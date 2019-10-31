@@ -41,7 +41,7 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
     if (this.worksheet.containsKey(s)) {
       Cell c = this.worksheet.getKey(s);
       try {
-        return this.worksheet.evaluateCell(c);
+        return this.worksheet.evaluateCell(s);
       }
       catch (Exception e) {
         throw new IllegalArgumentException("Could not evaluate symbol");

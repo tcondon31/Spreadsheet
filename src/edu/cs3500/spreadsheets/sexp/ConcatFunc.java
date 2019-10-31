@@ -54,7 +54,7 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
     if (this.worksheet.containsKey(s)) {
       Cell c = this.worksheet.getKey(s);
       try {
-        return this.worksheet.evaluateCell(c).toString();
+        return this.worksheet.evaluateCell(s).toString();
       }
       catch (Exception e) {
         return "";

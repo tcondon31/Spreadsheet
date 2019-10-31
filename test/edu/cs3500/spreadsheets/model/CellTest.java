@@ -61,12 +61,12 @@ public class CellTest {
     //assertEquals(new SBoolean(true), c2.evaluateCell());
     //assertEquals(new SNumber(9), c3.evaluateCell());
     //assertEquals(new SString("(SUM 4 5)"), c4.evaluateCell());
-    assertEquals(new SBoolean(false), w1.evaluateCell(w1.getCellAt(1, 5)));
+    assertEquals(new SBoolean(false), w1.evaluateCell(new Coord(1, 5).toString()));
     //TODO: Not sure if we want the slashes but thats how toString for SString works
-    assertEquals(new SString("cheese30.0"), w1.evaluateCell(w1.getCellAt(2, 1)));
+    assertEquals(new SString("cheese30.0"), w1.evaluateCell(new Coord(2, 1).toString()));
     //assertEquals(new Cell("4"), w1.getCellAt(1, 1));
-    assertEquals(new SNumber(43), w1.evaluateCell(w1.getCellAt(1, 3)));
+    assertEquals(new SNumber(43), w1.evaluateCell(new Coord(1, 3).toString()));
     //assertEquals("43.0", w1.evaluateCell(w1.getCellAt(1, 3)).toString());
-    assertEquals(new SNumber(70.0), w1.evaluateCell(w1.getCellAt(1, 4)));
+    assertEquals(new SNumber(70.0), w1.evaluateCell(new Coord(1, 4).toString()));
   }
 }

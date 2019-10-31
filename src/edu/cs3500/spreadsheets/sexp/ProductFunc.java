@@ -60,7 +60,7 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
     if (this.worksheet.containsKey(s)) {
       Cell c = this.worksheet.getKey(s);
       try {
-        return Double.parseDouble(this.worksheet.evaluateCell(c).toString());
+        return Double.parseDouble(this.worksheet.evaluateCell(s).toString());
       }
       catch (Exception e) {
         return 0.0;
