@@ -34,7 +34,7 @@ public class Worksheet implements IWorksheet{
   @Override
   public WorksheetCell getCellAt(int col, int row) {
     String key = new Coord(col, row).toString();
-    return this.sheet.getOrDefault(key, null);
+    return this.sheet.getOrDefault(key, new Cell(""));
   }
 
   @Override

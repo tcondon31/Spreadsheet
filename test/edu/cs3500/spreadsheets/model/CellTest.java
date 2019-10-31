@@ -15,19 +15,19 @@ import static org.junit.Assert.assertEquals;
  */
 public class CellTest {
 
-  Cell c1;
-  Cell c2;
-  Cell c3;
-  Cell c4;
-  Cell c5;
-  Cell c6;
-  Cell c7;
-  Cell c8;
-  Cell c9;
-  Cell c10;
-  Cell c11;
-  Cell c12;
-  Cell c13;
+  WorksheetCell c1;
+  WorksheetCell c2;
+  WorksheetCell c3;
+  WorksheetCell c4;
+  WorksheetCell c5;
+  WorksheetCell c6;
+  WorksheetCell c7;
+  WorksheetCell c8;
+  WorksheetCell c9;
+  WorksheetCell c10;
+  WorksheetCell c11;
+  WorksheetCell c12;
+  WorksheetCell c13;
   Worksheet w1;
 
   @Before
