@@ -4,8 +4,16 @@ import java.util.List;
 
 import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.SexpFunction;
+import edu.cs3500.spreadsheets.model.Worksheet;
 
 public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
+
+  private Worksheet worksheet;
+
+  public ProductFunc(Worksheet worksheet) {
+    this.worksheet = worksheet;
+  }
+
   @Override
   public Double apply(Sexp arg) {
     return arg.accept(this);
@@ -27,7 +35,8 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
     String first = l.get(0).toString();
     if (SexpFunction.isOneOf(first)) {
       try {
-        total += Double.parseDouble(new EvaluateCell().apply(new SList(l)).toString());
+        total += Double.parseDouble(
+                new EvaluateCell(this.worksheet).apply(new SList(l)).toString());
       }
       catch (NumberFormatException e) {
         throw new IllegalArgumentException("Not a valid S-Expression");
@@ -35,7 +44,7 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
     }
     else {
       for (Sexp s : l) {
-        total += new ProductFunc().apply(s);
+        total += new ProductFunc(this.worksheet).apply(s);
       }
     }
     return total;

@@ -4,8 +4,15 @@ import java.util.List;
 
 import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.SexpFunction;
+import edu.cs3500.spreadsheets.model.Worksheet;
 
 public class LessThanComparator implements Func<Sexp, Double>, SexpVisitor<Double> {
+
+  private Worksheet worksheet;
+
+  public LessThanComparator(Worksheet worksheet) {
+    this.worksheet = worksheet;
+  }
 
   @Override
   public Double apply(Sexp arg) {
@@ -27,14 +34,15 @@ public class LessThanComparator implements Func<Sexp, Double>, SexpVisitor<Doubl
     String first = l.get(0).toString();
     if (SexpFunction.isOneOf(first)) {
       try {
-        return Double.parseDouble(new EvaluateCell().apply(new SList(l)).toString());
+        return Double.parseDouble(new EvaluateCell(this.worksheet).apply(new SList(l)).toString());
       }
       catch (NumberFormatException e) {
         throw new IllegalArgumentException("Not a valid S-Expression");
       }
     }
     else {
-      return new LessThanComparator().apply(l.get(0)) - new LessThanComparator().apply(l.get(1));
+      return new LessThanComparator(this.worksheet).apply(l.get(0))
+              - new LessThanComparator(this.worksheet).apply(l.get(1));
     }
   }
 

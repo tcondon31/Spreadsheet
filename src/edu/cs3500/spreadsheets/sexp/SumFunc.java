@@ -5,6 +5,7 @@ import java.util.List;
 import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Func;
+import edu.cs3500.spreadsheets.model.SexpFunction;
 import edu.cs3500.spreadsheets.model.Worksheet;
 
 public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
@@ -36,7 +37,8 @@ public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
     String first = l.get(0).toString();
     if (SexpFunction.isOneOf(first)) {
       try {
-        total += Double.parseDouble(new EvaluateCell().apply(new SList(l)).toString());
+        total += Double.parseDouble(
+                new EvaluateCell(this.worksheet).apply(new SList(l)).toString());
       }
       catch (NumberFormatException e) {
         throw new IllegalArgumentException("Not a valid S-Expression");
@@ -44,7 +46,7 @@ public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
     }
     else {
       for (Sexp s : l) {
-        total += new SumFunc().apply(s);
+        total += new SumFunc(this.worksheet).apply(s);
       }
     }
     return total;

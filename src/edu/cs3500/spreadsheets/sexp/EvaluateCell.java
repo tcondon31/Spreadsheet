@@ -66,10 +66,11 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
         throw new IllegalArgumentException("Not enough arguments");
       }
       else if (rest.size() == 1) {
-        return SexpFunction.executeFunction(firstString, rest.get(0));
+        return SexpFunction.executeFunction(firstString, rest.get(0), this.worksheet);
       }
       else {
-        return SexpFunction.executeFunction(firstString, new SList(this.getValidList(rest)));
+        return SexpFunction.executeFunction(
+                firstString, new SList(this.getValidList(rest)), this.worksheet);
       }
 
       /*

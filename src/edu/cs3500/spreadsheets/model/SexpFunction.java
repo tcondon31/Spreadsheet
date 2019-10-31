@@ -27,17 +27,17 @@ public enum SexpFunction {
     return false;
   }
   // TODO: Make sure evry input is not a list
-  public static Sexp executeFunction(String s, Sexp input) {
+  public static Sexp executeFunction(String s, Sexp input, Worksheet ws) {
     if (s.equalsIgnoreCase(SUM.name)) {
-      return new SNumber(new SumFunc().apply(input));
+      return new SNumber(new SumFunc(ws).apply(input));
     }
     else if (s.equalsIgnoreCase(PRODUCT.name)) {
-      return new SNumber(new ProductFunc().apply(input));
+      return new SNumber(new ProductFunc(ws).apply(input));
     }
     else if (s.equalsIgnoreCase(LESSTHAN.name)) {
       try {
         if (new SListShallowSize().apply(input) == 2) {
-          return new SBoolean(new LessThanComparator().apply(input) < 0);
+          return new SBoolean(new LessThanComparator(ws).apply(input) < 0);
         }
         else{
           throw new IllegalArgumentException("Invalid number of inputs to < (Must be 2)");
