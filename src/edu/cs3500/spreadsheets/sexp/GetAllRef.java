@@ -3,6 +3,7 @@ package edu.cs3500.spreadsheets.sexp;
 import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.Worksheet;
+import edu.cs3500.spreadsheets.model.WorksheetCell;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,7 @@ public class GetAllRef implements Func<Sexp, List<String>>, SexpVisitor<List<Str
   @Override
   public List<String> visitSymbol(String s) {
     if (this.worksheet.isValidName(s)) {
-      Cell c = this.worksheet.getCellAt(s);
+      WorksheetCell c = this.worksheet.getCellAt(s);
       if (!this.list.contains(s)) {
         this.list.add(s);
         return this.worksheet.getLoRAcc(c, this.list);

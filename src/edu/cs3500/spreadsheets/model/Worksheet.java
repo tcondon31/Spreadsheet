@@ -20,32 +20,32 @@ import java.util.List;
  */
 public class Worksheet implements IWorksheet{
 
-  private HashMap<String, Cell> sheet;
+  private HashMap<String, WorksheetCell> sheet;
 
   public Worksheet() {
     this.sheet = new HashMap<>();
   }
 
   @Override
-  public Cell getCellAt(String key) {
+  public WorksheetCell getCellAt(String key) {
     return this.sheet.getOrDefault(key, new Cell(""));
   }
 
   @Override
-  public Cell getCellAt(int col, int row) {
+  public WorksheetCell getCellAt(int col, int row) {
     String key = new Coord(col, row).toString();
     return this.sheet.getOrDefault(key, null);
   }
 
   @Override
-  public void addCell(int col, int row, Cell c) {
+  public void addCell(int col, int row, WorksheetCell c) {
     Coord temp = new Coord(col, row);
     this.sheet.put(temp.toString(), c);
   }
 
   @Override
   public Sexp evaluateCell(String key) {
-    Cell c = this.sheet.getOrDefault(key, new Cell(""));
+    WorksheetCell c = this.sheet.getOrDefault(key, new Cell(""));
     List<String> ref = this.getListOfReferences(c);
     if (ref.contains(key)) {
       throw new IllegalArgumentException("Cyclic reference in cell");
@@ -106,7 +106,7 @@ public class Worksheet implements IWorksheet{
    * @param c the Cell to be checked
    * @return the list of all references
    */
-  public List<String> getListOfReferences(Cell c) {
+  public List<String> getListOfReferences(WorksheetCell c) {
     return this.getLoRAcc(c, new ArrayList<String>());
   }
 
@@ -116,7 +116,7 @@ public class Worksheet implements IWorksheet{
    * @param list the current list of references
    * @return the list of all references
    */
-  public List<String> getLoRAcc(Cell c, List<String> list) {
+  public List<String> getLoRAcc(WorksheetCell c, List<String> list) {
     if (c.getContents().substring(0,1).equals("=")) {
       Sexp s = Parser.parse(c.getContents().substring(1));
       return new GetAllRef(this, list).apply(s);

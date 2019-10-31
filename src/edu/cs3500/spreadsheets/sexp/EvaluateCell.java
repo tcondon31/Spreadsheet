@@ -7,6 +7,7 @@ import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.SexpFunction;
 import edu.cs3500.spreadsheets.model.Worksheet;
+import edu.cs3500.spreadsheets.model.WorksheetCell;
 
 /**
  * Function object designed to evaluate a cell, then delegates to other objects
@@ -39,7 +40,7 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
   @Override
   public Sexp visitSymbol(String s) {
     if (this.worksheet.containsKey(s)) {
-      Cell c = this.worksheet.getCellAt(s);
+      WorksheetCell c = this.worksheet.getCellAt(s);
       try {
         return this.worksheet.evaluateCell(s);
       }
