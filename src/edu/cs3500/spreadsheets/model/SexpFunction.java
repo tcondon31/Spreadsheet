@@ -29,7 +29,7 @@ public enum SexpFunction {
    */
   public static boolean isOneOf(String s) {
     for (SexpFunction sf : SexpFunction.values()) {
-      if (sf.name().equalsIgnoreCase(s)) {
+      if (sf.name.equalsIgnoreCase(s)) {
         return true;
       }
     }

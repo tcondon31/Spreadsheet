@@ -91,7 +91,7 @@ public class Worksheet {
    * Returns a list of all cells being referenced within two Coords.
    * @param tl the top left Coord to be evaluated
    * @param br the bottom right Coord to be evaluated
-   * @return List<SSymbol> the list of symbols that lie within the two bounds
+   * @return List of SSymbol the list of symbols that lie within the two bounds
    */
   public List<SSymbol> getAllReferences(Coord tl, Coord br) {
     List<SSymbol> references = new ArrayList<>();
