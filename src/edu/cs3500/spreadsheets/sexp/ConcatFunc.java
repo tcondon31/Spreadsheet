@@ -92,8 +92,7 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
           bottomRight = new Coord(Coord.colNameToIndex(rightCol), rightRow);
         }
         else {
-          bottomRight = new Coord(Coord.colNameToIndex(leftCol), leftRow);
-          topLeft = new Coord(Coord.colNameToIndex(rightCol), rightRow);
+          return "";
         }
         List<SSymbol> references = this.worksheet.getAllReferences(topLeft, bottomRight);
         StringBuilder total = new StringBuilder();
