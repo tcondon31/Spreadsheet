@@ -50,7 +50,7 @@ public class BeyondGood {
     if (args[2].equals("-eval")) {
       String s = "";
       try {
-        s = w.evaluateCell(new Cell("=(PRODUCT 10 10)")).toString();
+        s = w.evaluateCell(w.getCellAt(args[3])).toString();
       }
       catch (Exception e) {
         System.out.print("Error in cell " + args[3]);
