@@ -1,11 +1,12 @@
 package edu.cs3500.spreadsheets.model;
 
-import edu.cs3500.spreadsheets.sexp.Parser;
-import edu.cs3500.spreadsheets.sexp.Sexp;
-
 public class WorksheetBuilderClass implements WorksheetReader.WorksheetBuilder {
   private Worksheet worksheet;
 
+  /**
+   * Constructor for the worksheetBuilder class.
+   * @param w the worksheet to build into
+   */
   public WorksheetBuilderClass(Worksheet w) {
     this.worksheet = w;
   }
@@ -18,7 +19,6 @@ public class WorksheetBuilderClass implements WorksheetReader.WorksheetBuilder {
 
   @Override
   public Object createWorksheet() {
-    this.worksheet.evaluateAll();
     return this.worksheet;
   }
 }

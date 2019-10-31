@@ -8,7 +8,10 @@ import edu.cs3500.spreadsheets.model.Worksheet;
 
 import java.util.List;
 
-public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String>{
+/**
+ * Function object class designed to concatenate two strings.
+ */
+public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
 
   protected Worksheet worksheet;
 

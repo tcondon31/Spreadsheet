@@ -1,6 +1,6 @@
 package edu.cs3500.spreadsheets.model;
 
-import edu.cs3500.spreadsheets.sexp.*;
+import java.util.Objects;
 
 /**
  * represents a cell in a spreadsheet.
@@ -13,6 +13,9 @@ public class Cell {
     this.contents = c;
   }
 
+  /**
+   * returns the value of the contents within the cell.
+   */
   public String getContents() {
     return this.contents;
   }
@@ -27,5 +30,10 @@ public class Cell {
     }
     Cell cell = (Cell) o;
     return this.contents == ((Cell) o).getContents();
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.contents);
   }
 }

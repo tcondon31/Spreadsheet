@@ -9,6 +9,11 @@ public class Coord {
   public final int row;
   public final int col;
 
+  /**
+   * the constructor for the Coord class, represents a position in a grid.
+   * @param col the column index
+   * @param row the row index
+   */
   public Coord(int col, int row) {
     if (row < 1 || col < 1) {
       throw new IllegalArgumentException("Coordinates should be strictly positive");
