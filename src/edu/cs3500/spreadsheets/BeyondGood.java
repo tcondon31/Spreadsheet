@@ -7,12 +7,12 @@ import edu.cs3500.spreadsheets.model.WorksheetReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.StringReader;
 
 /**
  * The main class for our program.
  */
 public class BeyondGood {
+
   /**
    * The main entry point.
    * @param args any command-line arguments
@@ -24,23 +24,23 @@ public class BeyondGood {
     WorksheetReader.WorksheetBuilder wbc;
     Readable r;
 
-    System.out.println(args[0]);
-    System.out.println(args[1]);
-    System.out.println(args[2]);
-    System.out.println(args[3]);
-
     if (args[0].equals("-in")) {
+      f = new File(args[1]);
+      w = new Worksheet();
+      wbc = new WorksheetBuilderClass(w);
 
-        f = new File(args[1]);
-        w = new Worksheet();
-        wbc = new WorksheetBuilderClass(w);
       try {
         r = new FileReader(f);
       } catch (FileNotFoundException e) {
         e.printStackTrace();
         r = null;
       }
-      WorksheetReader.read(wbc, r);
+      try {
+        WorksheetReader.read(wbc, r);
+      }
+      catch (Exception e) {
+        throw new IllegalArgumentException("Could not read cells correctly");
+      }
 
 
     }
@@ -49,17 +49,23 @@ public class BeyondGood {
     }
 
     if (args[2].equals("-eval")) {
-      System.out.println(w.evaluateCell(w.getCellAt(args[3])));
+      String s = "";
+      try {
+        s = w.evaluateCell(w.getCellAt(args[3])).toString();
+      }
+      catch (Exception e) {
+        System.out.println("Error in cell " + args[3]);
+      }
+      try {
+        double d = Double.parseDouble(s);
+        System.out.println(String.format("%f", d));
+      }
+      catch (Exception e) {
+        System.out.println(s);
+      }
     }
     else {
       throw new IllegalArgumentException("Invalid Command Line");
     }
-
-    /*
-      TODO: For now, look in the args array to obtain a filename and a cell name,
-      - read the file and build a model from it, 
-      - evaluate all the cells, and
-      - report any errors, or print the evaluated value of the requested cell.
-    */
   }
 }
