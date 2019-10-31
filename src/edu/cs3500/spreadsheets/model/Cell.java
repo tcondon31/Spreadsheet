@@ -19,6 +19,11 @@ public class Cell implements WorksheetCell{
   }
 
   @Override
+  public void editContents(String newContents) {
+    this.contents = newContents;
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
