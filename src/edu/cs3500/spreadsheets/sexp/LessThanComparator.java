@@ -2,10 +2,7 @@ package edu.cs3500.spreadsheets.sexp;
 
 import java.util.List;
 
-import edu.cs3500.spreadsheets.model.Cell;
-import edu.cs3500.spreadsheets.model.Func;
-import edu.cs3500.spreadsheets.model.SexpFunction;
-import edu.cs3500.spreadsheets.model.Worksheet;
+import edu.cs3500.spreadsheets.model.*;
 
 /**
  * function object that takes an input and if it has two arguments that are numbers, will
@@ -56,7 +53,7 @@ public class LessThanComparator implements Func<Sexp, Double>, SexpVisitor<Doubl
   @Override
   public Double visitSymbol(String s) {
     if (this.worksheet.containsKey(s)) {
-      Cell c = this.worksheet.getCellAt(s);
+      WorksheetCell c = this.worksheet.getCellAt(s);
       try {
         return Double.parseDouble(this.worksheet.evaluateCell(s).toString());
       }

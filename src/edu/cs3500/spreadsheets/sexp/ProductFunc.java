@@ -2,11 +2,7 @@ package edu.cs3500.spreadsheets.sexp;
 
 import java.util.List;
 
-import edu.cs3500.spreadsheets.model.Cell;
-import edu.cs3500.spreadsheets.model.Coord;
-import edu.cs3500.spreadsheets.model.Func;
-import edu.cs3500.spreadsheets.model.SexpFunction;
-import edu.cs3500.spreadsheets.model.Worksheet;
+import edu.cs3500.spreadsheets.model.*;
 
 /**
  * represents a function object for finding the product of an arbitrary number of Sexps.
@@ -58,7 +54,7 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
   @Override
   public Double visitSymbol(String s) {
     if (this.worksheet.containsKey(s)) {
-      Cell c = this.worksheet.getCellAt(s);
+      WorksheetCell c = this.worksheet.getCellAt(s);
       try {
         return Double.parseDouble(this.worksheet.evaluateCell(s).toString());
       }

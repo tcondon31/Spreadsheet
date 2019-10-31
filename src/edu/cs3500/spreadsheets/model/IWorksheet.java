@@ -12,7 +12,7 @@ public interface IWorksheet {
    * @param key   string representation of key to get cell from
    * @return      cell at given key
    */
-  Cell getCellAt(String key);
+  WorksheetCell getCellAt(String key);
 
   /**
    * gets the cell at the given coordinate in the worksheet.
@@ -20,7 +20,7 @@ public interface IWorksheet {
    * @param row   row of cell
    * @return      cell at given coordinate
    */
-  Cell getCellAt(int col, int row);
+  WorksheetCell getCellAt(int col, int row);
 
   /**
    * adds a cell that contains a value at the given coordinate in the worksheet.
@@ -28,7 +28,7 @@ public interface IWorksheet {
    * @param row   row of where to add cell
    * @param c     Cell to be added
    */
-  void addCell(int col, int row, Cell c);
+  void addCell(int col, int row, WorksheetCell c);
 
   /**
    * Returns an Sexp containing the evaluation of the cell based on its contents.

@@ -1,10 +1,6 @@
 package edu.cs3500.spreadsheets.sexp;
 
-import edu.cs3500.spreadsheets.model.Cell;
-import edu.cs3500.spreadsheets.model.Coord;
-import edu.cs3500.spreadsheets.model.Func;
-import edu.cs3500.spreadsheets.model.SexpFunction;
-import edu.cs3500.spreadsheets.model.Worksheet;
+import edu.cs3500.spreadsheets.model.*;
 
 import java.util.List;
 
@@ -52,7 +48,7 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
   @Override
   public String visitSymbol(String s) {
     if (this.worksheet.containsKey(s)) {
-      Cell c = this.worksheet.getCellAt(s);
+      WorksheetCell c = this.worksheet.getCellAt(s);
       try {
         return this.worksheet.evaluateCell(s).toString();
       }
