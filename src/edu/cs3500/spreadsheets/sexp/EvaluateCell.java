@@ -3,7 +3,10 @@ package edu.cs3500.spreadsheets.sexp;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.cs3500.spreadsheets.model.*;
+import edu.cs3500.spreadsheets.model.Func;
+import edu.cs3500.spreadsheets.model.SexpFunction;
+import edu.cs3500.spreadsheets.model.Worksheet;
+import edu.cs3500.spreadsheets.model.WorksheetCell;
 
 /**
  * Function object designed to evaluate a cell, then delegates to other objects
