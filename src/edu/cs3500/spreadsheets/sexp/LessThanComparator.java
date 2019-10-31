@@ -2,6 +2,7 @@ package edu.cs3500.spreadsheets.sexp;
 
 import java.util.List;
 
+import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.SexpFunction;
 import edu.cs3500.spreadsheets.model.Worksheet;
@@ -48,7 +49,16 @@ public class LessThanComparator implements Func<Sexp, Double>, SexpVisitor<Doubl
 
   @Override
   public Double visitSymbol(String s) {
-    return 0.0;
+    if (this.worksheet.containsKey(s)) {
+      Cell c = this.worksheet.getKey(s);
+      try {
+        return Double.parseDouble(this.worksheet.evaluateCell(c).toString());
+      }
+      catch (Exception e) {
+        throw new IllegalArgumentException("Cannot reference");
+      }
+    }
+    throw new IllegalArgumentException("Cannot evaluate symbol");
   }
 
   @Override

@@ -1,11 +1,14 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.sexp.ConcatFunc;
 import edu.cs3500.spreadsheets.sexp.LessThanComparator;
 import edu.cs3500.spreadsheets.sexp.ProductFunc;
 import edu.cs3500.spreadsheets.sexp.SBoolean;
 import edu.cs3500.spreadsheets.sexp.SList;
 import edu.cs3500.spreadsheets.sexp.SListShallowSize;
 import edu.cs3500.spreadsheets.sexp.SNumber;
+import edu.cs3500.spreadsheets.sexp.SString;
+import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import edu.cs3500.spreadsheets.sexp.SumFunc;
 
@@ -47,6 +50,11 @@ public enum SexpFunction {
         throw new IllegalArgumentException("Invalid input to <");
       }
     }
-    return null;
+    else if (s.equalsIgnoreCase(CONCAT.name)){
+      return new SString(new ConcatFunc(ws).apply(input));
+    }
+    else {
+      throw new IllegalArgumentException("Invalid Function Symbol");
+    }
   }
 }

@@ -3,6 +3,7 @@ package edu.cs3500.spreadsheets.sexp;
 import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Func;
+import edu.cs3500.spreadsheets.model.SexpFunction;
 import edu.cs3500.spreadsheets.model.Worksheet;
 
 import java.util.List;
@@ -32,7 +33,17 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String>{
 
   @Override
   public String visitSList(List<Sexp> l) {
-    return new EvaluateCell(this.worksheet).apply(new SList(l)).toString();
+    StringBuilder output = new StringBuilder();
+    String first = l.get(0).toString();
+    if (SexpFunction.isOneOf(first)) {
+      output.append(new EvaluateCell(this.worksheet).apply(new SList(l)).toString());
+    }
+    else {
+      for (Sexp s : l) {
+        output.append(new ConcatFunc(this.worksheet).apply(s));
+      }
+    }
+    return output.toString();
   }
 
   @Override
