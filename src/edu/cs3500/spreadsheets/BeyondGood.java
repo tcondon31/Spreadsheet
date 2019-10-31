@@ -1,5 +1,6 @@
 package edu.cs3500.spreadsheets;
 
+import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetBuilderClass;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
@@ -41,8 +42,6 @@ public class BeyondGood {
       catch (Exception e) {
         throw new IllegalArgumentException("Could not read cells correctly");
       }
-
-
     }
     else {
       throw new IllegalArgumentException("Invalid Command Line");
@@ -51,17 +50,17 @@ public class BeyondGood {
     if (args[2].equals("-eval")) {
       String s = "";
       try {
-        s = w.evaluateCell(w.getCellAt(args[3])).toString();
+        s = w.evaluateCell(new Cell("=(PRODUCT 10 10)")).toString();
       }
       catch (Exception e) {
-        System.out.println("Error in cell " + args[3]);
+        System.out.print("Error in cell " + args[3]);
       }
       try {
         double d = Double.parseDouble(s);
-        System.out.println(String.format("%f", d));
+        System.out.print(String.format("%f", d));
       }
       catch (Exception e) {
-        System.out.println(s);
+        System.out.print(s);
       }
     }
     else {
