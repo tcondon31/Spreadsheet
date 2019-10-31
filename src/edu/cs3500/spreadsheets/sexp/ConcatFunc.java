@@ -52,7 +52,7 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
   @Override
   public String visitSymbol(String s) {
     if (this.worksheet.containsKey(s)) {
-      Cell c = this.worksheet.getKey(s);
+      Cell c = this.worksheet.getCellAt(s);
       try {
         return this.worksheet.evaluateCell(c).toString();
       }

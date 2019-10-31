@@ -39,7 +39,7 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
   @Override
   public Sexp visitSymbol(String s) {
     if (this.worksheet.containsKey(s)) {
-      Cell c = this.worksheet.getKey(s);
+      Cell c = this.worksheet.getCellAt(s);
       try {
         return this.worksheet.evaluateCell(c);
       }

@@ -56,7 +56,7 @@ public class LessThanComparator implements Func<Sexp, Double>, SexpVisitor<Doubl
   @Override
   public Double visitSymbol(String s) {
     if (this.worksheet.containsKey(s)) {
-      Cell c = this.worksheet.getKey(s);
+      Cell c = this.worksheet.getCellAt(s);
       try {
         return Double.parseDouble(this.worksheet.evaluateCell(c).toString());
       }

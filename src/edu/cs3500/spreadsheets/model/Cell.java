@@ -3,9 +3,9 @@ package edu.cs3500.spreadsheets.model;
 import java.util.Objects;
 
 /**
- * represents a cell in a spreadsheet.
+ * represents a cell that can hold values and formulas in a spreadsheet.
  */
-public class Cell {
+public class Cell implements WorksheetCell{
 
   private String contents;
 
@@ -13,9 +13,7 @@ public class Cell {
     this.contents = c;
   }
 
-  /**
-   * returns the value of the contents within the cell.
-   */
+  @Override
   public String getContents() {
     return this.contents;
   }
