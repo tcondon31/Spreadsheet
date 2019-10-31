@@ -10,7 +10,7 @@ public class BeyondGood {
    */
   public static void main(String[] args) {
 
-    
+
 
     /*
       TODO: For now, look in the args array to obtain a filename and a cell name,

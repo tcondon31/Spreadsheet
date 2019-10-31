@@ -1,0 +1,10 @@
+A1 4
+A2 =(SUM 4 5)
+A3 =(PRODUCT 5 6)
+B1 =(SUM (PRODUCT 2 3) (SUM 5 6) (PRODUCT 2 4))
+B2 =9
+B3 =A2
+B4 =(SUM A1:B3)
+C1 hello
+C2 =“Hello”
+C3 =(CONCAT C6 C7)
