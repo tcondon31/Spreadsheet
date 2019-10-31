@@ -1,8 +1,10 @@
 package edu.cs3500.spreadsheets.sexp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.cs3500.spreadsheets.model.Func;
+import edu.cs3500.spreadsheets.model.SexpFunction;
 
 public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
 
@@ -37,12 +39,20 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
       SSymbol first = (SSymbol)l.get(0);
       String firstString = first.toString();
       List<Sexp> rest = l.subList(1, l.size());
-      if (rest.size() <= 1) {
+      if (rest.size() < 1) {
         throw new IllegalArgumentException("Not enough arguments");
       }
+      else if (rest.size() == 1) {
+        return SexpFunction.executeFunction(firstString, rest.get(0));
+      }
+      else {
+        return SexpFunction.executeFunction(firstString, new SList(this.getValidList(rest)));
+      }
+
+      /*
       switch (firstString.toUpperCase()) {
         case "SUM":
-          double tot = new SumFunc(0).apply(new SList(rest));
+          double tot = new SumFunc().apply(new SList(rest));
           return new SNumber(tot);
           /*
           double totalSum = 0;
@@ -55,6 +65,7 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
           }
           return new SNumber(totalSum);
            */
+      /*
         case "PRODUCT":
           double totalProd = 1;
           for (Sexp s : rest) {
@@ -94,9 +105,19 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
         default:
           throw new IllegalArgumentException("Invalid Function");
       }
+    */
     }
     catch (Exception e) {
       throw new IllegalArgumentException("Invalid S-Expression");
     }
+  }
+
+  private List<Sexp> getValidList(List<Sexp> l) {
+    List<Sexp> lCopy = new ArrayList<>();
+    lCopy.addAll(l);
+    while (SexpFunction.isOneOf(lCopy.get(0).toString())) {
+      lCopy.remove(0);
+    }
+    return lCopy;
   }
 }

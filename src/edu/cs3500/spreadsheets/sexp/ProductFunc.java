@@ -4,10 +4,8 @@ import java.util.List;
 
 import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.SexpFunction;
-import edu.cs3500.spreadsheets.model.Worksheet;
 
-public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
-
+public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
   @Override
   public Double apply(Sexp arg) {
     return arg.accept(this);
@@ -15,7 +13,7 @@ public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
 
   @Override
   public Double visitBoolean(boolean b) {
-    return 0.0;
+    return 1.0;
   }
 
   @Override
@@ -37,7 +35,7 @@ public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
     }
     else {
       for (Sexp s : l) {
-        total += new SumFunc().apply(s);
+        total += new ProductFunc().apply(s);
       }
     }
     return total;
@@ -45,11 +43,11 @@ public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
 
   @Override
   public Double visitSymbol(String s) {
-    return 0.0;
+    return 1.0;
   }
 
   @Override
   public Double visitString(String s) {
-    return 0.0;
+    return 1.0;
   }
 }
