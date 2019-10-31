@@ -49,10 +49,10 @@ public class BeyondGood {
     if (args[2].equals("-eval")) {
       String s = "";
       try {
-        s = w.evaluateCell(w.getCellAt(args[3])).toString();
+        s = w.evaluateCell(args[3]).toString();
       }
       catch (Exception e) {
-        System.out.print("Error in cell " + args[3]);
+        System.out.print("Error in cell " + args[3] + ": " + e.getMessage());
       }
       try {
         double d = Double.parseDouble(s);

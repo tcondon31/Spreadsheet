@@ -60,10 +60,15 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
     if (this.worksheet.containsKey(s)) {
       Cell c = this.worksheet.getCellAt(s);
       try {
-        return Double.parseDouble(this.worksheet.evaluateCell(c).toString());
+        return Double.parseDouble(this.worksheet.evaluateCell(s).toString());
       }
       catch (Exception e) {
-        return 0.0;
+        if (e.getMessage().equals("Cyclic reference in cell")) {
+          throw e;
+        }
+        else {
+          return 0.0;
+        }
       }
     }
     else if (s.contains(":")) {

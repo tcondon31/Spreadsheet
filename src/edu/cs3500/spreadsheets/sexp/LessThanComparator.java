@@ -58,7 +58,7 @@ public class LessThanComparator implements Func<Sexp, Double>, SexpVisitor<Doubl
     if (this.worksheet.containsKey(s)) {
       Cell c = this.worksheet.getCellAt(s);
       try {
-        return Double.parseDouble(this.worksheet.evaluateCell(c).toString());
+        return Double.parseDouble(this.worksheet.evaluateCell(s).toString());
       }
       catch (Exception e) {
         throw new IllegalArgumentException("Cannot reference");

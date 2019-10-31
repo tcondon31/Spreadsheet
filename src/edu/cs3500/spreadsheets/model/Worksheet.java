@@ -2,11 +2,13 @@ package edu.cs3500.spreadsheets.model;
 
 import edu.cs3500.spreadsheets.sexp.EvaluateCell;
 import edu.cs3500.spreadsheets.sexp.Parser;
-import edu.cs3500.spreadsheets.sexp.SBoolean;
 import edu.cs3500.spreadsheets.sexp.SNumber;
+import edu.cs3500.spreadsheets.sexp.Sexp;
+import edu.cs3500.spreadsheets.sexp.SBoolean;
 import edu.cs3500.spreadsheets.sexp.SString;
 import edu.cs3500.spreadsheets.sexp.SSymbol;
-import edu.cs3500.spreadsheets.sexp.Sexp;
+import edu.cs3500.spreadsheets.sexp.GetAllRef;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,8 +43,17 @@ public class Worksheet implements IWorksheet{
     this.sheet.put(temp.toString(), c);
   }
 
-  @Override
-  public Sexp evaluateCell(Cell c) {
+  /**
+   * Returns an Sexp containing the evaluation of the cell based on its contents.
+   * @param key the key to be evaluated
+   * @return Sexp the evaluated contents in an S-expression
+   */
+  public Sexp evaluateCell(String key) {
+    Cell c = this.sheet.getOrDefault(key, new Cell(""));
+    List<String> ref = this.getListOfReferences(c);
+    if (ref.contains(key)) {
+      throw new IllegalArgumentException("Cyclic reference in cell");
+    }
     if (c.getContents().startsWith("=")) {
       return new EvaluateCell(this).apply(Parser.parse(c.getContents().substring(1)));
     }
@@ -92,6 +103,29 @@ public class Worksheet implements IWorksheet{
       }
     }
     return references;
+  }
+
+  /**
+   * finds all references a cell makes to other cells.
+   * @param c the Cell to be checked
+   * @return the list of all references
+   */
+  public List<String> getListOfReferences(Cell c) {
+    return this.getLoRAcc(c, new ArrayList<String>());
+  }
+
+  /**
+   * Accumulator for getListOfReferences.
+   * @param c the cell to be referenced
+   * @param list the current list of references
+   * @return the list of all references
+   */
+  public List<String> getLoRAcc(Cell c, List<String> list) {
+    if (c.getContents().substring(0,1).equals("=")) {
+      Sexp s = Parser.parse(c.getContents().substring(1));
+      return new GetAllRef(this, list).apply(s);
+    }
+    return new ArrayList<String>();
   }
 
   @Override
