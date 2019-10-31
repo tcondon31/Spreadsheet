@@ -78,6 +78,9 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
       }
     }
     catch (Exception e) {
+      if (e.getMessage().equals("Cyclic reference in cell")) {
+        throw e;
+      }
       throw new IllegalArgumentException("Invalid S-Expression");
     }
   }

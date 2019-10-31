@@ -1,7 +1,10 @@
 package edu.cs3500.spreadsheets.sexp;
 
-import edu.cs3500.spreadsheets.model.*;
+import edu.cs3500.spreadsheets.model.Cell;
+import edu.cs3500.spreadsheets.model.Func;
+import edu.cs3500.spreadsheets.model.Worksheet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +16,7 @@ public class GetAllRef implements Func<Sexp, List<String>>, SexpVisitor<List<Str
   private List<String> list;
 
   /**
-   * Constructor for the function object
+   * Constructor for the function object.
    * @param w the worksheet to be referenced
    * @param list the list of references to be passed along and added to
    */
@@ -40,7 +43,7 @@ public class GetAllRef implements Func<Sexp, List<String>>, SexpVisitor<List<Str
   @Override
   public List<String> visitSList(List<Sexp> l) {
     for (Sexp sexp : l) {
-      this.list.addAll(new GetAllRef(this.worksheet, this.list).apply(sexp));
+      this.list.addAll(new GetAllRef(this.worksheet, new ArrayList<String>()).apply(sexp));
     }
     return list;
   }

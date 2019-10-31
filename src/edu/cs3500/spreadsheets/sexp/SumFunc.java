@@ -63,6 +63,9 @@ public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
         return Double.parseDouble(this.worksheet.evaluateCell(s).toString());
       }
       catch (Exception e) {
+        if (e.getMessage().equals("Cyclic reference in cell")) {
+          throw e;
+        }
         return 0.0;
       }
     }

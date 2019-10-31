@@ -63,7 +63,12 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
         return Double.parseDouble(this.worksheet.evaluateCell(s).toString());
       }
       catch (Exception e) {
-        return 0.0;
+        if (e.getMessage().equals("Cyclic reference in cell")) {
+          throw e;
+        }
+        else {
+          return 0.0;
+        }
       }
     }
     else if (s.contains(":")) {
