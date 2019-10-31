@@ -22,6 +22,11 @@ public enum SexpFunction {
     this.name = s;
   }
 
+  /**
+   * determines if the given string matches the name of an SexpFunction.
+   * @param s   input string to be compared
+   * @return    true if the input matches the name of an SexpFunction, false if not
+   */
   public static boolean isOneOf(String s) {
     for (SexpFunction sf : SexpFunction.values()) {
       if (sf.name().equalsIgnoreCase(s)) {
