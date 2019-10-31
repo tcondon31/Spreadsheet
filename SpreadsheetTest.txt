@@ -6,5 +6,5 @@ B2 =9
 B3 =A2
 B4 =(SUM A1:B3)
 C1 hello
-C2 =“Hello”
-C3 =(CONCAT C6 C7)
+C2 ="hello"
+C3 =(CONCAT C1 C2)
