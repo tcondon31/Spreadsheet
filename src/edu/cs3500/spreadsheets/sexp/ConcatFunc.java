@@ -1,71 +1,56 @@
 package edu.cs3500.spreadsheets.sexp;
 
-import java.util.List;
-
 import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.Worksheet;
 
-public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
+import java.util.List;
+
+public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String>{
 
   protected Worksheet worksheet;
 
-  public SumFunc(Worksheet w) {
+  public ConcatFunc(Worksheet w) {
     this.worksheet = w;
   }
 
   @Override
-  public Double apply(Sexp arg) {
+  public String apply(Sexp arg) {
     return arg.accept(this);
   }
 
   @Override
-  public Double visitBoolean(boolean b) {
-    return 0.0;
+  public String visitBoolean(boolean b) {
+    return new SBoolean(b).toString();
   }
 
   @Override
-  public Double visitNumber(double d) {
-    return d;
+  public String visitNumber(double d) {
+    return new SNumber(d).toString();
   }
 
   @Override
-  public Double visitSList(List<Sexp> l) {
-    double total = 0;
-    String first = l.get(0).toString();
-    if (SexpFunction.isOneOf(first)) {
-      try {
-        total += Double.parseDouble(new EvaluateCell().apply(new SList(l)).toString());
-      }
-      catch (NumberFormatException e) {
-        throw new IllegalArgumentException("Not a valid S-Expression");
-      }
-    }
-    else {
-      for (Sexp s : l) {
-        total += new SumFunc().apply(s);
-      }
-    }
-    return total;
+  public String visitSList(List<Sexp> l) {
+    return new EvaluateCell(this.worksheet).apply(new SList(l)).toString();
   }
 
   @Override
-  public Double visitSymbol(String s) {
+  public String visitSymbol(String s) {
     if (this.worksheet.containsKey(s)) {
       Cell c = this.worksheet.getKey(s);
       try {
-        return Double.parseDouble(this.worksheet.evaluateCell(c).toString());
+        return this.worksheet.evaluateCell(c).toString();
       }
       catch (Exception e) {
-        return 0.0;
+        return "";
       }
     }
     else if (s.contains(":")) {
       String left = s.substring(0, s.indexOf(":"));
       String right = s.substring(s.indexOf(":") + 1);
       if (!(this.worksheet.isValidName(left) && this.worksheet.isValidName(right))) {
-        return 0.0;
+        return "";
       }
       else {
         String leftCol = "";
@@ -97,24 +82,23 @@ public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
           topLeft = new Coord(Coord.colNameToIndex(rightCol), rightRow);
         }
         List<SSymbol> references = this.worksheet.getAllReferences(topLeft, bottomRight);
-        double total = 0;
+        StringBuilder total = new StringBuilder();
         for (SSymbol ref : references) {
-          total += Double.parseDouble(new EvaluateCell(this.worksheet).apply(ref).toString());
+          total.append(new EvaluateCell(this.worksheet).apply(ref).toString());
         }
-        return total;
-
+        return total.toString();
       }
     }
     else if (this.worksheet.isValidName(s)) {
-      return 0.0;
+      return "";
     }
     else {
-      return 0.0;
+      return "";
     }
   }
 
   @Override
-  public Double visitString(String s) {
-    return 0.0;
+  public String visitString(String s) {
+    return s;
   }
 }

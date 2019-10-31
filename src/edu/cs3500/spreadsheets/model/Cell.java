@@ -13,25 +13,19 @@ public class Cell {
     this.contents = c;
   }
 
-  public Sexp evaluateCell() {
-    if (this.contents.startsWith("=")) {
-      return new EvaluateCell().apply(Parser.parse(this.contents.substring(1)));
+  public String getContents() {
+    return this.contents;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-    else {
-      try {
-        double value = Double.parseDouble(this.contents);
-        return new SNumber(value);
-      }
-      catch (Exception e) {
-        switch (this.contents) {
-          case "true" :
-            return new SBoolean(true);
-          case "false" :
-            return new SBoolean(false);
-          default :
-            return new SString(this.contents);
-        }
-      }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
+    Cell cell = (Cell) o;
+    return this.contents == ((Cell) o).getContents();
   }
 }

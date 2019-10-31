@@ -3,10 +3,19 @@ package edu.cs3500.spreadsheets.sexp;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.cs3500.spreadsheets.model.Cell;
+import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.SexpFunction;
+import edu.cs3500.spreadsheets.model.Worksheet;
 
 public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
+
+  private Worksheet worksheet;
+
+  public EvaluateCell(Worksheet w) {
+    this.worksheet = w;
+  }
 
   @Override
   public Sexp apply(Sexp arg) {
@@ -25,7 +34,21 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
 
   @Override
   public Sexp visitSymbol(String s) {
-    throw new IllegalArgumentException("Cannot evaluate symbol");
+    if (this.worksheet.containsKey(s)) {
+      Cell c = this.worksheet.getKey(s);
+      try {
+        return this.worksheet.evaluateCell(c);
+      }
+      catch (Exception e) {
+        throw new IllegalArgumentException("Could not evaluate symbol");
+      }
+    }
+    else if (this.worksheet.isValidName(s)) {
+      return new SString("");
+    }
+    else {
+      throw new IllegalArgumentException("Could not evaluate symbol");
+    }
   }
 
   @Override
@@ -52,13 +75,10 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
       /*
       switch (firstString.toUpperCase()) {
         case "SUM":
-          double tot = new SumFunc().apply(new SList(rest));
-          return new SNumber(tot);
-          /*
           double totalSum = 0;
           for (Sexp s : rest) {
             try {
-              totalSum += Double.parseDouble(s.accept(new EvaluateCell()).toString());
+              totalSum += new SumFunc(this.worksheet).apply(s);
             } catch (Exception e) {
               throw new IllegalArgumentException("Not a number");
             }
@@ -70,36 +90,34 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
           double totalProd = 1;
           for (Sexp s : rest) {
             try {
-              totalProd *= Double.parseDouble(s.accept(new EvaluateCell()).toString());
+              totalProd *= new ProdFunc(this.worksheet).apply(s);
+              //totalProd *= Double.parseDouble(s.accept(new EvaluateCell()).toString());
             } catch (Exception e) {
               throw new IllegalArgumentException("Not a number");
             }
           }
           return new SNumber(totalProd);
         case "<":
-          double curElement;
+          if (rest.size() > 2) {
+            throw new IllegalArgumentException("Too many arguments in less than");
+          }
+          double firstElement;
+          double secondElement;
           try {
-            curElement = Double.parseDouble(rest.get(0).accept(new EvaluateCell()).toString());
+            firstElement = new GreaterThanFunc(this.worksheet).apply(rest.get(0));
+            secondElement = new GreaterThanFunc(this.worksheet).apply(rest.get(1));
+
+            //firstElement = Double.parseDouble(new EvaluateCell(this.worksheet).apply(rest.get(0)).toString());
+            //secondElement = Double.parseDouble(new EvaluateCell(this.worksheet).apply(rest.get(1)).toString());
           } catch (Exception e) {
             throw new IllegalArgumentException("Not a number");
           }
-          List<Sexp> rest2 = rest.subList(1, rest.size());
-          for (Sexp s : rest2) {
-            try {
-              double nextElement = Double.parseDouble(s.accept(new EvaluateCell()).toString());
-              if (nextElement <= curElement) {
-                return new SBoolean(false);
-              }
-              curElement = nextElement;
-            } catch (Exception e) {
-              throw new IllegalArgumentException("Not a number");
-            }
-          }
-          return new SBoolean(true);
+          return new SBoolean(firstElement < secondElement);
         case "CONCAT" :
           StringBuilder total = new StringBuilder();
           for (Sexp s : rest) {
-            total.append(s.accept(new EvaluateCell()).toString());
+            total.append(new ConcatFunc(this.worksheet).apply(s));
+            //total.append(new EvaluateCell(this.worksheet).apply(s).toString());
           }
           return new SString(total.toString());
         default:

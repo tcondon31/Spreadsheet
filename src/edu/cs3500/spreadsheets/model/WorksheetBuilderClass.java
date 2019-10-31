@@ -12,7 +12,7 @@ public class WorksheetBuilderClass implements WorksheetReader.WorksheetBuilder {
 
   @Override
   public WorksheetReader.WorksheetBuilder createCell(int col, int row, String contents) {
-    this.worksheet.addCell(row, col, new Cell(contents));
+    this.worksheet.addCell(col, row, new Cell(contents));
     return this;
   }
 
