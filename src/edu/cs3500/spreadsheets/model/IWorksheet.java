@@ -32,10 +32,10 @@ public interface IWorksheet {
 
   /**
    * Returns an Sexp containing the evaluation of the cell based on its contents.
-   * @param c the cell to be evaluated
+   * @param key the key to be evaluated
    * @return Sexp the evaluated contents in an S-expression
    */
-  Sexp evaluateCell(Cell c);
+  Sexp evaluateCell(String key);
 
   /**
    * returns true if the given string is a valid name for a cell.

@@ -43,11 +43,7 @@ public class Worksheet implements IWorksheet{
     this.sheet.put(temp.toString(), c);
   }
 
-  /**
-   * Returns an Sexp containing the evaluation of the cell based on its contents.
-   * @param key the key to be evaluated
-   * @return Sexp the evaluated contents in an S-expression
-   */
+  @Override
   public Sexp evaluateCell(String key) {
     Cell c = this.sheet.getOrDefault(key, new Cell(""));
     List<String> ref = this.getListOfReferences(c);
