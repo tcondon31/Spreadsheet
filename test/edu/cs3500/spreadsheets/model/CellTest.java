@@ -1,14 +1,18 @@
 package edu.cs3500.spreadsheets.model;
 
-import edu.cs3500.spreadsheets.sexp.*;
+import edu.cs3500.spreadsheets.sexp.SBoolean;
+import edu.cs3500.spreadsheets.sexp.SNumber;
+import edu.cs3500.spreadsheets.sexp.SString;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
-
+//TODO: fix when writing tests
+/**
+ * represents tests for cells.
+ */
 public class CellTest {
 
   Cell c1;

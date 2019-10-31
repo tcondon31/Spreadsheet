@@ -8,6 +8,9 @@ import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.SexpFunction;
 import edu.cs3500.spreadsheets.model.Worksheet;
 
+/**
+ * represents a function object for finding the product of an arbitrary number of Sexps.
+ */
 public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
 
   private Worksheet worksheet;

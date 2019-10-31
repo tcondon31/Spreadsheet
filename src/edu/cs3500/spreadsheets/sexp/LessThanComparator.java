@@ -7,6 +7,13 @@ import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.SexpFunction;
 import edu.cs3500.spreadsheets.model.Worksheet;
 
+/**
+ * function object that takes an input and if it has two arguments that are numbers, will
+ * return a negative number if the 1st arg is less than the 2nd arg, 0 if they are equal, and a
+ * number if the 1st arg is greater than the 2nd arg.
+ *
+ * If it is given the wrong number or types of inputs, an exception will be thrown.
+ */
 public class LessThanComparator implements Func<Sexp, Double>, SexpVisitor<Double> {
 
   private Worksheet worksheet;
