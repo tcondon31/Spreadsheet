@@ -98,8 +98,7 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
           bottomRight = new Coord(Coord.colNameToIndex(rightCol), rightRow);
         }
         else {
-          bottomRight = new Coord(Coord.colNameToIndex(leftCol), leftRow);
-          topLeft = new Coord(Coord.colNameToIndex(rightCol), rightRow);
+          return 0.0;
         }
         List<SSymbol> references = this.worksheet.getAllReferences(topLeft, bottomRight);
         double total = 0;
