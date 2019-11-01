@@ -143,9 +143,11 @@ public class WorksheetTest {
   @Test
   public void getAllReferences() {
     initCells();
-    assertEquals(new ArrayList<SSymbol>(Arrays.asList(new SSymbol("A1"), new SSymbol("A2"))),
+    assertEquals(new ArrayList<SSymbol>(Arrays.asList(new SSymbol("A1"),
+            new SSymbol("A2"))),
         w1.getAllReferences(new Coord(1, 1), new Coord(1, 2)));
-    assertEquals(new ArrayList<SSymbol>(Arrays.asList(new SSymbol("A1"), new SSymbol("A2"),
+    assertEquals(new ArrayList<SSymbol>(Arrays.asList(new SSymbol("A1"),
+            new SSymbol("A2"),
         new SSymbol("B1"), new SSymbol("B2"))),
         w1.getAllReferences(new Coord(1, 1), new Coord(2, 2)));
 
@@ -155,8 +157,10 @@ public class WorksheetTest {
   public void getListOfReferences() {
     initCells();
     assertEquals(new HashSet<String>(), w1.getListOfReferences(c1, new ArrayList<String>()));
-    assertEquals(new HashSet<String>(Arrays.asList("A1", "A2")), w1.getListOfReferences(c12, new ArrayList<String>()));
-    assertEquals(new HashSet<String>(Arrays.asList("A1", "A2", "A3")), w1.getListOfReferences(c13, new ArrayList<String>()));
+    assertEquals(new HashSet<String>(Arrays.asList("A1", "A2")), w1.getListOfReferences(c12,
+            new ArrayList<String>()));
+    assertEquals(new HashSet<String>(Arrays.asList("A1", "A2", "A3")),
+            w1.getListOfReferences(c13, new ArrayList<String>()));
   }
 
   @Test

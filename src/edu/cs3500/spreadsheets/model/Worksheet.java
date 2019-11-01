@@ -20,7 +20,7 @@ import java.util.Set;
  * Represents a single spreadsheet.
  * Holds a HashMap of Cells whose keys are the string evaluation of their position.
  */
-public class Worksheet implements IWorksheet{
+public class Worksheet implements IWorksheet {
 
   private HashMap<String, WorksheetCell> sheet;
 
