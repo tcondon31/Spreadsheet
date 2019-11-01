@@ -6,6 +6,9 @@ import java.util.Set;
 import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 
+/**
+ * Interface representing a Worksheet.
+ */
 public interface IWorksheet {
 
   /**

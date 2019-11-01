@@ -1,6 +1,5 @@
 package edu.cs3500.spreadsheets.sexp;
 
-import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.SexpFunction;
