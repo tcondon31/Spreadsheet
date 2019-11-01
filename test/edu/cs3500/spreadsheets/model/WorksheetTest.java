@@ -13,6 +13,9 @@ import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests the Worksheet class and its methods.
+ */
 public class WorksheetTest {
 
   WorksheetCell c1;
