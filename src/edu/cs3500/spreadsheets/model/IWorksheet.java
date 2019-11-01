@@ -1,6 +1,7 @@
 package edu.cs3500.spreadsheets.model;
 
 import java.util.List;
+import java.util.Set;
 
 import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.Sexp;
@@ -49,7 +50,7 @@ public interface IWorksheet {
    * @param c the Cell to be checked
    * @return the list of all references
    */
-  List<String> getListOfReferences(WorksheetCell c);
+  Set<String> getListOfReferences(WorksheetCell c, List<String> list);
 
   /**
    * Returns a list of all cells being referenced within two Coords.

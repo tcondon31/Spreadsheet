@@ -55,7 +55,7 @@ public class GetAllRef implements Func<Sexp, List<String>>, SexpVisitor<List<Str
       WorksheetCell c = this.worksheet.getCellAt(s);
       if (!this.list.contains(s)) {
         this.list.add(s);
-        this.list.addAll(this.worksheet.getLoRAcc(c, this.list));
+        this.list.addAll(this.worksheet.getListOfReferences(c, this.list));
         return this.list;
       }
     }

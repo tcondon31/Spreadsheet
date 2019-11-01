@@ -154,17 +154,9 @@ public class WorksheetTest {
   @Test
   public void getListOfReferences() {
     initCells();
-    assertEquals(new HashSet<String>(), w1.getListOfReferences(c1));
-    assertEquals(new HashSet<String>(Arrays.asList("A1", "A2")), w1.getListOfReferences(c12));
-    assertEquals(new HashSet<String>(Arrays.asList("A1", "A2", "A3")), w1.getListOfReferences(c13));
-  }
-
-  @Test
-  public void getLoRAcc() {
-    initCells();
-    assertEquals(new HashSet<String>(), w1.getLoRAcc(c1, new ArrayList<>()));
-    assertEquals(new HashSet<String>(Arrays.asList("A1", "A2")), w1.getLoRAcc(c12, new ArrayList<>()));
-    assertEquals(new HashSet<String>(Arrays.asList("A1", "A2", "A3")), w1.getLoRAcc(c13, new ArrayList<>()));
+    assertEquals(new HashSet<String>(), w1.getListOfReferences(c1, new ArrayList<String>()));
+    assertEquals(new HashSet<String>(Arrays.asList("A1", "A2")), w1.getListOfReferences(c12, new ArrayList<String>()));
+    assertEquals(new HashSet<String>(Arrays.asList("A1", "A2", "A3")), w1.getListOfReferences(c13, new ArrayList<String>()));
   }
 
   @Test

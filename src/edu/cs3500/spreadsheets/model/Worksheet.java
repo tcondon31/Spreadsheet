@@ -10,9 +10,7 @@ import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.GetAllRef;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Represents a single spreadsheet.
@@ -49,7 +47,7 @@ public class Worksheet implements IWorksheet{
       return new SSymbol("");
     }
     WorksheetCell c = this.sheet.getOrDefault(key, new Cell(""));
-    Set<String> ref = this.getListOfReferences(c);
+    Set<String> ref = this.getListOfReferences(c, new ArrayList<>());
     if (ref.contains(key)) {
       throw new IllegalArgumentException("Cyclic reference in cell");
     }
@@ -104,22 +102,8 @@ public class Worksheet implements IWorksheet{
     return references;
   }
 
-  /**
-   * finds all references a cell makes to other cells.
-   * @param c the Cell to be checked
-   * @return the list of all references
-   */
-  public Set<String> getListOfReferences(WorksheetCell c) {
-    return this.getLoRAcc(c, new ArrayList<String>());
-  }
-
-  /**
-   * Accumulator for getListOfReferences.
-   * @param c the cell to be referenced
-   * @param list the current list of references
-   * @return the list of all references
-   */
-  public Set<String> getLoRAcc(WorksheetCell c, List<String> list) {
+  @Override
+  public Set<String> getListOfReferences(WorksheetCell c, List<String> list) {
     if (c.getContents().substring(0,1).equals("=")) {
       Sexp s = Parser.parse(c.getContents().substring(1));
       Set<String> uniqueRef = new HashSet<String>(new GetAllRef(this, list).apply(s));
