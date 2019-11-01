@@ -112,7 +112,7 @@ public class Worksheet implements IWorksheet{
    * @param list the current list of references
    * @return the list of all references
    */
-  private List<String> getLoRAcc(WorksheetCell c, List<String> list) {
+  public List<String> getLoRAcc(WorksheetCell c, List<String> list) {
     if (c.getContents().substring(0,1).equals("=")) {
       Sexp s = Parser.parse(c.getContents().substring(1));
       return new GetAllRef(this, list).apply(s);
