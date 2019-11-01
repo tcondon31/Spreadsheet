@@ -6,7 +6,6 @@ import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.SexpFunction;
 import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetCell;
-import edu.cs3500.spreadsheets.model.Coord;
 
 /**
  * function object that takes an input and if it has two arguments that are numbers, will

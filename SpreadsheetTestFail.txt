@@ -1,0 +1,4 @@
+A1 4
+A2 =B3
+B3 =A2
+C2 =(SUM 4 A1 (PRODUCT A1 A2))
