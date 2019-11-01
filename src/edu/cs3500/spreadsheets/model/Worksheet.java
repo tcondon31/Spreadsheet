@@ -101,11 +101,7 @@ public class Worksheet implements IWorksheet{
     return references;
   }
 
-  /**
-   * finds all references a cell makes to other cells.
-   * @param c the Cell to be checked
-   * @return the list of all references
-   */
+  @Override
   public List<String> getListOfReferences(WorksheetCell c) {
     return this.getLoRAcc(c, new ArrayList<String>());
   }
@@ -116,7 +112,7 @@ public class Worksheet implements IWorksheet{
    * @param list the current list of references
    * @return the list of all references
    */
-  public List<String> getLoRAcc(WorksheetCell c, List<String> list) {
+  private List<String> getLoRAcc(WorksheetCell c, List<String> list) {
     if (c.getContents().substring(0,1).equals("=")) {
       Sexp s = Parser.parse(c.getContents().substring(1));
       return new GetAllRef(this, list).apply(s);

@@ -45,6 +45,13 @@ public interface IWorksheet {
   boolean isValidName(String cell);
 
   /**
+   * finds all references a cell makes to other cells.
+   * @param c the Cell to be checked
+   * @return the list of all references
+   */
+  List<String> getListOfReferences(WorksheetCell c);
+
+  /**
    * Returns a list of all cells being referenced within two Coords.
    * @param tl the top left Coord to be evaluated
    * @param br the bottom right Coord to be evaluated
