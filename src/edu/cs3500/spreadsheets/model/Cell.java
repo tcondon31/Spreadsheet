@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * represents a cell that can hold values and formulas in a spreadsheet.
  */
-public class Cell implements WorksheetCell{
+public class Cell implements WorksheetCell {
 
   private String contents;
 
