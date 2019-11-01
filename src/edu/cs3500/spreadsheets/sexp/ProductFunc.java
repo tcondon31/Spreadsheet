@@ -2,11 +2,12 @@ package edu.cs3500.spreadsheets.sexp;
 
 import java.util.List;
 
+import edu.cs3500.spreadsheets.model.Cell;
+import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Func;
 import edu.cs3500.spreadsheets.model.SexpFunction;
 import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetCell;
-import edu.cs3500.spreadsheets.model.Coord;
 
 /**
  * represents a function object for finding the product of an arbitrary number of Sexps.
