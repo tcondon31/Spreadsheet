@@ -120,4 +120,9 @@ public class Worksheet implements IWorksheet {
   public boolean containsKey(String key) {
     return this.sheet.containsKey(key);
   }
+
+  @Override
+  public Set<String> getAllCellIndices() {
+    return this.sheet.keySet();
+  }
 }

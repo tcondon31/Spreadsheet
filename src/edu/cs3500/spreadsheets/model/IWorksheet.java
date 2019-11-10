@@ -70,4 +70,10 @@ public interface IWorksheet {
    */
   boolean containsKey(String key);
 
+  /**
+   * returns a set of all keys in the worksheet
+   * @return the set of keys as strings
+   */
+  Set<String> getAllCellIndices();
+
 }
