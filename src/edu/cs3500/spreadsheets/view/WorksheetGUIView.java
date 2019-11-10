@@ -7,12 +7,8 @@ import java.awt.event.ActionEvent;
 import java.util.function.Consumer;
 
 public class WorksheetGUIView extends JFrame implements IWorksheetView {
-  private JButton commandButton, quitButton;
-  private JPanel buttonPanel;
-  private TurtlePanel turtlePanel;
+
   private JScrollPane scrollPane;
-  private JTextField input;
-  Consumer<String> commandCallback;
 
   public WorksheetGUIView() {
     super();
@@ -21,7 +17,7 @@ public class WorksheetGUIView extends JFrame implements IWorksheetView {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     //use a borderlayout with drawing panel in center and button panel in south
-    this.setLayout(new BorderLayout());
+    this.setLayout(new GridLayout());
     turtlePanel = new TurtlePanel();
     turtlePanel.setPreferredSize(new Dimension(500, 500));
     scrollPane = new JScrollPane(turtlePanel);
