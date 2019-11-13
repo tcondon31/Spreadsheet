@@ -26,17 +26,21 @@ public class BeyondGood {
    */
   public static void main(String[] args) throws IOException {
 
-    Worksheet w1 = new Worksheet();
+    /*Worksheet w1 = new Worksheet();
     Cell c1 = new Cell("4");
     Cell c2 = new Cell("true");
+    Cell c3 = new Cell("=B1");
+    Cell c4 = new Cell("=B2");
     w1 = new Worksheet();
     w1.addCell(1, 1, c1);
     w1.addCell(1, 2, c2);
+    w1.addCell(2, 1, c4);
+    w1.addCell(2, 1, c3);
     IWorksheetView worksheetFrame = new WorksheetFrameView(w1);
     worksheetFrame.render();
-    worksheetFrame.display();
+    worksheetFrame.display();*/
 
-    /*
+
     File f;
     Worksheet w;
     WorksheetReader.WorksheetBuilder wbc;
@@ -59,6 +63,10 @@ public class BeyondGood {
       catch (Exception e) {
         throw new IllegalArgumentException("Could not read cells correctly");
       }
+
+      IWorksheetView worksheetFrame = new WorksheetFrameView(w);
+      worksheetFrame.render();
+      worksheetFrame.display();
     }
     else {
       throw new IllegalArgumentException("Invalid Command Line");
@@ -83,7 +91,6 @@ public class BeyondGood {
     else {
       throw new IllegalArgumentException("Invalid Command Line");
     }
-    */
   }
 
 }

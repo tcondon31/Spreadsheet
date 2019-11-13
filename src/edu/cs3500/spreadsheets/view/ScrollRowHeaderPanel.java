@@ -14,7 +14,7 @@ public class ScrollRowHeaderPanel extends JViewport implements ScrollHeader {
     this.rowHeaders = new ArrayList<>();
     for (int i = 1; i <= length; i++) {
       this.rowHeaders.add(
-              new CellPanel(Integer.toString(i), 0, (i - 1) * CellPanel.CELL_HEIGHT));
+              new CellPanel(Integer.toString(i), 0, (i - 1) * CellPanel.CELL_HEIGHT, true));
     }
   }
 

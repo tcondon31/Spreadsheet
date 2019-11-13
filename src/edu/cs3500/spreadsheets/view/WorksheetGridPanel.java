@@ -13,7 +13,7 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
     for (int r = 0; r < worksheet.length; r++) {
       for (int c = 0; c < worksheet[r].length; c++) {
         worksheet[r][c] = new CellPanel(
-                "", c * CellPanel.CELL_WIDTH, r * CellPanel.CELL_HEIGHT);
+                "", c * CellPanel.CELL_WIDTH, r * CellPanel.CELL_HEIGHT, false);
       }
     }
   }
@@ -29,10 +29,10 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
 
 
   @Override
-  public void setCell(String contents, int row, int col) {
-    this.worksheet[row][col] = new CellPanel(
+  public void setCell(String contents, int col, int row) {
+    this.worksheet[row - 1][col - 1] = new CellPanel(
             contents,
-            CellPanel.CELL_WIDTH * col,
-            CellPanel.CELL_HEIGHT * row);
+            CellPanel.CELL_WIDTH * (col - 1),
+            CellPanel.CELL_HEIGHT * (row - 1), false);
   }
 }

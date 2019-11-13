@@ -17,7 +17,7 @@ public class ScrollColumnHeaderPanel extends JViewport implements ScrollHeader {
     for (int i = 1; i <= length; i++) {
       this.columnHeaders.add(new CellPanel(Coord.colIndexToName(i),
               (i - 1) * CellPanel.CELL_WIDTH,
-              0));
+              0, true));
     }
   }
 
