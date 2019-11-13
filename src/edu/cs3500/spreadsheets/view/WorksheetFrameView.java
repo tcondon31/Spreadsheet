@@ -10,8 +10,6 @@ import java.util.List;
 import javax.swing.*;
 
 import edu.cs3500.spreadsheets.model.Worksheet;
-import edu.cs3500.spreadsheets.model.WorksheetCell;
-import edu.cs3500.spreadsheets.sexp.Sexp;
 
 public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
@@ -21,6 +19,7 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   private ScrollRowHeaderPanel rowHeaderPanel;
   private WorksheetGridPanel gridPanel;
   private JScrollPane scrollPane;
+  private CellSelectionListener selection;
   private Worksheet worksheet;
 
   public WorksheetFrameView(Worksheet worksheet) {
@@ -37,16 +36,16 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
     this.columnHeaderPanel = new ScrollColumnHeaderPanel(STARTING_SIZE);
     this.columnHeaderPanel.setPreferredSize(
-            new Dimension(CellPanel.CELL_WIDTH * STARTING_SIZE, CellPanel.CELL_HEIGHT));
+            new Dimension(WorksheetCellPanel.CELL_WIDTH * STARTING_SIZE, WorksheetCellPanel.CELL_HEIGHT));
 
     this.rowHeaderPanel = new ScrollRowHeaderPanel(STARTING_SIZE);
     this.rowHeaderPanel.setPreferredSize(
-            new Dimension(CellPanel.CELL_WIDTH, CellPanel.CELL_HEIGHT * STARTING_SIZE));
+            new Dimension(WorksheetCellPanel.CELL_WIDTH, WorksheetCellPanel.CELL_HEIGHT * STARTING_SIZE));
 
     this.gridPanel = new WorksheetGridPanel(STARTING_SIZE, STARTING_SIZE);
     this.gridPanel.setPreferredSize(new Dimension(
-            CellPanel.CELL_WIDTH * STARTING_SIZE,
-            CellPanel.CELL_HEIGHT * STARTING_SIZE));
+            WorksheetCellPanel.CELL_WIDTH * STARTING_SIZE,
+            WorksheetCellPanel.CELL_HEIGHT * STARTING_SIZE));
 
     this.scrollPane = new JScrollPane(
             this.gridPanel,
@@ -55,6 +54,9 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
     this.scrollPane.setColumnHeaderView(this.columnHeaderPanel);
     this.scrollPane.setRowHeaderView(this.rowHeaderPanel);
     this.add(this.scrollPane);
+
+    this.selection = new CellSelectionListener(this.gridPanel);
+    this.gridPanel.addMouseListener(this.selection);
   }
 
   @Override
@@ -82,6 +84,8 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
           this.worksheet.getColumnIndex(key),
           this.worksheet.getRowIndex(key));
     }
+
+    this.gridPanel.changeSelected(0,0);
   }
 
 }

@@ -8,15 +8,15 @@ import javax.swing.*;
 
 import edu.cs3500.spreadsheets.model.Coord;
 
-public class ScrollColumnHeaderPanel extends JViewport implements ScrollHeader {
+public class ScrollColumnHeaderPanel extends JPanel implements ScrollHeader {
 
-  private final List<CellPanel> columnHeaders;
+  private final List<WorksheetCellPanel> columnHeaders;
 
   public ScrollColumnHeaderPanel(int length) {
     this.columnHeaders = new ArrayList<>();
     for (int i = 1; i <= length; i++) {
-      this.columnHeaders.add(new CellPanel(Coord.colIndexToName(i),
-              (i - 1) * CellPanel.CELL_WIDTH,
+      this.columnHeaders.add(new WorksheetCellPanel(Coord.colIndexToName(i),
+              (i - 1) * WorksheetCellPanel.CELL_WIDTH,
               0, true));
     }
   }
@@ -27,7 +27,7 @@ public class ScrollColumnHeaderPanel extends JViewport implements ScrollHeader {
     super.paintComponent(g);
     setOpaque(true);
     setBackground(Color.lightGray);
-    for (CellPanel cp : columnHeaders) {
+    for (WorksheetCellPanel cp : columnHeaders) {
       cp.paintComponent(g);
     }
   }

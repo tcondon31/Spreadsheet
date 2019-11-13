@@ -72,24 +72,26 @@ public class BeyondGood {
       throw new IllegalArgumentException("Invalid Command Line");
     }
 
-    if (args[2].equals("-eval")) {
-      String s = "";
-      try {
-        s = w.evaluateCell(args[3]).toString();
+    if (args.length > 2) {
+      if (args[2].equals("-eval")) {
+        String s = "";
+        try {
+          s = w.evaluateCell(args[3]).toString();
+        }
+        catch (Exception e) {
+          System.out.print("Error in cell " + args[3] + ": " + e.getMessage());
+        }
+        try {
+          double d = Double.parseDouble(s);
+          System.out.print(String.format("%f", d));
+        }
+        catch (Exception e) {
+          System.out.print(s);
+        }
       }
-      catch (Exception e) {
-        System.out.print("Error in cell " + args[3] + ": " + e.getMessage());
+      else {
+        throw new IllegalArgumentException("Invalid Command Line");
       }
-      try {
-        double d = Double.parseDouble(s);
-        System.out.print(String.format("%f", d));
-      }
-      catch (Exception e) {
-        System.out.print(s);
-      }
-    }
-    else {
-      throw new IllegalArgumentException("Invalid Command Line");
     }
   }
 

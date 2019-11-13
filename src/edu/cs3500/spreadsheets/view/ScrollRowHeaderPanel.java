@@ -6,15 +6,15 @@ import java.util.List;
 
 import javax.swing.*;
 
-public class ScrollRowHeaderPanel extends JViewport implements ScrollHeader {
+public class ScrollRowHeaderPanel extends JPanel implements ScrollHeader {
 
-  private final List<CellPanel> rowHeaders;
+  private final List<WorksheetCellPanel> rowHeaders;
 
   public ScrollRowHeaderPanel(int length) {
     this.rowHeaders = new ArrayList<>();
     for (int i = 1; i <= length; i++) {
       this.rowHeaders.add(
-              new CellPanel(Integer.toString(i), 0, (i - 1) * CellPanel.CELL_HEIGHT, true));
+              new WorksheetCellPanel(Integer.toString(i), 0, (i - 1) * WorksheetCellPanel.CELL_HEIGHT, true));
     }
   }
 
@@ -23,7 +23,7 @@ public class ScrollRowHeaderPanel extends JViewport implements ScrollHeader {
     super.paintComponent(g);
     setOpaque(true);
     setBackground(Color.lightGray);
-    for (CellPanel cp : rowHeaders) {
+    for (WorksheetCellPanel cp : rowHeaders) {
       cp.paintComponent(g);
     }
   }
