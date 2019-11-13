@@ -85,6 +85,7 @@ public class BeyondGood {
             PrintWriter pw = new PrintWriter(args[3]);
             IWorksheetView textualView = new WorksheetTextualView(w, pw);
             textualView.render();
+            pw.close();
             break;
           default:
             throw new IllegalArgumentException("Invalid Command Line");

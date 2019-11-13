@@ -4,13 +4,13 @@ package edu.cs3500.spreadsheets.model;
  * represents a class that is used to build the worksheet model.
  */
 public class WorksheetBuilderClass implements WorksheetReader.WorksheetBuilder {
-  private Worksheet worksheet;
+  private IWorksheet worksheet;
 
   /**
    * Constructor for the worksheetBuilder class.
    * @param w the worksheet to build into
    */
-  public WorksheetBuilderClass(Worksheet w) {
+  public WorksheetBuilderClass(IWorksheet w) {
     this.worksheet = w;
   }
 

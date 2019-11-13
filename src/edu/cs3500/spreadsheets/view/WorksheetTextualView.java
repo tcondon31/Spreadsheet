@@ -27,7 +27,7 @@ public class WorksheetTextualView implements IWorksheetView {
       this.ap.append(s);
       this.ap.append(" ");
       this.ap.append(this.model.getCellAt(s).getContents());
-      this.ap.append("/n");
+      this.ap.append("\n");
     }
   }
 

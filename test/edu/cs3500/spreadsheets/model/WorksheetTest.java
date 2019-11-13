@@ -36,7 +36,7 @@ public class WorksheetTest {
   WorksheetCell c16;
   WorksheetCell c17;
   WorksheetCell c18;
-  Worksheet w1;
+  IWorksheet w1;
 
   @Before
   public void initCells() {
