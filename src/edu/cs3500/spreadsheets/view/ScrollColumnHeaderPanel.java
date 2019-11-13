@@ -43,4 +43,9 @@ public class ScrollColumnHeaderPanel extends JPanel implements ScrollHeader {
     this.revalidate();
     this.repaint();
   }
+
+  @Override
+  public int numHeaders() {
+    return this.columnHeaders.size();
+  }
 }

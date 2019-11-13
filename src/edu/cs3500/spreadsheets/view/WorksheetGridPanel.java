@@ -82,7 +82,7 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
     this.setPreferredSize(new Dimension(
             newGrid.length * WorksheetCellPanel.CELL_WIDTH,
             newGrid[0].length * WorksheetCellPanel.CELL_HEIGHT));
-    this.revalidate();
+    //this.revalidate();
     this.repaint();
   }
 }

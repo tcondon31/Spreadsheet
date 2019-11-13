@@ -12,7 +12,7 @@ import edu.cs3500.spreadsheets.model.Worksheet;
 
 public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
-  private final int STARTING_SIZE = 10;
+  private final int STARTING_SIZE = 80;
 
   private ScrollColumnHeaderPanel columnHeaderPanel;
   private ScrollRowHeaderPanel rowHeaderPanel;
@@ -47,8 +47,8 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
             WorksheetCellPanel.CELL_HEIGHT * STARTING_SIZE));
 
     this.scrollPane = new JScrollPane(this.gridPanel,
-            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-            JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     this.scrollPane.setColumnHeaderView(this.columnHeaderPanel);
     this.scrollPane.setRowHeaderView(this.rowHeaderPanel);
     this.add(this.scrollPane, BorderLayout.CENTER);
@@ -72,23 +72,16 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
       String key = allKeys.get(i);
       int row = this.worksheet.getRowIndex(key);
       int col = this.worksheet.getColumnIndex(key);
-      if (row > this.STARTING_SIZE) {
-        System.out.println("Hit row if");
-        this.rowHeaderPanel.expand(row - this.STARTING_SIZE);
-        System.out.println("Expand by: " + (row - this.STARTING_SIZE));
-        this.gridPanel.expand(row - this.STARTING_SIZE, 0);
-        this.scrollPane.revalidate();
-        this.scrollPane.repaint();
+      if (row > this.rowHeaderPanel.numHeaders()) {
+        this.gridPanel.expand(row - this.rowHeaderPanel.numHeaders(), 0);
+        this.rowHeaderPanel.expand(row - this.rowHeaderPanel.numHeaders());
       }
-      if (col > this.STARTING_SIZE) {
-        System.out.println("Hit col if");
-        this.columnHeaderPanel.expand(col - this.STARTING_SIZE);
-        System.out.println("Expand by: " + (col - this.STARTING_SIZE));
-        this.gridPanel.expand(0, col - this.STARTING_SIZE);
-        //System.out.println("Set Preferred Size to: " + WorksheetCellPanel.CELL_WIDTH * col + ", " + WorksheetCellPanel.CELL_HEIGHT * this.STARTING_SIZE);
-        this.scrollPane.revalidate();
-        this.scrollPane.repaint();
+      if (col > this.columnHeaderPanel.numHeaders()) {
+        this.gridPanel.expand(0, col - this.columnHeaderPanel.numHeaders());
+        this.columnHeaderPanel.expand(col - this.columnHeaderPanel.numHeaders());
       }
+      this.scrollPane.revalidate();
+      this.scrollPane.repaint();
       try {
         cell = this.worksheet.evaluateCell(key).toString();
       }
