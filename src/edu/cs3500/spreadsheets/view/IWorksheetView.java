@@ -9,4 +9,9 @@ public interface IWorksheetView {
 
   public void render() throws IOException;
 
+  /**
+   * Display this view.
+   */
+  void display();
+
 }

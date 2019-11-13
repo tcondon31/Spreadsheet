@@ -42,6 +42,12 @@ public interface IWorksheet {
   Sexp evaluateCell(String key);
 
   /**
+   * Evaluates all cells in a worksheet.
+   * @return a list of the values of all the evaluated cells
+   */
+  List<Sexp> evaluateAllCells();
+
+  /**
    * returns true if the given string is a valid name for a cell.
    * @param cell the string to be evaluated
    * @return boolean whether or not the String name is a valid cell name
@@ -75,5 +81,19 @@ public interface IWorksheet {
    * @return the set of keys as strings
    */
   Set<String> getAllCellIndices();
+
+  /**
+   * gets the index number of the column in the key.
+   * @param key hashmap key
+   * @return the index number of the key
+   */
+  int getColumnIndex(String key);
+
+  /**
+   * gets the row number in the key.
+   * @param key the hashmap key that contains the row index
+   * @return the row index of the key
+   */
+  int getRowIndex(String key);
 
 }

@@ -77,6 +77,15 @@ public class Worksheet implements IWorksheet {
   }
 
   @Override
+  public List<Sexp> evaluateAllCells() {
+    List<Sexp> result = new ArrayList<>();
+    for (String key : this.sheet.keySet()) {
+      result.add(this.evaluateCell(key));
+    }
+    return result;
+  }
+
+  @Override
   public boolean isValidName(String cell) {
     for (int i = 0; i < cell.length(); i++) {
       if (Character.isDigit(cell.charAt(i))) {
@@ -124,5 +133,40 @@ public class Worksheet implements IWorksheet {
   @Override
   public Set<String> getAllCellIndices() {
     return this.sheet.keySet();
+  }
+
+  @Override
+  public int getColumnIndex(String key) {
+    String col = "";
+    String character;
+    for (int i = 0; i < key.length(); i++) {
+      character = key.substring(i, i + 1);
+      try {
+        Integer.parseInt(character);
+      }
+      catch (NumberFormatException e) {
+        col += character;
+      }
+    }
+    return Coord.colNameToIndex(col);
+  }
+
+  @Override
+  public int getRowIndex(String key) {
+    String rest = key;
+    for (int i = 0; i <= key.length(); i++) {
+      try {
+        return Integer.parseInt(rest);
+      }
+      catch (NumberFormatException e) {
+        try {
+          rest = key.substring(i);
+        }
+        catch (IndexOutOfBoundsException ioobe) {
+          return -1;
+        }
+      }
+    }
+    return -1;
   }
 }

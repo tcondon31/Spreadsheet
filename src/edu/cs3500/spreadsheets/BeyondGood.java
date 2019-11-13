@@ -1,12 +1,19 @@
 package edu.cs3500.spreadsheets;
 
+import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetBuilderClass;
+import edu.cs3500.spreadsheets.model.WorksheetCell;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
+import edu.cs3500.spreadsheets.view.IWorksheetView;
+import edu.cs3500.spreadsheets.view.WorksheetFrameView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+
+import javax.swing.*;
 
 /**
  * The main class for our program.
@@ -17,8 +24,19 @@ public class BeyondGood {
    * The main entry point.
    * @param args any command-line arguments
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
 
+    Worksheet w1 = new Worksheet();
+    Cell c1 = new Cell("4");
+    Cell c2 = new Cell("true");
+    w1 = new Worksheet();
+    w1.addCell(1, 1, c1);
+    w1.addCell(1, 2, c2);
+    IWorksheetView worksheetFrame = new WorksheetFrameView(w1);
+    worksheetFrame.render();
+    worksheetFrame.display();
+
+    /*
     File f;
     Worksheet w;
     WorksheetReader.WorksheetBuilder wbc;
@@ -65,5 +83,7 @@ public class BeyondGood {
     else {
       throw new IllegalArgumentException("Invalid Command Line");
     }
+    */
   }
+
 }

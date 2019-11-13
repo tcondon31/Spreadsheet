@@ -30,4 +30,9 @@ public class WorksheetTextualView implements IWorksheetView {
     }
   }
 
+  @Override
+  public void display() {
+
+  }
+
 }
