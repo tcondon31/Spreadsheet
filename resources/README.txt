@@ -15,4 +15,4 @@ cell in the view. It creates a view that is at least the size of the furthest ou
 that contains non-blank contents in both directions. It is able to scroll in both directions
 using the scroll bars on the sides of the frame. It is also able to handle a mouse-click
 that selects the cell that is clicked on. This will be useful when dealing with controllers
-and editing contents of cells. 
+and editing contents of cells.

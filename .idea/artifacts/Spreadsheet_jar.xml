@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Spreadsheet:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Spreadsheet_jar</output-path>
+    <root id="archive" name="Spreadsheet.jar">
+      <element id="module-output" name="Spreadsheet" />
+    </root>
+  </artifact>
+</component>
