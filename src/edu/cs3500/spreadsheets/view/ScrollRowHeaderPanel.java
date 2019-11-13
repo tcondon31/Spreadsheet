@@ -14,7 +14,10 @@ public class ScrollRowHeaderPanel extends JPanel implements ScrollHeader {
     this.rowHeaders = new ArrayList<>();
     for (int i = 1; i <= length; i++) {
       this.rowHeaders.add(
-              new WorksheetCellPanel(Integer.toString(i), 0, (i - 1) * WorksheetCellPanel.CELL_HEIGHT, true));
+              new WorksheetCellPanel(Integer.toString(i),
+                      0,
+                      (i - 1) * WorksheetCellPanel.CELL_HEIGHT,
+                      true));
     }
   }
 
@@ -25,6 +28,18 @@ public class ScrollRowHeaderPanel extends JPanel implements ScrollHeader {
     setBackground(Color.lightGray);
     for (WorksheetCellPanel cp : rowHeaders) {
       cp.paintComponent(g);
+    }
+  }
+
+  @Override
+  public void expand(int numToExpand) {
+    int length = this.rowHeaders.size();
+    for (int i = length + 1; i <= length + numToExpand; i++) {
+      this.rowHeaders.add(
+              new WorksheetCellPanel(Integer.toString(i),
+                      0,
+                      (i - 1) * WorksheetCellPanel.CELL_HEIGHT,
+                      true));
     }
   }
 }

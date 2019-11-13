@@ -1,8 +1,7 @@
 package edu.cs3500.spreadsheets.view;
 
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,7 @@ import edu.cs3500.spreadsheets.model.Worksheet;
 
 public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
-  private final int STARTING_SIZE = 120;
+  private final int STARTING_SIZE = 10;
 
   private ScrollColumnHeaderPanel columnHeaderPanel;
   private ScrollRowHeaderPanel rowHeaderPanel;
@@ -47,13 +46,12 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
             WorksheetCellPanel.CELL_WIDTH * STARTING_SIZE,
             WorksheetCellPanel.CELL_HEIGHT * STARTING_SIZE));
 
-    this.scrollPane = new JScrollPane(
-            this.gridPanel,
+    this.scrollPane = new JScrollPane(this.gridPanel,
             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     this.scrollPane.setColumnHeaderView(this.columnHeaderPanel);
     this.scrollPane.setRowHeaderView(this.rowHeaderPanel);
-    this.add(this.scrollPane);
+    this.add(this.scrollPane, BorderLayout.CENTER);
 
     this.selection = new CellSelectionListener(this.gridPanel);
     this.gridPanel.addMouseListener(this.selection);
@@ -68,11 +66,37 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   public void render() throws IOException {
     List<String> allKeys = new ArrayList<>();
     allKeys.addAll(this.worksheet.getAllCellIndices());
-    //List<Sexp> cells = this.worksheet.evaluateAllCells();
 
     for (int i = 0; i < allKeys.size(); i++) {
       String cell;
       String key = allKeys.get(i);
+      int row = this.worksheet.getRowIndex(key);
+      int col = this.worksheet.getColumnIndex(key);
+      if (row > this.STARTING_SIZE) {
+        this.rowHeaderPanel.expand(row - this.STARTING_SIZE);
+        this.rowHeaderPanel.setPreferredSize(new Dimension(
+                WorksheetCellPanel.CELL_WIDTH,
+                row * WorksheetCellPanel.CELL_HEIGHT));
+        this.gridPanel.expand(row - this.STARTING_SIZE, 0);
+        this.gridPanel.setPreferredSize(new Dimension(
+                WorksheetCellPanel.CELL_WIDTH * this.STARTING_SIZE,
+                WorksheetCellPanel.CELL_HEIGHT * row));
+      }
+      if (col > this.STARTING_SIZE) {
+        System.out.println("Hit col if");
+        this.columnHeaderPanel.expand(col - this.STARTING_SIZE);
+        System.out.println("Expand by: " + (col - this.STARTING_SIZE));
+        this.columnHeaderPanel.setPreferredSize(new Dimension(
+                WorksheetCellPanel.CELL_WIDTH * col,
+                WorksheetCellPanel.CELL_HEIGHT));
+        this.gridPanel.expand(0, col - this.STARTING_SIZE);
+        this.gridPanel.setPreferredSize(new Dimension(
+                WorksheetCellPanel.CELL_WIDTH * col,
+                WorksheetCellPanel.CELL_HEIGHT * this.STARTING_SIZE));
+        System.out.println("Set Preferred Size to: " + WorksheetCellPanel.CELL_WIDTH * col + ", " + WorksheetCellPanel.CELL_HEIGHT * this.STARTING_SIZE);
+      }
+      revalidate();
+      repaint();
       try {
         cell = this.worksheet.evaluateCell(key).toString();
       }

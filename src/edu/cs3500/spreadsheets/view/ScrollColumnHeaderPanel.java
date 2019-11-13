@@ -11,6 +11,7 @@ import edu.cs3500.spreadsheets.model.Coord;
 public class ScrollColumnHeaderPanel extends JPanel implements ScrollHeader {
 
   private final List<WorksheetCellPanel> columnHeaders;
+  private String lastIndex;
 
   public ScrollColumnHeaderPanel(int length) {
     this.columnHeaders = new ArrayList<>();
@@ -29,6 +30,16 @@ public class ScrollColumnHeaderPanel extends JPanel implements ScrollHeader {
     setBackground(Color.lightGray);
     for (WorksheetCellPanel cp : columnHeaders) {
       cp.paintComponent(g);
+    }
+  }
+
+  @Override
+  public void expand(int numToExpand) {
+    int length = this.columnHeaders.size();
+    for (int i = length + 1; i <= length + numToExpand; i++) {
+      this.columnHeaders.add(new WorksheetCellPanel(Coord.colIndexToName(i),
+              (i - 1) * WorksheetCellPanel.CELL_WIDTH,
+              0, true));
     }
   }
 }

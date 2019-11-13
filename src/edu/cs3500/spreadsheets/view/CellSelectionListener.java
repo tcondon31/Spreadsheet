@@ -1,6 +1,5 @@
 package edu.cs3500.spreadsheets.view;
 
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -21,7 +20,12 @@ public class CellSelectionListener implements MouseListener {
   public void mouseClicked(MouseEvent e) {
     int xPos = e.getX() / WorksheetCellPanel.CELL_WIDTH;;
     int yPos = e.getY() / WorksheetCellPanel.CELL_HEIGHT;
-    this.gridPanel.changeSelected(yPos,xPos);
+    try {
+      this.gridPanel.changeSelected(yPos,xPos);
+    }
+    catch (IllegalArgumentException iae) {
+
+    }
     this.gridPanel.revalidate();
     this.gridPanel.repaint();
   }

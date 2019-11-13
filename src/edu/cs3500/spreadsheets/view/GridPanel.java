@@ -6,6 +6,6 @@ public interface GridPanel {
 
   void changeSelected(int row, int col);
 
-  WorksheetCellPanel getCell(int row, int col);
+  void expand(int numRows, int numCols);
 
 }

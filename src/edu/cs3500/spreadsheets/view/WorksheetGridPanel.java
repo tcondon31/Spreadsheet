@@ -49,6 +49,9 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
 
   @Override
   public void changeSelected(int row, int col) {
+    if (row >= this.worksheet.length || col >= this.worksheet[0].length) {
+      throw new IllegalArgumentException("Not on grid");
+    }
     WorksheetCellPanel wcp = this.worksheet[this.selectedRow][this.selectedCol];
     wcp.deselect();
     this.selectedRow = row;
@@ -57,7 +60,26 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
   }
 
   @Override
-  public WorksheetCellPanel getCell(int row, int col) {
-    return this.worksheet[row][col];
+  public void expand(int numRows, int numCols) {
+    WorksheetCellPanel[][] newGrid =
+            new WorksheetCellPanel
+                    [this.worksheet.length + numRows][this.worksheet[0].length + numCols];
+    for (int r = 0; r < this.worksheet.length; r++) {
+      for (int c = 0; c < this.worksheet[0].length; c++) {
+        newGrid[r][c] = this.worksheet[r][c];
+      }
+    }
+    for (int r = 0; r < newGrid.length; r++) {
+      for (int c = 0; c < newGrid[0].length; c++) {
+        if (newGrid[r][c] == null) {
+          newGrid[r][c] = new WorksheetCellPanel(
+                  "",
+                  c * WorksheetCellPanel.CELL_WIDTH,
+                  r * WorksheetCellPanel.CELL_HEIGHT,
+                  false);
+        }
+      }
+    }
+    this.worksheet = newGrid;
   }
 }
