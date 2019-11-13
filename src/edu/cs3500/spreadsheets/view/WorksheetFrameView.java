@@ -1,14 +1,16 @@
 package edu.cs3500.spreadsheets.view;
 
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
-import edu.cs3500.spreadsheets.model.Worksheet;
+import edu.cs3500.spreadsheets.model.IWorksheet;
 
 public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
@@ -19,9 +21,9 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   private WorksheetGridPanel gridPanel;
   private JScrollPane scrollPane;
   private CellSelectionListener selection;
-  private Worksheet worksheet;
+  private IWorksheet worksheet;
 
-  public WorksheetFrameView(Worksheet worksheet) {
+  public WorksheetFrameView(IWorksheet worksheet) {
     super("EXCEL");
 
     this.worksheet = worksheet;

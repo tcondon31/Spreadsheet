@@ -1,9 +1,7 @@
 package edu.cs3500.spreadsheets;
 
-import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetBuilderClass;
-import edu.cs3500.spreadsheets.model.WorksheetCell;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
 import edu.cs3500.spreadsheets.view.IWorksheetView;
 import edu.cs3500.spreadsheets.view.WorksheetFrameView;
@@ -12,8 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
-import javax.swing.*;
 
 /**
  * The main class for our program.
