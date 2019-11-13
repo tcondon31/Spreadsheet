@@ -1,0 +1,13 @@
+B125 3
+C1 hello
+B1 =(SUM (PRODUCT 2 3) (SUM 5 6) (PRODUCT 2 4))
+C2 ="hello"
+A1 4
+B2 =9
+C3 =(CONCAT C1 C2)
+A2 =(SUM 4 5)
+B3 =A2
+A3 =(PRODUCT 5 6)
+B4 =(SUM A1:B3)
+AA3 45
+C8 Jack says "hi". Jill has one backslash \ here.
