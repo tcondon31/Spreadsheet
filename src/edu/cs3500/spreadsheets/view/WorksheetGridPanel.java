@@ -1,8 +1,8 @@
 package edu.cs3500.spreadsheets.view;
 
-import java.awt.*;
+import java.awt.Graphics;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 public class WorksheetGridPanel extends JPanel implements GridPanel {
 
@@ -79,9 +79,6 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
       }
     }
     this.worksheet = newGrid;
-    this.setPreferredSize(new Dimension(
-            newGrid.length * WorksheetCellPanel.CELL_WIDTH,
-            newGrid[0].length * WorksheetCellPanel.CELL_HEIGHT));
     this.revalidate();
     this.repaint();
   }

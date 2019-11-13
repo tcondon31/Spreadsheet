@@ -80,6 +80,9 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
         this.gridPanel.expand(0, col - this.columnHeaderPanel.numHeaders());
         this.columnHeaderPanel.expand(col - this.columnHeaderPanel.numHeaders());
       }
+      this.gridPanel.setPreferredSize(new Dimension(
+          this.columnHeaderPanel.numHeaders() * WorksheetCellPanel.CELL_WIDTH,
+          this.rowHeaderPanel.numHeaders() * WorksheetCellPanel.CELL_HEIGHT));
       this.scrollPane.revalidate();
       this.scrollPane.repaint();
       try {
