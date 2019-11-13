@@ -73,30 +73,22 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
       int row = this.worksheet.getRowIndex(key);
       int col = this.worksheet.getColumnIndex(key);
       if (row > this.STARTING_SIZE) {
+        System.out.println("Hit row if");
         this.rowHeaderPanel.expand(row - this.STARTING_SIZE);
-        this.rowHeaderPanel.setPreferredSize(new Dimension(
-                WorksheetCellPanel.CELL_WIDTH,
-                row * WorksheetCellPanel.CELL_HEIGHT));
+        System.out.println("Expand by: " + (row - this.STARTING_SIZE));
         this.gridPanel.expand(row - this.STARTING_SIZE, 0);
-        this.gridPanel.setPreferredSize(new Dimension(
-                WorksheetCellPanel.CELL_WIDTH * this.STARTING_SIZE,
-                WorksheetCellPanel.CELL_HEIGHT * row));
+        this.scrollPane.revalidate();
+        this.scrollPane.repaint();
       }
       if (col > this.STARTING_SIZE) {
         System.out.println("Hit col if");
         this.columnHeaderPanel.expand(col - this.STARTING_SIZE);
         System.out.println("Expand by: " + (col - this.STARTING_SIZE));
-        this.columnHeaderPanel.setPreferredSize(new Dimension(
-                WorksheetCellPanel.CELL_WIDTH * col,
-                WorksheetCellPanel.CELL_HEIGHT));
         this.gridPanel.expand(0, col - this.STARTING_SIZE);
-        this.gridPanel.setPreferredSize(new Dimension(
-                WorksheetCellPanel.CELL_WIDTH * col,
-                WorksheetCellPanel.CELL_HEIGHT * this.STARTING_SIZE));
-        System.out.println("Set Preferred Size to: " + WorksheetCellPanel.CELL_WIDTH * col + ", " + WorksheetCellPanel.CELL_HEIGHT * this.STARTING_SIZE);
+        //System.out.println("Set Preferred Size to: " + WorksheetCellPanel.CELL_WIDTH * col + ", " + WorksheetCellPanel.CELL_HEIGHT * this.STARTING_SIZE);
+        this.scrollPane.revalidate();
+        this.scrollPane.repaint();
       }
-      revalidate();
-      repaint();
       try {
         cell = this.worksheet.evaluateCell(key).toString();
       }

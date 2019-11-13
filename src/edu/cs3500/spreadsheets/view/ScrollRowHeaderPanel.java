@@ -24,8 +24,6 @@ public class ScrollRowHeaderPanel extends JPanel implements ScrollHeader {
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    setOpaque(true);
-    setBackground(Color.lightGray);
     for (WorksheetCellPanel cp : rowHeaders) {
       cp.paintComponent(g);
     }
@@ -41,5 +39,10 @@ public class ScrollRowHeaderPanel extends JPanel implements ScrollHeader {
                       (i - 1) * WorksheetCellPanel.CELL_HEIGHT,
                       true));
     }
+    this.setPreferredSize(new Dimension(
+            WorksheetCellPanel.CELL_WIDTH,
+            this.rowHeaders.size() * WorksheetCellPanel.CELL_HEIGHT));
+    this.revalidate();
+    this.repaint();
   }
 }

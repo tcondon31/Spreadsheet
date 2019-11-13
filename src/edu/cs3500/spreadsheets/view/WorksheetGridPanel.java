@@ -29,8 +29,6 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    setOpaque(true);
-    setBackground(Color.WHITE);
     for (WorksheetCellPanel[] cpArray : worksheet) {
       for (WorksheetCellPanel cp : cpArray) {
         cp.paintComponent(g);
@@ -81,5 +79,10 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
       }
     }
     this.worksheet = newGrid;
+    this.setPreferredSize(new Dimension(
+            newGrid.length * WorksheetCellPanel.CELL_WIDTH,
+            newGrid[0].length * WorksheetCellPanel.CELL_HEIGHT));
+    this.revalidate();
+    this.repaint();
   }
 }
