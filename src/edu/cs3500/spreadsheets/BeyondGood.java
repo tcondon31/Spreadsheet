@@ -8,6 +8,7 @@ import edu.cs3500.spreadsheets.view.WorksheetFrameView;
 import edu.cs3500.spreadsheets.view.WorksheetTextualView;
 
 import java.io.*;
+import java.nio.file.Path;
 
 /**
  * The main class for our program.
@@ -34,7 +35,7 @@ public class BeyondGood {
     }
     else if (args.length > 2) {
       if (args[0].equals("-in")) {
-        f = new File(args[1]);
+        f = new File("resources/" + args[1]);
         w = new Worksheet();
         wbc = new WorksheetBuilderClass(w);
 
