@@ -1,9 +1,14 @@
 package edu.cs3500.spreadsheets.view;
 
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 /**
  * Represents the visual view of one cell in the grid.
