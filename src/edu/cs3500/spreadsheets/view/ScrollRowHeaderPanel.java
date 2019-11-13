@@ -6,10 +6,17 @@ import java.util.List;
 
 import javax.swing.*;
 
+/**
+ * represents the headers for the rows.
+ */
 public class ScrollRowHeaderPanel extends JPanel implements ScrollHeader {
 
   private final List<WorksheetCellPanel> rowHeaders;
 
+  /**
+   * cosntructor for the ScrollRowHeaderPanel class.
+   * @param length int rows to add
+   */
   public ScrollRowHeaderPanel(int length) {
     this.rowHeaders = new ArrayList<>();
     for (int i = 1; i <= length; i++) {

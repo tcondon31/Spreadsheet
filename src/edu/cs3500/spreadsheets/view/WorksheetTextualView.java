@@ -11,7 +11,7 @@ public class WorksheetTextualView implements IWorksheetView {
   private Appendable ap;
 
   /**
-   * Constructs a Textual View for a Worksheet
+   * Constructs a Textual View for a Worksheet.
    * @param model the model to be passed in
    * @param ap the appendable to be added to
    */
@@ -35,5 +35,4 @@ public class WorksheetTextualView implements IWorksheetView {
   public void display() {
 
   }
-
 }

@@ -8,7 +8,7 @@ import java.io.IOException;
 public interface IWorksheetView {
 
   /**
-   * renders a view of the model
+   * renders a view of the model.
    * @throws IOException
    */
   void render() throws IOException;

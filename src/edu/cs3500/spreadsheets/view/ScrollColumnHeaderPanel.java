@@ -10,12 +10,16 @@ import javax.swing.JPanel;
 import edu.cs3500.spreadsheets.model.Coord;
 
 /**
- *
+ * represents the headers for the view.
  */
 public class ScrollColumnHeaderPanel extends JPanel implements ScrollHeader {
 
   private final List<WorksheetCellPanel> columnHeaders;
 
+  /**
+   * constructor for the ScrollColumnHeaderPanel class.
+   * @param length int the number of columns to have
+   */
   public ScrollColumnHeaderPanel(int length) {
     this.columnHeaders = new ArrayList<>();
     for (int i = 1; i <= length; i++) {

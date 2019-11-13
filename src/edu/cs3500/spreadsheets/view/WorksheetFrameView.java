@@ -12,6 +12,9 @@ import javax.swing.JScrollPane;
 
 import edu.cs3500.spreadsheets.model.IWorksheet;
 
+/**
+ * Represents the GUI view of an IWorksheet.
+ */
 public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
   private final int STARTING_SIZE = 10;
@@ -23,6 +26,10 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   private CellSelectionListener selection;
   private IWorksheet worksheet;
 
+  /**
+   * constructs a GUI view.
+   * @param worksheet IWorksheet to base the view off of
+   */
   public WorksheetFrameView(IWorksheet worksheet) {
     super("EXCEL");
 

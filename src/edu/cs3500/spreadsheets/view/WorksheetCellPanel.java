@@ -5,6 +5,9 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.*;
 
+/**
+ * Represents the visual view of one cell in the grid.
+ */
 public class WorksheetCellPanel extends JPanel implements CellPanel {
 
   static final int CELL_WIDTH = 80;
@@ -16,6 +19,13 @@ public class WorksheetCellPanel extends JPanel implements CellPanel {
   private int xPos;
   private int yPos;
 
+  /**
+   * Constructs a WorksheetCellPanel.
+   * @param contents String contents of the cell
+   * @param xPos int position in the horizontal direction
+   * @param yPos int position in the vertical direction
+   * @param header boolean is this cell a header
+   */
   public WorksheetCellPanel(String contents, int xPos, int yPos, boolean header) {
     this.contents = contents;
     this.xPos = xPos;

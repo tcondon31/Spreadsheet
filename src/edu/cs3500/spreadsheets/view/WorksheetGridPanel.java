@@ -4,12 +4,20 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+/**
+ * Represents the JPanel to place in the view, creates the content cells.
+ */
 public class WorksheetGridPanel extends JPanel implements GridPanel {
 
   private WorksheetCellPanel[][] worksheet;
   private int selectedRow;
   private int selectedCol;
 
+  /**
+   * constructs the GridPanel.
+   * @param rows int number of rows long
+   * @param cols int number of columns long
+   */
   public WorksheetGridPanel (int rows, int cols) {
     this.worksheet = new WorksheetCellPanel[rows][cols];
     this.selectedRow = 0;
