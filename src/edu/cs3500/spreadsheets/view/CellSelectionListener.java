@@ -3,11 +3,19 @@ package edu.cs3500.spreadsheets.view;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * Class designed for representing a selected cell, uses a mouse listener to determine
+ * which cell should be selected.
+ */
 public class CellSelectionListener implements MouseListener {
 
   private WorksheetGridPanel gridPanel;
 
-  public CellSelectionListener(WorksheetGridPanel gridPanel) {
+  /**
+   * constructor for the CellSelectionListener class.
+   * @param gridPanel WorksheetGridPanel to assign to the class.
+   */
+  CellSelectionListener(WorksheetGridPanel gridPanel) {
     this.gridPanel = gridPanel;
   }
 

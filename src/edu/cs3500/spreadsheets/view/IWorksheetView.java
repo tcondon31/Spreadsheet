@@ -7,7 +7,11 @@ import java.io.IOException;
  */
 public interface IWorksheetView {
 
-  public void render() throws IOException;
+  /**
+   * renders a view of the model
+   * @throws IOException
+   */
+  void render() throws IOException;
 
   /**
    * Display this view.

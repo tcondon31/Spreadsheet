@@ -9,6 +9,9 @@ import javax.swing.JPanel;
 
 import edu.cs3500.spreadsheets.model.Coord;
 
+/**
+ *
+ */
 public class ScrollColumnHeaderPanel extends JPanel implements ScrollHeader {
 
   private final List<WorksheetCellPanel> columnHeaders;
