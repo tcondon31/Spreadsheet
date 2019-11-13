@@ -25,6 +25,7 @@ public class WorksheetTextualView implements IWorksheetView {
     Set<String> keys = this.model.getAllCellIndices();
     for (String s : keys) {
       this.ap.append(s);
+      this.ap.append(" ");
       this.ap.append(this.model.getCellAt(s).getContents());
       this.ap.append("/n");
     }

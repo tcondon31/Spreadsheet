@@ -14,7 +14,7 @@ import edu.cs3500.spreadsheets.model.IWorksheet;
 
 public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
-  private final int STARTING_SIZE = 80;
+  private final int STARTING_SIZE = 10;
 
   private ScrollColumnHeaderPanel columnHeaderPanel;
   private ScrollRowHeaderPanel rowHeaderPanel;
