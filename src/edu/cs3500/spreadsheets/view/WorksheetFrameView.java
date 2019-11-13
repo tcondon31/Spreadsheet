@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.*;
 
 import edu.cs3500.spreadsheets.model.Worksheet;
+import edu.cs3500.spreadsheets.model.WorksheetCell;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 
 public class WorksheetFrameView extends JFrame implements IWorksheetView {
@@ -65,13 +66,21 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   public void render() throws IOException {
     List<String> allKeys = new ArrayList<>();
     allKeys.addAll(this.worksheet.getAllCellIndices());
-    List<Sexp> cells = this.worksheet.evaluateAllCells();
+    //List<Sexp> cells = this.worksheet.evaluateAllCells();
 
     for (int i = 0; i < allKeys.size(); i++) {
+      String cell;
+      String key = allKeys.get(i);
+      try {
+        cell = this.worksheet.evaluateCell(key).toString();
+      }
+      catch (Exception e) {
+        cell = "#VALUE!";
+      }
       this.gridPanel.setCell(
-              cells.get(i).toString(),
-              this.worksheet.getColumnIndex(allKeys.get(i)),
-              this.worksheet.getRowIndex(allKeys.get(i)));
+          cell,
+          this.worksheet.getColumnIndex(key),
+          this.worksheet.getRowIndex(key));
     }
   }
 
