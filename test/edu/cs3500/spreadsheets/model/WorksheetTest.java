@@ -123,12 +123,12 @@ public class WorksheetTest {
     assertEquals(new SNumber(0), w1.evaluateCell("A14"));
   }
 
-  @Test (expected= IllegalArgumentException.class)
+  @Test (expected = IllegalArgumentException.class)
   public void evaluateCyclic1() {
     w1.evaluateCell("A7");
   }
 
-  @Test (expected= IllegalArgumentException.class)
+  @Test (expected = IllegalArgumentException.class)
   public void evaluateCyclic2() {
     w1.evaluateCell("A8");
   }

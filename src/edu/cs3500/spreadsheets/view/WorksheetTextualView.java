@@ -5,6 +5,9 @@ import edu.cs3500.spreadsheets.model.IWorksheet;
 import java.io.IOException;
 import java.util.Set;
 
+/**
+ * Creates a textual view of the given model.
+ */
 public class WorksheetTextualView implements IWorksheetView {
 
   private IWorksheet model;
@@ -33,6 +36,6 @@ public class WorksheetTextualView implements IWorksheetView {
 
   @Override
   public void display() {
-
+    // nothing to implement here.
   }
 }

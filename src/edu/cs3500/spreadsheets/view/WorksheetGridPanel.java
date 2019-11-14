@@ -18,7 +18,7 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
    * @param rows int number of rows long
    * @param cols int number of columns long
    */
-  public WorksheetGridPanel (int rows, int cols) {
+  public WorksheetGridPanel(int rows, int cols) {
     this.worksheet = new WorksheetCellPanel[rows][cols];
     this.selectedRow = 0;
     this.selectedCol = 0;

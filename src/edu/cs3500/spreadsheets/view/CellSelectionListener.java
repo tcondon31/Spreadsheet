@@ -26,13 +26,13 @@ public class CellSelectionListener implements MouseListener {
    */
   @Override
   public void mouseClicked(MouseEvent e) {
-    int xPos = e.getX() / WorksheetCellPanel.CELL_WIDTH;;
+    int xPos = e.getX() / WorksheetCellPanel.CELL_WIDTH;
     int yPos = e.getY() / WorksheetCellPanel.CELL_HEIGHT;
     try {
       this.gridPanel.changeSelected(yPos,xPos);
     }
     catch (IllegalArgumentException iae) {
-
+      // do not want the program to crash with out of bounds click. should do nothing.
     }
     this.gridPanel.revalidate();
     this.gridPanel.repaint();
@@ -45,7 +45,7 @@ public class CellSelectionListener implements MouseListener {
    */
   @Override
   public void mousePressed(MouseEvent e) {
-
+    // no event to take place.
   }
 
   /**
@@ -55,7 +55,7 @@ public class CellSelectionListener implements MouseListener {
    */
   @Override
   public void mouseReleased(MouseEvent e) {
-
+    // no event to take place.
   }
 
   /**
@@ -65,7 +65,7 @@ public class CellSelectionListener implements MouseListener {
    */
   @Override
   public void mouseEntered(MouseEvent e) {
-
+    // no event to take place.
   }
 
   /**
@@ -75,6 +75,6 @@ public class CellSelectionListener implements MouseListener {
    */
   @Override
   public void mouseExited(MouseEvent e) {
-
+    // no event to take place.
   }
 }

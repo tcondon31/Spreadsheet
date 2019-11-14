@@ -14,6 +14,9 @@ import java.io.StringReader;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests the textual view for a spreadsheet.
+ */
 public class WorksheetTextualViewTest {
 
   WorksheetCell c1;

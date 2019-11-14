@@ -9,7 +9,7 @@ public interface IWorksheetView {
 
   /**
    * renders a view of the model.
-   * @throws IOException
+   * @throws IOException if the appendable cannot be appended onto
    */
   void render() throws IOException;
 

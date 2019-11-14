@@ -23,7 +23,6 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   private ScrollRowHeaderPanel rowHeaderPanel;
   private WorksheetGridPanel gridPanel;
   private JScrollPane scrollPane;
-  private CellSelectionListener selection;
   private IWorksheet worksheet;
 
   /**
@@ -44,11 +43,13 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
     this.columnHeaderPanel = new ScrollColumnHeaderPanel(STARTING_SIZE);
     this.columnHeaderPanel.setPreferredSize(
-            new Dimension(WorksheetCellPanel.CELL_WIDTH * STARTING_SIZE, WorksheetCellPanel.CELL_HEIGHT));
+            new Dimension(WorksheetCellPanel.CELL_WIDTH * STARTING_SIZE,
+                WorksheetCellPanel.CELL_HEIGHT));
 
     this.rowHeaderPanel = new ScrollRowHeaderPanel(STARTING_SIZE);
     this.rowHeaderPanel.setPreferredSize(
-            new Dimension(WorksheetCellPanel.CELL_WIDTH, WorksheetCellPanel.CELL_HEIGHT * STARTING_SIZE));
+            new Dimension(WorksheetCellPanel.CELL_WIDTH,
+                WorksheetCellPanel.CELL_HEIGHT * STARTING_SIZE));
 
     this.gridPanel = new WorksheetGridPanel(STARTING_SIZE, STARTING_SIZE);
     this.gridPanel.setPreferredSize(new Dimension(
@@ -62,8 +63,8 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
     this.scrollPane.setRowHeaderView(this.rowHeaderPanel);
     this.add(this.scrollPane, BorderLayout.CENTER);
 
-    this.selection = new CellSelectionListener(this.gridPanel);
-    this.gridPanel.addMouseListener(this.selection);
+    CellSelectionListener selection = new CellSelectionListener(this.gridPanel);
+    this.gridPanel.addMouseListener(selection);
   }
 
   @Override
