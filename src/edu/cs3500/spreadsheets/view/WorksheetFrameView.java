@@ -32,6 +32,10 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   public WorksheetFrameView(IWorksheet worksheet) {
     super("EXCEL");
 
+    if (worksheet == null) {
+      throw new IllegalArgumentException("Cannot render a null worksheet");
+    }
+
     this.worksheet = worksheet;
 
     setSize(1200, 700);
