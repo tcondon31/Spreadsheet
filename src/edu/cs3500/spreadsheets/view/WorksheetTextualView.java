@@ -19,6 +19,9 @@ public class WorksheetTextualView implements IWorksheetView {
    * @param ap the appendable to be added to
    */
   public WorksheetTextualView(IWorksheet model, Appendable ap) {
+    if (model == null || ap == null) {
+      throw new IllegalArgumentException("Cannot make model or appendable null");
+    }
     this.model = model;
     this.ap = ap;
   }
