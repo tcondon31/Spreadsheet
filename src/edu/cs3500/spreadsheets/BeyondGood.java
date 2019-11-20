@@ -85,7 +85,6 @@ public class BeyondGood {
             }
             break;
           case "-save":
-            //TODO: Figure out how to write to the file
             PrintWriter pw = new PrintWriter(args[3]);
             IWorksheetView textualView = new WorksheetTextualView(w, pw);
             textualView.render();

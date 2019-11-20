@@ -105,6 +105,19 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
       catch (Exception e) {
         cell = "#VALUE!";
       }
+      try {
+        double d = Double.parseDouble(cell);
+        cell = String.format("%f", d);
+      }
+      catch (Exception ignored) {
+
+      }
+      /*try {
+        cell = this.worksheet.evaluateCell(key).toString();
+      }
+      catch (Exception e) {
+        cell = "#VALUE!";
+      }*/
       this.gridPanel.setCell(
           cell,
           this.worksheet.getColumnIndex(key),
