@@ -104,8 +104,8 @@ public class Worksheet implements IWorksheet {
   }
 
   @Override
-  public List<SSymbol> getAllReferences(Coord tl, Coord br) {
-    List<SSymbol> references = new ArrayList<>();
+  public List<Sexp> getAllReferences(Coord tl, Coord br) {
+    List<Sexp> references = new ArrayList<>();
     for (int i = tl.col; i <= br.col; i++) {
       for (int j = tl.row; j <= br.row; j++) {
         Coord temp = new Coord(i, j);
@@ -168,5 +168,20 @@ public class Worksheet implements IWorksheet {
       }
     }
     return -1;
+  }
+
+  @Override
+  public void editCell(String key, String contents) {
+    this.getCellAt(key).editContents(contents);
+  }
+
+  @Override
+  public void removeCell(String key) {
+    this.sheet.remove(this.getCellAt(key));
+  }
+
+  @Override
+  public int getNumCells() {
+    return this.sheet.size();
   }
 }
