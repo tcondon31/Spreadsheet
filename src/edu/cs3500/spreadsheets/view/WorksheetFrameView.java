@@ -19,17 +19,17 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
   private final int STARTING_SIZE = 100;
 
-  private ScrollColumnHeaderPanel columnHeaderPanel;
-  private ScrollRowHeaderPanel rowHeaderPanel;
-  private WorksheetGridPanel gridPanel;
-  private JScrollPane scrollPane;
-  private IWorksheet worksheet;
+  protected ScrollColumnHeaderPanel columnHeaderPanel;
+  protected ScrollRowHeaderPanel rowHeaderPanel;
+  protected WorksheetGridPanel gridPanel;
+  protected JScrollPane scrollPane;
+  protected IWorksheet worksheet;
 
   /**
    * constructs a GUI view.
    * @param worksheet IWorksheet to base the view off of
    */
-  public WorksheetFrameView(IWorksheet worksheet) {
+  public WorksheetFrameView(IWorksheet worksheet) throws IOException {
     super("EXCEL");
 
     if (worksheet == null) {
@@ -69,6 +69,8 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
     CellSelectionListener selection = new CellSelectionListener(this.gridPanel);
     this.gridPanel.addMouseListener(selection);
+    this.render();
+    this.gridPanel.changeSelected(0,0);
   }
 
   @Override
@@ -77,9 +79,8 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   }
 
   @Override
-  public void render() throws IOException {
-    List<String> allKeys = new ArrayList<>();
-    allKeys.addAll(this.worksheet.getAllCellIndices());
+  public void render() {
+    List<String> allKeys = new ArrayList<>(this.worksheet.getAllCellIndices());
 
     for (int i = 0; i < allKeys.size(); i++) {
       String cell;
@@ -105,26 +106,17 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
       catch (Exception e) {
         cell = "#VALUE!";
       }
-      try {
-        double d = Double.parseDouble(cell);
-        cell = String.format("%f", d);
-      }
-      catch (Exception ignored) {
-
-      }
-      /*try {
-        cell = this.worksheet.evaluateCell(key).toString();
-      }
-      catch (Exception e) {
-        cell = "#VALUE!";
-      }*/
       this.gridPanel.setCell(
           cell,
           this.worksheet.getColumnIndex(key),
           this.worksheet.getRowIndex(key));
     }
+  }
 
-    this.gridPanel.changeSelected(0,0);
+  @Override
+  public String getSelectedCellContents() {
+    String key = this.gridPanel.getSelectedCellKey();
+    return this.worksheet.getCellAt(key).getContents();
   }
 
 }

@@ -41,4 +41,9 @@ public class WorksheetTextualView implements IWorksheetView {
   public void display() {
     // nothing to implement here.
   }
+
+  @Override
+  public String getSelectedCellContents() {
+    return "";
+  }
 }

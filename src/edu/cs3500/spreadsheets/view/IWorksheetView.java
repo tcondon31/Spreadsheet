@@ -18,4 +18,10 @@ public interface IWorksheetView {
    */
   void display();
 
+  /**
+   * returns the String contents of the Cell that is currently selected.
+   * @return the contents of whatever cell is selected
+   */
+  String getSelectedCellContents();
+
 }

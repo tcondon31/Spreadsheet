@@ -94,9 +94,9 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
         else {
           return "";
         }
-        List<SSymbol> references = this.worksheet.getAllReferences(topLeft, bottomRight);
+        List<Sexp> references = this.worksheet.getAllReferences(topLeft, bottomRight);
         StringBuilder total = new StringBuilder();
-        for (SSymbol ref : references) {
+        for (Sexp ref : references) {
           total.append(new EvaluateCell(this.worksheet).apply(ref).toString());
         }
         return total.toString();

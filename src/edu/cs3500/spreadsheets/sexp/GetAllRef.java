@@ -92,8 +92,8 @@ public class GetAllRef implements Func<Sexp, List<String>>, SexpVisitor<List<Str
         } else {
           return this.list;
         }
-        List<SSymbol> references = this.worksheet.getAllReferences(topLeft, bottomRight);
-        for (SSymbol refer : references) {
+        List<Sexp> references = this.worksheet.getAllReferences(topLeft, bottomRight);
+        for (Sexp refer : references) {
           this.list.addAll(new GetAllRef(this.worksheet, new ArrayList<String>()).apply(refer));
         }
         return this.list;
