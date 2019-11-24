@@ -9,6 +9,8 @@ import java.io.IOException;
 
 public class WorksheetFrameControllerView extends WorksheetFrameView {
 
+  private JTextField editBar;
+
   /**
    * constructs a GUI view.
    *
@@ -16,16 +18,22 @@ public class WorksheetFrameControllerView extends WorksheetFrameView {
    */
   public WorksheetFrameControllerView(IWorksheet worksheet) throws IOException {
     super(worksheet);
-    JTextField editBar = new JTextField(this.getSelectedCellContents());
-    editBar.setPreferredSize(new Dimension(200, 30));
+    this.editBar = new JTextField(this.getSelectedCellContents());
+    this.editBar.setPreferredSize(new Dimension(200, 30));
     JButton submit = new JButton("Submit");
     JButton clear = new JButton("Clear");
     JPanel topBar = new JPanel();
     topBar.add(submit);
     topBar.add(clear);
-    topBar.add(editBar);
+    topBar.add(this.editBar);
     this.add(topBar, BorderLayout.NORTH);
+    CellSelectionListener selection = new CellSelectionListener(this, this.gridPanel);
+    this.gridPanel.addMouseListener(selection);
+  }
 
+  @Override
+  public void changeSelected() {
+    this.editBar.setText(this.getSelectedCellContents());
   }
 
 

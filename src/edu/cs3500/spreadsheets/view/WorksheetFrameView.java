@@ -67,8 +67,6 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
     this.scrollPane.setRowHeaderView(this.rowHeaderPanel);
     this.add(this.scrollPane, BorderLayout.CENTER);
 
-    CellSelectionListener selection = new CellSelectionListener(this.gridPanel);
-    this.gridPanel.addMouseListener(selection);
     this.render();
     this.gridPanel.changeSelected(0,0);
   }
@@ -117,6 +115,11 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   public String getSelectedCellContents() {
     String key = this.gridPanel.getSelectedCellKey();
     return this.worksheet.getCellAt(key).getContents();
+  }
+
+  @Override
+  public void changeSelected() {
+    // nothing to implement here
   }
 
 }

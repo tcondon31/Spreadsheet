@@ -1,5 +1,7 @@
 package edu.cs3500.spreadsheets.view;
 
+import edu.cs3500.spreadsheets.model.IWorksheet;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -9,13 +11,15 @@ import java.awt.event.MouseListener;
  */
 public class CellSelectionListener implements MouseListener {
 
+  private IWorksheetView total;
   private WorksheetGridPanel gridPanel;
 
   /**
    * constructor for the CellSelectionListener class.
    * @param gridPanel WorksheetGridPanel to assign to the class.
    */
-  CellSelectionListener(WorksheetGridPanel gridPanel) {
+  CellSelectionListener(IWorksheetView total, WorksheetGridPanel gridPanel) {
+    this.total = total;
     this.gridPanel = gridPanel;
   }
 
@@ -30,6 +34,7 @@ public class CellSelectionListener implements MouseListener {
     int yPos = e.getY() / WorksheetCellPanel.CELL_HEIGHT;
     try {
       this.gridPanel.changeSelected(yPos,xPos);
+      this.total.changeSelected();
     }
     catch (IllegalArgumentException iae) {
       // do not want the program to crash with out of bounds click. should do nothing.

@@ -24,4 +24,9 @@ public interface IWorksheetView {
    */
   String getSelectedCellContents();
 
+  /**
+   * updates the Text Field to display the correct contents if applicable to the view.
+   */
+  void changeSelected();
+
 }
