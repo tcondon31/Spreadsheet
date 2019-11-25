@@ -38,7 +38,7 @@ public class BeyondGood {
     }
     else if (args.length > 2) {
       if (args[0].equals("-in")) {
-        f = new File("resources/" + args[1]);
+        f = new File(args[1]);
         w = new Worksheet();
         wbc = new WorksheetBuilderClass(w);
 
