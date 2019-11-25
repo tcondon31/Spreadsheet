@@ -103,9 +103,9 @@ public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
         else {
           return 0.0;
         }
-        List<SSymbol> references = this.worksheet.getAllReferences(topLeft, bottomRight);
+        List<Sexp> references = this.worksheet.getAllReferences(topLeft, bottomRight);
         double total = 0;
-        for (SSymbol ref : references) {
+        for (Sexp ref : references) {
           total += Double.parseDouble(new EvaluateCell(this.worksheet).apply(ref).toString());
         }
         return total;

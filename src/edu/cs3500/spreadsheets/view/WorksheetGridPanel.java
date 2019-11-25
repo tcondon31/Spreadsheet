@@ -1,5 +1,7 @@
 package edu.cs3500.spreadsheets.view;
 
+import edu.cs3500.spreadsheets.model.Coord;
+
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -89,5 +91,11 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
     this.worksheet = newGrid;
     this.revalidate();
     this.repaint();
+  }
+
+  @Override
+  public String getSelectedCellKey() {
+    String key = Coord.colIndexToName(this.selectedCol + 1) + (this.selectedRow + 1);
+    return key;
   }
 }

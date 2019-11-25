@@ -19,6 +19,9 @@ public class WorksheetTextualView implements IWorksheetView {
    * @param ap the appendable to be added to
    */
   public WorksheetTextualView(IWorksheet model, Appendable ap) {
+    if (model == null || ap == null) {
+      throw new IllegalArgumentException("Cannot make model or appendable null");
+    }
     this.model = model;
     this.ap = ap;
   }
@@ -36,6 +39,16 @@ public class WorksheetTextualView implements IWorksheetView {
 
   @Override
   public void display() {
+    // nothing to implement here.
+  }
+
+  @Override
+  public String getSelectedCellContents() {
+    return "";
+  }
+
+  @Override
+  public void changeSelected() {
     // nothing to implement here.
   }
 }

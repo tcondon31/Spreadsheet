@@ -17,20 +17,24 @@ import edu.cs3500.spreadsheets.model.IWorksheet;
  */
 public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
-  private final int STARTING_SIZE = 1000;
+  private final int STARTING_SIZE = 100;
 
-  private ScrollColumnHeaderPanel columnHeaderPanel;
-  private ScrollRowHeaderPanel rowHeaderPanel;
-  private WorksheetGridPanel gridPanel;
-  private JScrollPane scrollPane;
-  private IWorksheet worksheet;
+  protected ScrollColumnHeaderPanel columnHeaderPanel;
+  protected ScrollRowHeaderPanel rowHeaderPanel;
+  protected WorksheetGridPanel gridPanel;
+  protected JScrollPane scrollPane;
+  protected IWorksheet worksheet;
 
   /**
    * constructs a GUI view.
    * @param worksheet IWorksheet to base the view off of
    */
-  public WorksheetFrameView(IWorksheet worksheet) {
+  public WorksheetFrameView(IWorksheet worksheet) throws IOException {
     super("EXCEL");
+
+    if (worksheet == null) {
+      throw new IllegalArgumentException("Cannot render a null worksheet");
+    }
 
     this.worksheet = worksheet;
 
@@ -63,8 +67,8 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
     this.scrollPane.setRowHeaderView(this.rowHeaderPanel);
     this.add(this.scrollPane, BorderLayout.CENTER);
 
-    CellSelectionListener selection = new CellSelectionListener(this.gridPanel);
-    this.gridPanel.addMouseListener(selection);
+    this.render();
+    this.gridPanel.changeSelected(0,0);
   }
 
   @Override
@@ -73,9 +77,8 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   }
 
   @Override
-  public void render() throws IOException {
-    List<String> allKeys = new ArrayList<>();
-    allKeys.addAll(this.worksheet.getAllCellIndices());
+  public void render() {
+    List<String> allKeys = new ArrayList<>(this.worksheet.getAllCellIndices());
 
     for (int i = 0; i < allKeys.size(); i++) {
       String cell;
@@ -106,8 +109,17 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
           this.worksheet.getColumnIndex(key),
           this.worksheet.getRowIndex(key));
     }
+  }
 
-    this.gridPanel.changeSelected(0,0);
+  @Override
+  public String getSelectedCellContents() {
+    String key = this.gridPanel.getSelectedCellKey();
+    return this.worksheet.getCellAt(key).getContents();
+  }
+
+  @Override
+  public void changeSelected() {
+    // nothing to implement here
   }
 
 }

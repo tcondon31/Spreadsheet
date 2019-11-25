@@ -4,6 +4,7 @@ import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetBuilderClass;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
 import edu.cs3500.spreadsheets.view.IWorksheetView;
+import edu.cs3500.spreadsheets.view.WorksheetFrameControllerView;
 import edu.cs3500.spreadsheets.view.WorksheetFrameView;
 import edu.cs3500.spreadsheets.view.WorksheetTextualView;
 
@@ -52,7 +53,8 @@ public class BeyondGood {
           WorksheetReader.read(wbc, r);
         }
         catch (Exception e) {
-          throw new IllegalArgumentException("Could not read cells correctly");
+          System.out.println(e.getMessage());
+          return;
         }
       }
       else {
@@ -60,8 +62,8 @@ public class BeyondGood {
       }
       if (args.length == 3) {
         if (args[2].equals("-gui")) {
-          IWorksheetView worksheetFrame = new WorksheetFrameView(w);
-          worksheetFrame.render();
+          IWorksheetView worksheetFrame = new WorksheetFrameControllerView(w);
+          //worksheetFrame.render();
           worksheetFrame.display();
         }
         else {
@@ -85,7 +87,6 @@ public class BeyondGood {
             }
             break;
           case "-save":
-            //TODO: Figure out how to write to the file
             PrintWriter pw = new PrintWriter(args[3]);
             IWorksheetView textualView = new WorksheetTextualView(w, pw);
             textualView.render();

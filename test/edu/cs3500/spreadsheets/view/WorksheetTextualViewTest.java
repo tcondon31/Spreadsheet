@@ -88,4 +88,14 @@ public class WorksheetTextualViewTest {
     assertEquals(w2.evaluateCell("A14"), w1.evaluateCell("A14"));
     assertEquals(w2.evaluateCell("B1"), w1.evaluateCell("B1"));
   }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testNull1() {
+    IWorksheetView view = new WorksheetTextualView(null, sb);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testNull2() {
+    IWorksheetView view = new WorksheetTextualView(w1, null);
+  }
 }

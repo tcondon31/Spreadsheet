@@ -14,5 +14,4 @@ public interface CellPanel {
    * deselects a cell, removes the distinguishing feature.
    */
   void deselect();
-
 }

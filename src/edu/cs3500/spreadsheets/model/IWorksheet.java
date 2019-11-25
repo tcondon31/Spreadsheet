@@ -67,7 +67,7 @@ public interface IWorksheet {
    * @param br the bottom right Coord to be evaluated
    * @return List of SSymbol the list of symbols that lie within the two bounds
    */
-  List<SSymbol> getAllReferences(Coord tl, Coord br);
+  List<Sexp> getAllReferences(Coord tl, Coord br);
 
   /**
    * determines if a worksheet contains the given key.
@@ -95,5 +95,24 @@ public interface IWorksheet {
    * @return the row index of the key
    */
   int getRowIndex(String key);
+
+  /**
+   * Edits the contents of the specified cell and replaces it with the new contents.
+   * @param key the hashmap key that contains the cell
+   * @param contents the contents to replace the current contents with
+   */
+  void editCell(String key, String contents);
+
+  /**
+   * removes the specified cell at the given index.
+   * @param key the hashmap key that contains the cell
+   */
+  void removeCell(String key);
+
+  /**
+   * gets the number of cells in the worksheet.
+   * @return the number of cells in the worksheet
+   */
+  int getNumCells();
 
 }

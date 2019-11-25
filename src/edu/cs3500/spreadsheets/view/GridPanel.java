@@ -27,4 +27,10 @@ public interface GridPanel {
    */
   void expand(int numRows, int numCols);
 
+  /**
+   * returns the String contents of the Cell in the specified position.
+   * @return the String contents of the Cell
+   */
+  String getSelectedCellKey();
+
 }

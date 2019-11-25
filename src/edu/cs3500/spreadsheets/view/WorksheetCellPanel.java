@@ -1,5 +1,7 @@
 package edu.cs3500.spreadsheets.view;
 
+import edu.cs3500.spreadsheets.model.WorksheetCell;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -79,4 +81,5 @@ public class WorksheetCellPanel extends JPanel implements CellPanel {
   public void deselect() {
     this.selected = false;
   }
+
 }
