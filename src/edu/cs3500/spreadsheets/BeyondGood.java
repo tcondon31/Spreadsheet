@@ -2,6 +2,7 @@ package edu.cs3500.spreadsheets;
 
 import edu.cs3500.spreadsheets.controller.BasicEditableWorksheetController;
 import edu.cs3500.spreadsheets.controller.Features;
+import edu.cs3500.spreadsheets.model.IWorksheet;
 import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetBuilderClass;
 import edu.cs3500.spreadsheets.model.WorksheetReader;

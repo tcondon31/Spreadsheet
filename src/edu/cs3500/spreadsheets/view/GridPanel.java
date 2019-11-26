@@ -21,6 +21,13 @@ public interface GridPanel {
   void changeSelected(int row, int col);
 
   /**
+   * changes the selected cell by the given amounts.
+   * @param up int times to go up. negative is down
+   * @param right int times to go right. negative is left
+   */
+  void changeSelectedBy(int up, int right);
+
+  /**
    * expands the grid by the given number of rows and columns.
    * @param numRows int rows to add
    * @param numCols int cols to add

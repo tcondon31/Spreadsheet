@@ -5,6 +5,9 @@ import edu.cs3500.spreadsheets.model.IWorksheet;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.AdjustmentListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,9 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
         this.scrollPane.getVerticalScrollBar().setUnitIncrement(ViewConstants.SCROLL_SPEED);
         this.scrollPane.getHorizontalScrollBar().setUnitIncrement(ViewConstants.SCROLL_SPEED);
         this.add(this.scrollPane, BorderLayout.CENTER);
+        AdjustmentListener adjust = new ScrollAdjuster(this);
+        this.scrollPane.getVerticalScrollBar().addAdjustmentListener(adjust);
+        this.scrollPane.getHorizontalScrollBar().addAdjustmentListener(adjust);
 
         this.editBarPanel = new BasicEditBarPanel(ViewConstants.STARTING_SIZE, this.gridPanel);
         this.add(this.editBarPanel, BorderLayout.NORTH);
@@ -85,12 +91,10 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
             int row = this.worksheet.getRowIndex(key);
             int col = this.worksheet.getColumnIndex(key);
             if (row > this.rowHeaderPanel.numHeaders()) {
-                this.gridPanel.expand(row - this.rowHeaderPanel.numHeaders(), 0);
-                this.rowHeaderPanel.expand(row - this.rowHeaderPanel.numHeaders());
+                this.expand(row - this.rowHeaderPanel.numHeaders(), 0);
             }
             if (col > this.columnHeaderPanel.numHeaders()) {
-                this.gridPanel.expand(0, col - this.columnHeaderPanel.numHeaders());
-                this.columnHeaderPanel.expand(col - this.columnHeaderPanel.numHeaders());
+                this.expand(0, col - this.columnHeaderPanel.numHeaders());
             }
             this.gridPanel.setPreferredSize(new Dimension(
                     this.columnHeaderPanel.numHeaders() * ViewConstants.CELL_WIDTH,
@@ -133,13 +137,54 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
      * updates the Text Field to display the correct contents if applicable to the view.
      */
     @Override
-    public void changeSelected() {
-
+    public void changeSelected(int up, int right) {
+      this.gridPanel.changeSelectedBy(up, right);
     }
 
     @Override
     public void addFeatures(Features features) {
         this.editBarPanel.addFeatures(features);
+        /*this.scrollPane.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                System.out.println("got to start here");
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    System.out.println("got here");
+                    features.changeSelected("up");
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    features.changeSelected("down");
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    features.changeSelected("left");
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    features.changeSelected("right");
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });*/
+    }
+
+    @Override
+    public void expand(int numRows, int numCols) {
+      this.gridPanel.expand(numRows, numCols);
+      this.columnHeaderPanel.expand(numCols);
+      this.rowHeaderPanel.expand(numRows);
+      this.render();
+    }
+
+    public JScrollPane getScrollPane() {
+        return this.scrollPane;
     }
 
 }

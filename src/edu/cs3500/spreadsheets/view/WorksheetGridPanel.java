@@ -68,6 +68,40 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
   }
 
   @Override
+  public void changeSelectedBy(int up, int right) {
+    WorksheetCellPanel wcp = this.worksheet[this.selectedRow][this.selectedCol];
+    this.worksheet[this.selectedRow][this.selectedCol].select();
+    if (up == -1) {
+      if (this.selectedRow != 0) {
+        wcp.deselect();
+        this.selectedRow -= 1;
+        this.worksheet[this.selectedRow][this.selectedCol].select();
+      }
+    }
+    else if (up == 1) {
+      if (this.selectedRow != this.worksheet.length - 1) {
+        wcp.deselect();
+        this.selectedRow += 1;
+        this.worksheet[this.selectedRow][this.selectedCol].select();
+      }
+    }
+    else if (right == -1) {
+      if (this.selectedCol != 0) {
+        wcp.deselect();
+        this.selectedCol -= 1;
+        this.worksheet[this.selectedRow][this.selectedCol].select();
+      }
+    }
+    else if (right == 1) {
+      if (this.selectedCol != this.worksheet[0].length - 1) {
+        wcp.deselect();
+        this.selectedCol += 1;
+        this.worksheet[this.selectedRow][this.selectedCol].select();
+      }
+    }
+  }
+
+  @Override
   public void expand(int numRows, int numCols) {
     WorksheetCellPanel[][] newGrid =
             new WorksheetCellPanel
