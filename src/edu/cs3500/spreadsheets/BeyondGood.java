@@ -61,12 +61,13 @@ public class BeyondGood {
       }
       if (args.length == 3) {
         if (args[2].equals("-gui")) {
-          IWorksheetView editable = new EditableWorksheetFrameView(w);
-          Features controller = new BasicEditableWorksheetController(w, editable);
+          IWorksheetView worksheetFrame = new WorksheetFrameView(w);
+          //worksheetFrame.render();
+          worksheetFrame.display();
         }
         else if (args[2].equals("-edit")) {
           IWorksheetView editableWorksheet = new EditableWorksheetFrameView(w);
-          editableWorksheet.display();
+          Features controller = new BasicEditableWorksheetController(w, editableWorksheet);
         }
         else {
           throw new IllegalArgumentException("Invalid command line");
