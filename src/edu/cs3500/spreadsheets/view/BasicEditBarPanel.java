@@ -2,8 +2,11 @@ package edu.cs3500.spreadsheets.view;
 
 import edu.cs3500.spreadsheets.controller.Features;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
