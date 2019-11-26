@@ -59,5 +59,13 @@ public class BasicEditBarPanel extends JPanel implements EditBarPanel {
                 features.changeCellContents(selectedCell, newCellContents);
             }
         });
+        this.cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedCell = gridPanel.getSelectedCellKey();
+                String original = features.rejectEdits(selectedCell);
+                textField.setText(original);
+            }
+        });
     }
 }

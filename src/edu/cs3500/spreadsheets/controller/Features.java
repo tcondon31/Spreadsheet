@@ -4,4 +4,6 @@ public interface Features {
 
     void changeCellContents(String cellKey, String newContents);
 
+    String rejectEdits(String cellKey);
+
 }

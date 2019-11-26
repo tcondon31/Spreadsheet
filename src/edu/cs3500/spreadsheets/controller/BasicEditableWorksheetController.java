@@ -33,4 +33,9 @@ public class BasicEditableWorksheetController implements Features {
         }
         this.view.render();
     }
+
+    @Override
+    public String rejectEdits(String cellKey) {
+        return this.view.getSelectedCellContents();
+    }
 }
