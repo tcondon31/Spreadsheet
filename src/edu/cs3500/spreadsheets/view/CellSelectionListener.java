@@ -13,6 +13,7 @@ public class CellSelectionListener implements MouseListener {
 
   private IWorksheetView total;
   private WorksheetGridPanel gridPanel;
+  private BasicEditBarPanel editBarPanel;
 
   /**
    * constructor for the CellSelectionListener class.
@@ -23,6 +24,12 @@ public class CellSelectionListener implements MouseListener {
     this.gridPanel = gridPanel;
   }
 
+  CellSelectionListener(IWorksheetView total, WorksheetGridPanel gridPanel, BasicEditBarPanel editBarPanel) {
+    this.total = total;
+    this.gridPanel = gridPanel;
+    this.editBarPanel = editBarPanel;
+  }
+
   /**
    * Invoked when the mouse button has been clicked (pressed and released) on a component.
    *
@@ -30,11 +37,14 @@ public class CellSelectionListener implements MouseListener {
    */
   @Override
   public void mouseClicked(MouseEvent e) {
-    int xPos = e.getX() / WorksheetCellPanel.CELL_WIDTH;
-    int yPos = e.getY() / WorksheetCellPanel.CELL_HEIGHT;
+    int xPos = e.getX() / ViewConstants.CELL_WIDTH;
+    int yPos = e.getY() / ViewConstants.CELL_HEIGHT;
     try {
       this.gridPanel.changeSelected(yPos,xPos);
       this.total.changeSelected();
+      if (this.editBarPanel != null) {
+        this.editBarPanel.changeTextField(this.total.getSelectedCellContents());
+      }
     }
     catch (IllegalArgumentException iae) {
       // do not want the program to crash with out of bounds click. should do nothing.

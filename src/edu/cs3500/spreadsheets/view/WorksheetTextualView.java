@@ -1,5 +1,6 @@
 package edu.cs3500.spreadsheets.view;
 
+import edu.cs3500.spreadsheets.controller.Features;
 import edu.cs3500.spreadsheets.model.IWorksheet;
 
 import java.io.IOException;
@@ -27,13 +28,19 @@ public class WorksheetTextualView implements IWorksheetView {
   }
 
   @Override
-  public void render() throws IOException {
+  public void render(){
     Set<String> keys = this.model.getAllCellIndices();
     for (String s : keys) {
-      this.ap.append(s);
-      this.ap.append(" ");
-      this.ap.append(this.model.getCellAt(s).getContents());
-      this.ap.append("\n");
+      try {
+        this.ap.append(s);
+        this.ap.append(" ");
+        this.ap.append(this.model.getCellAt(s).getContents());
+        this.ap.append("\n");
+      }
+      catch (Exception e) {
+
+      }
+
     }
   }
 
@@ -50,5 +57,10 @@ public class WorksheetTextualView implements IWorksheetView {
   @Override
   public void changeSelected() {
     // nothing to implement here.
+  }
+
+  @Override
+  public void addFeatures(Features features) {
+
   }
 }
