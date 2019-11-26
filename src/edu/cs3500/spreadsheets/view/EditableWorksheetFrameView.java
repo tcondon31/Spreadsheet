@@ -103,6 +103,8 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
             this.scrollPane.repaint();
             try {
                 cell = this.worksheet.evaluateCell(key).toString();
+                cell = cell.replaceAll("^\"|\"$", "");
+                cell = cell.replace("\\\"", "\"");
             }
             catch (Exception e) {
                 cell = "#VALUE!";
