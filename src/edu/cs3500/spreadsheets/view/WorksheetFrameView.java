@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
+import edu.cs3500.spreadsheets.controller.Features;
 import edu.cs3500.spreadsheets.model.IWorksheet;
 
 /**
@@ -17,20 +18,18 @@ import edu.cs3500.spreadsheets.model.IWorksheet;
  */
 public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
-  private final int STARTING_SIZE = 100;
-
-  protected ScrollColumnHeaderPanel columnHeaderPanel;
-  protected ScrollRowHeaderPanel rowHeaderPanel;
-  protected WorksheetGridPanel gridPanel;
-  protected JScrollPane scrollPane;
-  protected IWorksheet worksheet;
+  private ScrollColumnHeaderPanel columnHeaderPanel;
+  private ScrollRowHeaderPanel rowHeaderPanel;
+  private WorksheetGridPanel gridPanel;
+  private JScrollPane scrollPane;
+  private IWorksheet worksheet;
 
   /**
    * constructs a GUI view.
    * @param worksheet IWorksheet to base the view off of
    */
   public WorksheetFrameView(IWorksheet worksheet) throws IOException {
-    super("EXCEL");
+    super("YOU CAN LOOK BUT YOU CANT TOUCH");
 
     if (worksheet == null) {
       throw new IllegalArgumentException("Cannot render a null worksheet");
@@ -45,20 +44,20 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
     this.setMinimumSize(new Dimension(300,300));
     this.setLayout(new BorderLayout());
 
-    this.columnHeaderPanel = new ScrollColumnHeaderPanel(STARTING_SIZE);
+    this.columnHeaderPanel = new ScrollColumnHeaderPanel(ViewConstants.STARTING_SIZE);
     this.columnHeaderPanel.setPreferredSize(
-            new Dimension(WorksheetCellPanel.CELL_WIDTH * STARTING_SIZE,
-                WorksheetCellPanel.CELL_HEIGHT));
+            new Dimension(ViewConstants.CELL_WIDTH * ViewConstants.STARTING_SIZE,
+                    ViewConstants.CELL_HEIGHT));
 
-    this.rowHeaderPanel = new ScrollRowHeaderPanel(STARTING_SIZE);
+    this.rowHeaderPanel = new ScrollRowHeaderPanel(ViewConstants.STARTING_SIZE);
     this.rowHeaderPanel.setPreferredSize(
-            new Dimension(WorksheetCellPanel.CELL_WIDTH,
-                WorksheetCellPanel.CELL_HEIGHT * STARTING_SIZE));
+            new Dimension(ViewConstants.CELL_WIDTH,
+                    ViewConstants.CELL_HEIGHT * ViewConstants.STARTING_SIZE));
 
-    this.gridPanel = new WorksheetGridPanel(STARTING_SIZE, STARTING_SIZE);
+    this.gridPanel = new WorksheetGridPanel(ViewConstants.STARTING_SIZE, ViewConstants.STARTING_SIZE);
     this.gridPanel.setPreferredSize(new Dimension(
-            WorksheetCellPanel.CELL_WIDTH * STARTING_SIZE,
-            WorksheetCellPanel.CELL_HEIGHT * STARTING_SIZE));
+            ViewConstants.CELL_WIDTH * ViewConstants.STARTING_SIZE,
+            ViewConstants.CELL_HEIGHT * ViewConstants.STARTING_SIZE));
 
     this.scrollPane = new JScrollPane(this.gridPanel,
         JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -94,8 +93,8 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
         this.columnHeaderPanel.expand(col - this.columnHeaderPanel.numHeaders());
       }
       this.gridPanel.setPreferredSize(new Dimension(
-          this.columnHeaderPanel.numHeaders() * WorksheetCellPanel.CELL_WIDTH,
-          this.rowHeaderPanel.numHeaders() * WorksheetCellPanel.CELL_HEIGHT));
+          this.columnHeaderPanel.numHeaders() * ViewConstants.CELL_WIDTH,
+          this.rowHeaderPanel.numHeaders() * ViewConstants.CELL_HEIGHT));
       this.scrollPane.revalidate();
       this.scrollPane.repaint();
       try {
@@ -121,5 +120,11 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   public void changeSelected() {
     // nothing to implement here
   }
+
+  @Override
+  public void addFeatures(Features features) {
+
+  }
+
 
 }

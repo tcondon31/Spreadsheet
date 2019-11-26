@@ -1,12 +1,11 @@
 package edu.cs3500.spreadsheets;
 
+import edu.cs3500.spreadsheets.controller.BasicEditableWorksheetController;
+import edu.cs3500.spreadsheets.controller.Features;
 import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetBuilderClass;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
-import edu.cs3500.spreadsheets.view.IWorksheetView;
-import edu.cs3500.spreadsheets.view.WorksheetFrameControllerView;
-import edu.cs3500.spreadsheets.view.WorksheetFrameView;
-import edu.cs3500.spreadsheets.view.WorksheetTextualView;
+import edu.cs3500.spreadsheets.view.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -62,9 +61,12 @@ public class BeyondGood {
       }
       if (args.length == 3) {
         if (args[2].equals("-gui")) {
-          IWorksheetView worksheetFrame = new WorksheetFrameControllerView(w);
-          //worksheetFrame.render();
-          worksheetFrame.display();
+          IWorksheetView editable = new EditableWorksheetFrameView(w);
+          Features controller = new BasicEditableWorksheetController(w, editable);
+        }
+        else if (args[2].equals("-edit")) {
+          IWorksheetView editableWorksheet = new EditableWorksheetFrameView(w);
+          editableWorksheet.display();
         }
         else {
           throw new IllegalArgumentException("Invalid command line");

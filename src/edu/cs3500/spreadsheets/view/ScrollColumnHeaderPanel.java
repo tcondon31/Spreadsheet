@@ -24,7 +24,7 @@ public class ScrollColumnHeaderPanel extends JPanel implements ScrollHeader {
     this.columnHeaders = new ArrayList<>();
     for (int i = 1; i <= length; i++) {
       this.columnHeaders.add(new WorksheetCellPanel(Coord.colIndexToName(i),
-              (i - 1) * WorksheetCellPanel.CELL_WIDTH,
+              (i - 1) * ViewConstants.CELL_WIDTH,
               0, true));
     }
   }
@@ -42,12 +42,12 @@ public class ScrollColumnHeaderPanel extends JPanel implements ScrollHeader {
     int length = this.columnHeaders.size();
     for (int i = length + 1; i <= length + numToExpand; i++) {
       this.columnHeaders.add(new WorksheetCellPanel(Coord.colIndexToName(i),
-              (i - 1) * WorksheetCellPanel.CELL_WIDTH,
+              (i - 1) * ViewConstants.CELL_WIDTH,
               0, true));
     }
     this.setPreferredSize(new Dimension(
-            this.columnHeaders.size() * WorksheetCellPanel.CELL_WIDTH,
-            WorksheetCellPanel.CELL_HEIGHT));
+            this.columnHeaders.size() * ViewConstants.CELL_WIDTH,
+            ViewConstants.CELL_HEIGHT));
     this.revalidate();
     this.repaint();
   }

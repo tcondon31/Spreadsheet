@@ -28,8 +28,8 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
       for (int c = 0; c < worksheet[r].length; c++) {
         worksheet[r][c] = new WorksheetCellPanel(
                 "",
-                c * WorksheetCellPanel.CELL_WIDTH,
-                r * WorksheetCellPanel.CELL_HEIGHT,
+                c * ViewConstants.CELL_WIDTH,
+                r * ViewConstants.CELL_HEIGHT,
                 false);
       }
     }
@@ -51,8 +51,8 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
   public void setCell(String contents, int col, int row) {
     this.worksheet[row - 1][col - 1] = new WorksheetCellPanel(
             contents,
-            WorksheetCellPanel.CELL_WIDTH * (col - 1),
-            WorksheetCellPanel.CELL_HEIGHT * (row - 1), false);
+            ViewConstants.CELL_WIDTH * (col - 1),
+            ViewConstants.CELL_HEIGHT * (row - 1), false);
   }
 
   @Override
@@ -82,8 +82,8 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
         if (newGrid[r][c] == null) {
           newGrid[r][c] = new WorksheetCellPanel(
                   "",
-                  c * WorksheetCellPanel.CELL_WIDTH,
-                  r * WorksheetCellPanel.CELL_HEIGHT,
+                  c * ViewConstants.CELL_WIDTH,
+                  r * ViewConstants.CELL_HEIGHT,
                   false);
         }
       }

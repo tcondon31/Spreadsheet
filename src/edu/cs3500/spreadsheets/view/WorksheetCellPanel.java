@@ -16,9 +16,6 @@ import javax.swing.JPanel;
  * Represents the visual view of one cell in the grid.
  */
 public class WorksheetCellPanel extends JPanel implements CellPanel {
-
-  static final int CELL_WIDTH = 80;
-  static final int CELL_HEIGHT = 20;
   private final boolean header;
 
   private boolean selected;
@@ -48,15 +45,15 @@ public class WorksheetCellPanel extends JPanel implements CellPanel {
     Color fillColor = Color.WHITE;
     int textOffset = 0;
     if (this.header) {
-      textOffset = this.CELL_WIDTH / 2;
+      textOffset = ViewConstants.CELL_WIDTH / 2;
       fillColor = Color.LIGHT_GRAY;
     }
     Rectangle2D r = new Rectangle(this.xPos - 1 , this.yPos - 1,
-        this.CELL_WIDTH + 1, this.CELL_HEIGHT + 1);
+            ViewConstants.CELL_WIDTH + 1, ViewConstants.CELL_HEIGHT + 1);
     g2d.setClip(r);
     FontMetrics fm = g.getFontMetrics();
     g2d.setColor(fillColor);
-    g2d.fillRect(this.xPos, this.yPos, this.CELL_WIDTH, this.CELL_HEIGHT);
+    g2d.fillRect(this.xPos, this.yPos, ViewConstants.CELL_WIDTH, ViewConstants.CELL_HEIGHT);
     if (this.selected) {
       g2d.setColor(Color.BLUE);
       g2d.setStroke(new BasicStroke(3));
@@ -65,11 +62,11 @@ public class WorksheetCellPanel extends JPanel implements CellPanel {
       g2d.setColor(Color.BLACK);
       g2d.setStroke(new BasicStroke(1));
     }
-    g2d.drawRect(this.xPos, this.yPos, this.CELL_WIDTH, this.CELL_HEIGHT);
+    g2d.drawRect(this.xPos, this.yPos, ViewConstants.CELL_WIDTH, ViewConstants.CELL_HEIGHT);
     g2d.setColor(Color.BLACK);
     g2d.drawString(this.contents,
         this.xPos + textOffset,
-        this.yPos + this.CELL_HEIGHT / 2 + fm.getAscent() / 2);
+        this.yPos + ViewConstants.CELL_HEIGHT / 2 + fm.getAscent() / 2);
   }
 
   @Override
