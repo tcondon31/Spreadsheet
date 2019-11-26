@@ -1,5 +1,6 @@
 package edu.cs3500.spreadsheets.controller;
 
+import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.IWorksheet;
 import edu.cs3500.spreadsheets.view.EditableWorksheetFrameView;
 import edu.cs3500.spreadsheets.view.IWorksheetView;
@@ -22,7 +23,14 @@ public class BasicEditableWorksheetController implements Features {
 
     @Override
     public void changeCellContents(String cellKey, String newContents) {
-        this.worksheet.editCell(cellKey, newContents);
+        if (this.worksheet.containsKey(cellKey)) {
+            this.worksheet.editCell(cellKey, newContents);
+        }
+        else {
+            this.worksheet.addCell(this.worksheet.getColumnIndex(cellKey),
+                    this.worksheet.getRowIndex(cellKey),
+                    new Cell(newContents));
+        }
         this.view.render();
     }
 }
