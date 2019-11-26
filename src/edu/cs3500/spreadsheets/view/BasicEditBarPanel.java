@@ -63,4 +63,6 @@ public class BasicEditBarPanel extends JPanel implements EditBarPanel {
             }
         });
     }
+
+
 }
