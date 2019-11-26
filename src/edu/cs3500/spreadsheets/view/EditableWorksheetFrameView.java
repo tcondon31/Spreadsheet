@@ -3,15 +3,18 @@ package edu.cs3500.spreadsheets.view;
 import edu.cs3500.spreadsheets.controller.Features;
 import edu.cs3500.spreadsheets.model.IWorksheet;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.AdjustmentListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Creates a view of an IWorksheet that allows for editing and cell selection.
+ */
 public class EditableWorksheetFrameView extends JFrame implements IWorksheetView {
 
     private ScrollColumnHeaderPanel columnHeaderPanel;
@@ -22,6 +25,10 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
 
     private BasicEditBarPanel editBarPanel;
 
+    /**
+     * Constructs an EditableWorksheetFrameView
+     * @param worksheet the model to base it off of
+     */
     public EditableWorksheetFrameView(IWorksheet worksheet) {
         super("GO CRAZY AHH GO STUPID AHH");
 
@@ -70,7 +77,6 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
 
         CellSelectionListener selection = new CellSelectionListener(this, this.gridPanel, this.editBarPanel);
         this.gridPanel.addMouseListener(selection);
-
         this.render();
         this.gridPanel.changeSelected(0,0);
         this.editBarPanel.changeTextField(this.getSelectedCellContents());
@@ -114,6 +120,7 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
                     this.worksheet.getColumnIndex(key),
                     this.worksheet.getRowIndex(key));
         }
+        this.editBarPanel.changeTextField(this.getSelectedCellContents());
     }
 
     /**
@@ -146,35 +153,6 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
     @Override
     public void addFeatures(Features features) {
         this.editBarPanel.addFeatures(features);
-        /*this.scrollPane.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                System.out.println("got to start here");
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    System.out.println("got here");
-                    features.changeSelected("up");
-                }
-                else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    features.changeSelected("down");
-                }
-                else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    features.changeSelected("left");
-                }
-                else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    features.changeSelected("right");
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });*/
     }
 
     @Override
@@ -183,10 +161,6 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
       this.columnHeaderPanel.expand(numCols);
       this.rowHeaderPanel.expand(numRows);
       this.render();
-    }
-
-    public JScrollPane getScrollPane() {
-        return this.scrollPane;
     }
 
 }

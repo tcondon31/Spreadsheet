@@ -3,11 +3,22 @@ package edu.cs3500.spreadsheets.controller;
 import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.IWorksheet;
 import edu.cs3500.spreadsheets.view.IWorksheetView;
+
+/**
+ * Implementation of a controller for an Editable worksheet.
+ * Contains methods that are able to alter cells, change the selected cell,
+ * and revert cell contents back to normal.
+ */
 public class BasicEditableWorksheetController implements Features {
 
   private IWorksheet worksheet;
   private IWorksheetView view;
 
+  /**
+   * Constructs a controller
+   * @param worksheet the model to base the controller on
+   * @param view the display of the model
+   */
   public BasicEditableWorksheetController(IWorksheet worksheet, IWorksheetView view) {
     this.worksheet = worksheet;
     this.view = view;
@@ -38,12 +49,17 @@ public class BasicEditableWorksheetController implements Features {
     switch (direction) {
       case "up" :
         this.view.changeSelected(1, 0);
+        break;
       case "down" :
         this.view.changeSelected(-1, 0);
+        break;
       case "left" :
         this.view.changeSelected(0, -1);
+        break;
       case "right" :
         this.view.changeSelected(0, 1);
+        break;
     }
+    this.view.render();
   }
 }

@@ -1,5 +1,7 @@
 package edu.cs3500.spreadsheets.view;
 
+import edu.cs3500.spreadsheets.controller.Features;
+
 /**
  * interface representing a panel that contains a grid.
  */
@@ -39,5 +41,4 @@ public interface GridPanel {
    * @return the String contents of the Cell
    */
   String getSelectedCellKey();
-
 }

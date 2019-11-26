@@ -2,7 +2,9 @@ package edu.cs3500.spreadsheets.view;
 
 import edu.cs3500.spreadsheets.controller.Features;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Represents the top bar of a view. Contains JButtons with abilities and a text box.
+ */
 public class BasicEditBarPanel extends JPanel implements EditBarPanel {
 
   private int size;
@@ -18,6 +23,11 @@ public class BasicEditBarPanel extends JPanel implements EditBarPanel {
   private JTextField textField;
   private WorksheetGridPanel gridPanel;
 
+  /**
+   * Constructs a BasicEditBarPanel.
+   * @param size the size of the bar
+   * @param gridPanel the gridPanel it assists with
+   */
   public BasicEditBarPanel(int size, WorksheetGridPanel gridPanel) {
     this.gridPanel = gridPanel;
     this.size = size;
@@ -35,6 +45,12 @@ public class BasicEditBarPanel extends JPanel implements EditBarPanel {
     this.add(this.textField);
   }
 
+  /**
+   * constructor for a BasicEditBarPanel with the contents of the textBox already set.
+   * @param size
+   * @param gridPanel
+   * @param textFieldContents
+   */
   public BasicEditBarPanel(int size, WorksheetGridPanel gridPanel, String textFieldContents) {
     this(size, gridPanel);
     this.textField.setText(textFieldContents);
@@ -68,6 +84,33 @@ public class BasicEditBarPanel extends JPanel implements EditBarPanel {
         String selectedCell = gridPanel.getSelectedCellKey();
         String original = features.rejectEdits(selectedCell);
         textField.setText(original);
+      }
+    });
+    this.textField.addKeyListener(new KeyListener() {
+      @Override
+      public void keyTyped(KeyEvent e) {
+
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+          features.changeSelected("up");
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+          features.changeSelected("down");
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+          features.changeSelected("left");
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+          features.changeSelected("right");
+        }
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e) {
+
       }
     });
   }
