@@ -1,8 +1,11 @@
 package edu.cs3500.spreadsheets.view;
 
+import edu.cs3500.spreadsheets.controller.Features;
 import edu.cs3500.spreadsheets.model.Coord;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
@@ -65,6 +68,30 @@ public class WorksheetGridPanel extends JPanel implements GridPanel {
     this.selectedRow = row;
     this.selectedCol = col;
     this.worksheet[this.selectedRow][this.selectedCol].select();
+  }
+
+  @Override
+  public void changeSelectedBy(int up, int right) {
+    if (up == -1) {
+      if (this.selectedRow != this.worksheet.length - 1) {
+        this.changeSelected(this.selectedRow + 1, this.selectedCol);
+      }
+    }
+    else if (up == 1) {
+      if (this.selectedRow != 0) {
+        this.changeSelected(this.selectedRow - 1, this.selectedCol);
+      }
+    }
+    else if (right == -1) {
+      if (this.selectedCol != 0) {
+        this.changeSelected(this.selectedRow, this.selectedCol - 1);
+      }
+    }
+    else if (right == 1) {
+      if (this.selectedCol != this.worksheet[0].length - 1) {
+        this.changeSelected(this.selectedRow, this.selectedCol + 1);
+      }
+    }
   }
 
   @Override

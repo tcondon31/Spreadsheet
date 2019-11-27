@@ -41,7 +41,6 @@ public class CellSelectionListener implements MouseListener {
     int yPos = e.getY() / ViewConstants.CELL_HEIGHT;
     try {
       this.gridPanel.changeSelected(yPos,xPos);
-      this.total.changeSelected();
       if (this.editBarPanel != null) {
         this.editBarPanel.changeTextField(this.total.getSelectedCellContents());
       }

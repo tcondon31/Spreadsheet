@@ -9,6 +9,10 @@ public class Cell implements WorksheetCell {
 
   private String contents;
 
+  /**
+   * Constructs a cell.
+   * @param c the string contents of the cell
+   */
   public Cell(String c) {
     this.contents = c;
   }

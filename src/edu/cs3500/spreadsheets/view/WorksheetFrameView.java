@@ -117,13 +117,18 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
   }
 
   @Override
-  public void changeSelected() {
+  public void changeSelected(int up, int right) {
     // nothing to implement here
   }
 
   @Override
   public void addFeatures(Features features) {
+    // nothing to implement here
+  }
 
+  @Override
+  public void expand(int numRows, int numCols) {
+    // nothing to implement here
   }
 
 

@@ -43,7 +43,10 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
     }
     else {
       for (Sexp s : l) {
-        output.append(new ConcatFunc(this.worksheet).apply(s));
+        String str = new ConcatFunc(this.worksheet).apply(s);
+        str = str.replaceAll("^\"|\"$", "");
+        str = str.replace("\\\"", "\"");
+        output.append(str);
       }
     }
     return output.toString();
