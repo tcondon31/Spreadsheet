@@ -68,4 +68,19 @@ public class WorksheetTextualView implements IWorksheetView {
   public void expand(int numRows, int numCols) {
     // nothing to implement here.
   }
+
+  @Override
+  public void resetFocus() {
+    // nothing to implement here.
+  }
+
+  @Override
+  public void repaintImmediately() {
+    //nothing to implement
+  }
+
+  @Override
+  public void updateTextField() {
+    // nothing to implement
+  }
 }

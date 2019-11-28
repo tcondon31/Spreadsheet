@@ -26,11 +26,39 @@ public interface IWorksheetView {
    */
   String getSelectedCellContents();
 
+  /**
+   * changes the selected cell by the specified amount up and to the right.
+   * @param up    positive means up, negative means down
+   * @param right positive means right, negative means left
+   */
   void changeSelected(int up, int right);
 
+  /**
+   * communication between view and controller for listeners and callbacks.
+   * @param features  the controller
+   */
   void addFeatures(Features features);
 
+  /**
+   * expands the view by the given dimensions.
+   * @param numRows   number of rows to add
+   * @param numCols   number of columns to add
+   */
   void expand(int numRows, int numCols);
 
+  /**
+   * resets the focus of the view for keyEvents.
+   */
+  void resetFocus();
+
+  /**
+   * repaints the view immediately.
+   */
+  void repaintImmediately();
+
+  /**
+   * updates the text field of the view if applicable.
+   */
+  void updateTextField();
 
 }

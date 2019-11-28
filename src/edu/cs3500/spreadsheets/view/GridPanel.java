@@ -41,4 +41,5 @@ public interface GridPanel {
    * @return the String contents of the Cell
    */
   String getSelectedCellKey();
+
 }

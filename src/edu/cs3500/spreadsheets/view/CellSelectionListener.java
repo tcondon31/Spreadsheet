@@ -48,6 +48,7 @@ public class CellSelectionListener implements MouseListener {
     catch (IllegalArgumentException iae) {
       // do not want the program to crash with out of bounds click. should do nothing.
     }
+    this.total.resetFocus();
     this.gridPanel.revalidate();
     this.gridPanel.repaint();
   }

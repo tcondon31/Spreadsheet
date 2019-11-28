@@ -24,4 +24,15 @@ public interface Features {
    * @param direction the direction to move the selection
    */
   void changeSelected(String direction);
+
+  /**
+   * resets the focus of the view for keyEvents.
+   */
+  void resetFocus();
+
+  /**
+   * clears the contents of the currently selected cell.
+   */
+  void clearCell(String cellKey);
+
 }

@@ -8,6 +8,8 @@ import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.AdjustmentListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +122,7 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
                     this.worksheet.getColumnIndex(key),
                     this.worksheet.getRowIndex(key));
         }
-        this.editBarPanel.changeTextField(this.getSelectedCellContents());
+        this.updateTextField();
     }
 
     /**
@@ -151,8 +153,45 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
     }
 
     @Override
+    public void resetFocus() {
+        this.setFocusable(true);
+        this.requestFocus();
+    }
+
+    @Override
     public void addFeatures(Features features) {
         this.editBarPanel.addFeatures(features);
+        this.resetFocus();
+        this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    features.changeSelected("up");
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    features.changeSelected("down");
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    features.changeSelected("left");
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    features.changeSelected("right");
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE || e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    features.clearCell(gridPanel.getSelectedCellKey());
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
     }
 
     @Override
@@ -162,5 +201,17 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
       this.rowHeaderPanel.expand(numRows);
       this.render();
     }
+
+    @Override
+    public void repaintImmediately() {
+        this.repaint();
+        this.revalidate();
+    }
+
+    @Override
+    public void updateTextField() {
+        this.editBarPanel.changeTextField(this.getSelectedCellContents());
+    }
+
 
 }

@@ -131,5 +131,21 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
     // nothing to implement here
   }
 
+  @Override
+  public void resetFocus() {
+    // not necessary because there are no keyListeners
+  }
+
+  @Override
+  public void repaintImmediately() {
+    this.repaint();
+    this.revalidate();
+  }
+
+  @Override
+  public void updateTextField() {
+    // nothing to implement because not editable
+  }
+
 
 }

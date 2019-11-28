@@ -9,8 +9,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 /**
  * Represents the top bar of a view. Contains JButtons with abilities and a text box.
@@ -76,6 +74,7 @@ public class BasicEditBarPanel extends JPanel implements EditBarPanel {
         String newCellContents = textField.getText();
         String selectedCell = gridPanel.getSelectedCellKey();
         features.changeCellContents(selectedCell, newCellContents);
+        features.resetFocus();
       }
     });
     this.cancel.addActionListener(new ActionListener() {
@@ -84,33 +83,7 @@ public class BasicEditBarPanel extends JPanel implements EditBarPanel {
         String selectedCell = gridPanel.getSelectedCellKey();
         String original = features.rejectEdits(selectedCell);
         textField.setText(original);
-      }
-    });
-    this.textField.addKeyListener(new KeyListener() {
-      @Override
-      public void keyTyped(KeyEvent e) {
-
-      }
-
-      @Override
-      public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-          features.changeSelected("up");
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-          features.changeSelected("down");
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-          features.changeSelected("left");
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-          features.changeSelected("right");
-        }
-      }
-
-      @Override
-      public void keyReleased(KeyEvent e) {
-
+        features.resetFocus();
       }
     });
   }

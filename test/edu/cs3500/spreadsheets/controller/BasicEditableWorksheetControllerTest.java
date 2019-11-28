@@ -14,6 +14,9 @@ import java.io.FileReader;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * test class for the methods in the controller
+ */
 public class BasicEditableWorksheetControllerTest {
 
   IWorksheet model;

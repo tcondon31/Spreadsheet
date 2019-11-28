@@ -60,6 +60,21 @@ public class BasicEditableWorksheetController implements Features {
         this.view.changeSelected(0, 1);
         break;
     }
-    this.view.render();
+    this.view.updateTextField();
+    this.view.repaintImmediately();
   }
+
+  @Override
+  public void resetFocus() {
+      this.view.resetFocus();
+  }
+
+  @Override
+  public void clearCell(String cellKey) {
+      this.worksheet.removeCell(cellKey);
+      this.view.render();
+      this.view.updateTextField();
+      this.view.repaintImmediately();
+  }
+
 }
