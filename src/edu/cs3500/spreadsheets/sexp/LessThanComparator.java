@@ -8,10 +8,10 @@ import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetCell;
 
 /**
- * function object that takes an input and if it has two arguments that are numbers, will
- * return a negative number if the 1st arg is less than the 2nd arg, 0 if they are equal, and a
- * number if the 1st arg is greater than the 2nd arg.
- * If it is given the wrong number or types of inputs, an exception will be thrown.
+ * function object that takes an input and if it has two arguments that are numbers, will return a
+ * negative number if the 1st arg is less than the 2nd arg, 0 if they are equal, and a number if the
+ * 1st arg is greater than the 2nd arg. If it is given the wrong number or types of inputs, an
+ * exception will be thrown.
  */
 public class LessThanComparator implements Func<Sexp, Double>, SexpVisitor<Double> {
 
@@ -42,12 +42,10 @@ public class LessThanComparator implements Func<Sexp, Double>, SexpVisitor<Doubl
     if (SexpFunction.isOneOf(first)) {
       try {
         return Double.parseDouble(new EvaluateCell(this.worksheet).apply(new SList(l)).toString());
-      }
-      catch (NumberFormatException e) {
+      } catch (NumberFormatException e) {
         throw new IllegalArgumentException("Not a valid S-Expression");
       }
-    }
-    else {
+    } else {
       return new LessThanComparator(this.worksheet).apply(l.get(0))
               - new LessThanComparator(this.worksheet).apply(l.get(1));
     }
@@ -59,8 +57,7 @@ public class LessThanComparator implements Func<Sexp, Double>, SexpVisitor<Doubl
       WorksheetCell c = this.worksheet.getCellAt(s);
       try {
         return Double.parseDouble(this.worksheet.evaluateCell(s).toString());
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         throw new IllegalArgumentException("Cannot reference");
       }
     }

@@ -3,7 +3,6 @@ package edu.cs3500.spreadsheets.view;
 import edu.cs3500.spreadsheets.controller.Features;
 import edu.cs3500.spreadsheets.model.IWorksheet;
 
-import java.io.IOException;
 import java.util.Set;
 
 /**
@@ -16,8 +15,9 @@ public class WorksheetTextualView implements IWorksheetView {
 
   /**
    * Constructs a Textual View for a Worksheet.
+   *
    * @param model the model to be passed in
-   * @param ap the appendable to be added to
+   * @param ap    the appendable to be added to
    */
   public WorksheetTextualView(IWorksheet model, Appendable ap) {
     if (model == null || ap == null) {
@@ -28,7 +28,7 @@ public class WorksheetTextualView implements IWorksheetView {
   }
 
   @Override
-  public void render(){
+  public void render() {
     Set<String> keys = this.model.getAllCellIndices();
     for (String s : keys) {
       try {
@@ -36,9 +36,8 @@ public class WorksheetTextualView implements IWorksheetView {
         this.ap.append(" ");
         this.ap.append(this.model.getCellAt(s).getContents());
         this.ap.append("\n");
-      }
-      catch (Exception e) {
-
+      } catch (Exception e) {
+        // do not want to do anything
       }
 
     }

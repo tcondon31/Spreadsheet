@@ -24,8 +24,9 @@ public enum SexpFunction {
 
   /**
    * determines if the given string matches the name of an SexpFunction.
-   * @param s   input string to be compared
-   * @return    true if the input matches the name of an SexpFunction, false if not
+   *
+   * @param s input string to be compared
+   * @return true if the input matches the name of an SexpFunction, false if not
    */
   public static boolean isOneOf(String s) {
     for (SexpFunction sf : SexpFunction.values()) {
@@ -38,35 +39,30 @@ public enum SexpFunction {
 
   /**
    * Executes the correct function based on the input.
-   * @param s the function to try
+   *
+   * @param s     the function to try
    * @param input the Sexp to perform it on
-   * @param ws the worksheet to get cells from
+   * @param ws    the worksheet to get cells from
    * @return the evaluated Sexp
    */
   public static Sexp executeFunction(String s, Sexp input, Worksheet ws) {
     if (s.equalsIgnoreCase(SUM.name)) {
       return new SNumber(new SumFunc(ws).apply(input));
-    }
-    else if (s.equalsIgnoreCase(PRODUCT.name)) {
+    } else if (s.equalsIgnoreCase(PRODUCT.name)) {
       return new SNumber(new ProductFunc(ws).apply(input));
-    }
-    else if (s.equalsIgnoreCase(LESSTHAN.name)) {
+    } else if (s.equalsIgnoreCase(LESSTHAN.name)) {
       try {
         if (new SListShallowSize().apply(input) == 2) {
           return new SBoolean(new LessThanComparator(ws).apply(input) < 0);
-        }
-        else {
+        } else {
           throw new IllegalArgumentException("Invalid number of inputs to < (Must be 2)");
         }
-      }
-      catch (IllegalArgumentException e) {
+      } catch (IllegalArgumentException e) {
         throw new IllegalArgumentException("Invalid input to <");
       }
-    }
-    else if (s.equalsIgnoreCase(CONCAT.name)) {
+    } else if (s.equalsIgnoreCase(CONCAT.name)) {
       return new SString(new ConcatFunc(ws).apply(input));
-    }
-    else {
+    } else {
       throw new IllegalArgumentException("Invalid Function Symbol");
     }
   }

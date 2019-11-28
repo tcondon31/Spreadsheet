@@ -6,6 +6,7 @@ import edu.cs3500.spreadsheets.model.WorksheetBuilderClass;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
 import edu.cs3500.spreadsheets.view.EditableWorksheetFrameView;
 import edu.cs3500.spreadsheets.view.IWorksheetView;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +16,7 @@ import java.io.FileReader;
 import static org.junit.Assert.assertEquals;
 
 /**
- * test class for the methods in the controller
+ * test class for the methods in the controller.
  */
 public class BasicEditableWorksheetControllerTest {
 
@@ -73,7 +74,8 @@ public class BasicEditableWorksheetControllerTest {
     this.contr.changeSelected("up");
     assertEquals("4", this.view.getSelectedCellContents());
     this.contr.changeSelected("right");
-    assertEquals("=(SUM (PRODUCT 2 3) (SUM 5 6) (PRODUCT 2 4))", this.view.getSelectedCellContents());
+    assertEquals("=(SUM (PRODUCT 2 3) (SUM 5 6) (PRODUCT 2 4))",
+            this.view.getSelectedCellContents());
     this.contr.changeSelected("right");
     this.contr.changeSelected("right");
     assertEquals("", this.view.getSelectedCellContents());

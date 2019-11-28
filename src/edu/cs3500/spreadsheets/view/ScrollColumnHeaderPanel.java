@@ -18,6 +18,7 @@ public class ScrollColumnHeaderPanel extends JPanel implements ScrollHeader {
 
   /**
    * constructor for the ScrollColumnHeaderPanel class.
+   *
    * @param length int the number of columns to have
    */
   public ScrollColumnHeaderPanel(int length) {

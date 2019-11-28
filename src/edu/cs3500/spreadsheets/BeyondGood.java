@@ -2,11 +2,13 @@ package edu.cs3500.spreadsheets;
 
 import edu.cs3500.spreadsheets.controller.BasicEditableWorksheetController;
 import edu.cs3500.spreadsheets.controller.Features;
-import edu.cs3500.spreadsheets.model.IWorksheet;
 import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetBuilderClass;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
-import edu.cs3500.spreadsheets.view.*;
+import edu.cs3500.spreadsheets.view.EditableWorksheetFrameView;
+import edu.cs3500.spreadsheets.view.IWorksheetView;
+import edu.cs3500.spreadsheets.view.WorksheetFrameView;
+import edu.cs3500.spreadsheets.view.WorksheetTextualView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +23,7 @@ public class BeyondGood {
 
   /**
    * The main entry point.
+   *
    * @param args any command-line arguments
    */
   public static void main(String[] args) throws IOException {
@@ -36,8 +39,7 @@ public class BeyondGood {
         worksheetFrame.render();
         worksheetFrame.display();
       }
-    }
-    else if (args.length > 2) {
+    } else if (args.length > 2) {
       if (args[0].equals("-in")) {
         f = new File(args[1]);
         w = new Worksheet();
@@ -51,13 +53,11 @@ public class BeyondGood {
         }
         try {
           WorksheetReader.read(wbc, r);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
           System.out.println(e.getMessage());
           return;
         }
-      }
-      else {
+      } else {
         throw new IllegalArgumentException("Invalid Command Line");
       }
       if (args.length == 3) {
@@ -65,16 +65,13 @@ public class BeyondGood {
           IWorksheetView worksheetFrame = new WorksheetFrameView(w);
           //worksheetFrame.render();
           worksheetFrame.display();
-        }
-        else if (args[2].equals("-edit")) {
+        } else if (args[2].equals("-edit")) {
           IWorksheetView editableWorksheet = new EditableWorksheetFrameView(w);
           Features controller = new BasicEditableWorksheetController(w, editableWorksheet);
-        }
-        else {
+        } else {
           throw new IllegalArgumentException("Invalid command line");
         }
-      }
-      else {
+      } else {
         switch (args[2]) {
           case "-eval":
             String s = "";
@@ -100,8 +97,7 @@ public class BeyondGood {
             throw new IllegalArgumentException("Invalid Command Line");
         }
       }
-    }
-    else {
+    } else {
       throw new IllegalArgumentException("Invalid Command Line");
     }
   }

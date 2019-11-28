@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Represents a single spreadsheet.
- * Holds a HashMap of Cells whose keys are the string evaluation of their position.
+ * Represents a single spreadsheet. Holds a HashMap of Cells whose keys are the string evaluation of
+ * their position.
  */
 public class Worksheet implements IWorksheet {
 
@@ -57,19 +57,17 @@ public class Worksheet implements IWorksheet {
     }
     if (c.getContents().startsWith("=")) {
       return new EvaluateCell(this).apply(Parser.parse(c.getContents().substring(1)));
-    }
-    else {
+    } else {
       try {
         double value = Double.parseDouble(c.getContents());
         return new SNumber(value);
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         switch (c.getContents()) {
-          case "true" :
+          case "true":
             return new SBoolean(true);
-          case "false" :
+          case "false":
             return new SBoolean(false);
-          default :
+          default:
             return new SString(c.getContents());
         }
       }
@@ -93,9 +91,8 @@ public class Worksheet implements IWorksheet {
           String celCol = cell.substring(0, i);
           int celRow = Integer.parseInt(cell.substring(i));
           return ((!celCol.equals(""))
-              && (celCol.matches("^[a-zA-Z]*$")));
-        }
-        catch (Exception e) {
+                  && (celCol.matches("^[a-zA-Z]*$")));
+        } catch (Exception e) {
           return false;
         }
       }
@@ -117,7 +114,7 @@ public class Worksheet implements IWorksheet {
 
   @Override
   public Set<String> getListOfReferences(WorksheetCell c, List<String> list) {
-    if (c.getContents().substring(0,1).equals("=")) {
+    if (c.getContents().substring(0, 1).equals("=")) {
       Sexp s = Parser.parse(c.getContents().substring(1));
       Set<String> uniqueRef = new HashSet<String>(new GetAllRef(this, list).apply(s));
       return uniqueRef;
@@ -143,8 +140,7 @@ public class Worksheet implements IWorksheet {
       character = key.substring(i, i + 1);
       try {
         Integer.parseInt(character);
-      }
-      catch (NumberFormatException e) {
+      } catch (NumberFormatException e) {
         col += character;
       }
     }
@@ -157,12 +153,10 @@ public class Worksheet implements IWorksheet {
     for (int i = 0; i <= key.length(); i++) {
       try {
         return Integer.parseInt(rest);
-      }
-      catch (NumberFormatException e) {
+      } catch (NumberFormatException e) {
         try {
           rest = key.substring(i);
-        }
-        catch (IndexOutOfBoundsException ioobe) {
+        } catch (IndexOutOfBoundsException ioobe) {
           return -1;
         }
       }

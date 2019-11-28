@@ -40,8 +40,7 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
     String first = l.get(0).toString();
     if (SexpFunction.isOneOf(first)) {
       output.append(new EvaluateCell(this.worksheet).apply(new SList(l)).toString());
-    }
-    else {
+    } else {
       for (Sexp s : l) {
         String str = new ConcatFunc(this.worksheet).apply(s);
         str = str.replaceAll("^\"|\"$", "");
@@ -58,18 +57,15 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
       WorksheetCell c = this.worksheet.getCellAt(s);
       try {
         return this.worksheet.evaluateCell(s).toString();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         return "";
       }
-    }
-    else if (s.contains(":")) {
+    } else if (s.contains(":")) {
       String left = s.substring(0, s.indexOf(":"));
       String right = s.substring(s.indexOf(":") + 1);
       if (!(this.worksheet.isValidName(left) && this.worksheet.isValidName(right))) {
         return "";
-      }
-      else {
+      } else {
         String leftCol = "";
         String rightCol = "";
         int leftRow = 0;
@@ -93,8 +89,7 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
         if (left.toUpperCase().compareTo(right.toUpperCase()) <= 0) {
           topLeft = new Coord(Coord.colNameToIndex(leftCol), leftRow);
           bottomRight = new Coord(Coord.colNameToIndex(rightCol), rightRow);
-        }
-        else {
+        } else {
           return "";
         }
         List<Sexp> references = this.worksheet.getAllReferences(topLeft, bottomRight);
@@ -104,11 +99,9 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
         }
         return total.toString();
       }
-    }
-    else if (this.worksheet.isValidName(s)) {
+    } else if (this.worksheet.isValidName(s)) {
       return "";
-    }
-    else {
+    } else {
       return "";
     }
   }

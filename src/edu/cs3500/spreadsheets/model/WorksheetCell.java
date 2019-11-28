@@ -12,7 +12,8 @@ public interface WorksheetCell {
 
   /**
    * changes contents of this cell to the given string.
-   * @param newContents   new contents to be set to the cell contents
+   *
+   * @param newContents new contents to be set to the cell contents
    */
   void editContents(String newContents);
 

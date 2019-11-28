@@ -11,6 +11,7 @@ public class Cell implements WorksheetCell {
 
   /**
    * Constructs a cell.
+   *
    * @param c the string contents of the cell
    */
   public Cell(String c) {

@@ -8,6 +8,7 @@ public class WorksheetBuilderClass implements WorksheetReader.WorksheetBuilder {
 
   /**
    * Constructor for the worksheetBuilder class.
+   *
    * @param w the worksheet to build into
    */
   public WorksheetBuilderClass(IWorksheet w) {

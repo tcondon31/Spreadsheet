@@ -5,9 +5,8 @@ import edu.cs3500.spreadsheets.model.IWorksheet;
 import edu.cs3500.spreadsheets.view.IWorksheetView;
 
 /**
- * Implementation of a controller for an Editable worksheet.
- * Contains methods that are able to alter cells, change the selected cell,
- * and revert cell contents back to normal.
+ * Implementation of a controller for an Editable worksheet. Contains methods that are able to alter
+ * cells, change the selected cell, and revert cell contents back to normal.
  */
 public class BasicEditableWorksheetController implements Features {
 
@@ -15,9 +14,10 @@ public class BasicEditableWorksheetController implements Features {
   private IWorksheetView view;
 
   /**
-   * Constructs a controller
+   * Constructs a controller.
+   *
    * @param worksheet the model to base the controller on
-   * @param view the display of the model
+   * @param view      the display of the model
    */
   public BasicEditableWorksheetController(IWorksheet worksheet, IWorksheetView view) {
     this.worksheet = worksheet;
@@ -30,34 +30,36 @@ public class BasicEditableWorksheetController implements Features {
   public void changeCellContents(String cellKey, String newContents) {
     if (this.worksheet.containsKey(cellKey)) {
       this.worksheet.editCell(cellKey, newContents);
-    }
-    else {
+    } else {
       this.worksheet.addCell(this.worksheet.getColumnIndex(cellKey),
-        this.worksheet.getRowIndex(cellKey),
-          new Cell(newContents));
+              this.worksheet.getRowIndex(cellKey),
+              new Cell(newContents));
     }
     this.view.render();
   }
 
   @Override
   public String rejectEdits(String cellKey) {
-        return this.view.getSelectedCellContents();
-    }
+    return this.view.getSelectedCellContents();
+  }
 
   @Override
   public void changeSelected(String direction) {
     switch (direction) {
-      case "up" :
+      case "up":
         this.view.changeSelected(1, 0);
         break;
-      case "down" :
+      case "down":
         this.view.changeSelected(-1, 0);
         break;
-      case "left" :
+      case "left":
         this.view.changeSelected(0, -1);
         break;
-      case "right" :
+      case "right":
         this.view.changeSelected(0, 1);
+        break;
+      default:
+        // do nothing
         break;
     }
     this.view.updateTextField();
@@ -66,15 +68,15 @@ public class BasicEditableWorksheetController implements Features {
 
   @Override
   public void resetFocus() {
-      this.view.resetFocus();
+    this.view.resetFocus();
   }
 
   @Override
   public void clearCell(String cellKey) {
-      this.worksheet.removeCell(cellKey);
-      this.view.render();
-      this.view.updateTextField();
-      this.view.repaintImmediately();
+    this.worksheet.removeCell(cellKey);
+    this.view.render();
+    this.view.updateTextField();
+    this.view.repaintImmediately();
   }
 
 }

@@ -1,9 +1,12 @@
 package edu.cs3500.spreadsheets.view;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
+/**
+ * represents a class used for infinite scrolling by knowing when the scrollbar reaches the end and
+ * expanding the size of the worksheet.
+ */
 public class ScrollAdjuster implements AdjustmentListener {
 
   private IWorksheetView view;
@@ -19,15 +22,12 @@ public class ScrollAdjuster implements AdjustmentListener {
     int value = e.getAdjustable().getValue();
     int orientation = e.getAdjustable().getOrientation();
     if (max - value <= size) {
-      switch (orientation) {
-        case 0: //Horizontal
-          this.view.expand(0, 10);
-          e.getAdjustable().setValue(0);
-          break;
-        case 1: //Vertical
-          this.view.expand(10, 0);
-          e.getAdjustable().setValue(0);
-          break;
+      if (orientation == 0) { // Horizontal
+        this.view.expand(0, 10);
+        e.getAdjustable().setValue(0);
+      } else if (orientation == 1) { //Vertical
+        this.view.expand(10, 0);
+        e.getAdjustable().setValue(0);
       }
     }
   }

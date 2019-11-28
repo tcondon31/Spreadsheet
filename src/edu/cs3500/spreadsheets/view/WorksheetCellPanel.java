@@ -1,7 +1,5 @@
 package edu.cs3500.spreadsheets.view;
 
-import edu.cs3500.spreadsheets.model.WorksheetCell;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -25,10 +23,11 @@ public class WorksheetCellPanel extends JPanel implements CellPanel {
 
   /**
    * Constructs a WorksheetCellPanel.
+   *
    * @param contents String contents of the cell
-   * @param xPos int position in the horizontal direction
-   * @param yPos int position in the vertical direction
-   * @param header boolean is this cell a header
+   * @param xPos     int position in the horizontal direction
+   * @param yPos     int position in the vertical direction
+   * @param header   boolean is this cell a header
    */
   public WorksheetCellPanel(String contents, int xPos, int yPos, boolean header) {
     this.contents = contents;
@@ -41,14 +40,14 @@ public class WorksheetCellPanel extends JPanel implements CellPanel {
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    Graphics2D g2d = (Graphics2D)g;
+    Graphics2D g2d = (Graphics2D) g;
     Color fillColor = Color.WHITE;
     int textOffset = 0;
     if (this.header) {
       textOffset = ViewConstants.CELL_WIDTH / 2;
       fillColor = Color.LIGHT_GRAY;
     }
-    Rectangle2D r = new Rectangle(this.xPos - 1 , this.yPos - 1,
+    Rectangle2D r = new Rectangle(this.xPos - 1, this.yPos - 1,
             ViewConstants.CELL_WIDTH + 1, ViewConstants.CELL_HEIGHT + 1);
     g2d.setClip(r);
     FontMetrics fm = g.getFontMetrics();
@@ -57,16 +56,15 @@ public class WorksheetCellPanel extends JPanel implements CellPanel {
     if (this.selected) {
       g2d.setColor(Color.BLUE);
       g2d.setStroke(new BasicStroke(3));
-    }
-    else {
+    } else {
       g2d.setColor(Color.BLACK);
       g2d.setStroke(new BasicStroke(1));
     }
     g2d.drawRect(this.xPos, this.yPos, ViewConstants.CELL_WIDTH, ViewConstants.CELL_HEIGHT);
     g2d.setColor(Color.BLACK);
     g2d.drawString(this.contents,
-        this.xPos + textOffset,
-        this.yPos + ViewConstants.CELL_HEIGHT / 2 + fm.getAscent() / 2);
+            this.xPos + textOffset,
+            this.yPos + ViewConstants.CELL_HEIGHT / 2 + fm.getAscent() / 2);
   }
 
   @Override

@@ -5,6 +5,7 @@ import edu.cs3500.spreadsheets.controller.Features;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -23,7 +24,8 @@ public class BasicEditBarPanel extends JPanel implements EditBarPanel {
 
   /**
    * Constructs a BasicEditBarPanel.
-   * @param size the size of the bar
+   *
+   * @param size      the size of the bar
    * @param gridPanel the gridPanel it assists with
    */
   public BasicEditBarPanel(int size, WorksheetGridPanel gridPanel) {
@@ -34,36 +36,25 @@ public class BasicEditBarPanel extends JPanel implements EditBarPanel {
     this.textField = new JTextField();
     this.setLayout(new FlowLayout(FlowLayout.LEFT));
     this.setPreferredSize(
-        new Dimension(this.size * ViewConstants.CELL_WIDTH, 30));
+            new Dimension(this.size * ViewConstants.CELL_WIDTH, 30));
     this.textField.setPreferredSize(new Dimension(200, ViewConstants.CELL_HEIGHT));
     this.enter.setPreferredSize(new Dimension(20, 20));
-    this.cancel.setPreferredSize(new Dimension(20,20));
+    this.cancel.setPreferredSize(new Dimension(20, 20));
     this.add(this.enter);
     this.add(this.cancel);
     this.add(this.textField);
   }
 
-  /**
-   * constructor for a BasicEditBarPanel with the contents of the textBox already set.
-   * @param size
-   * @param gridPanel
-   * @param textFieldContents
-   */
-  public BasicEditBarPanel(int size, WorksheetGridPanel gridPanel, String textFieldContents) {
-    this(size, gridPanel);
-    this.textField.setText(textFieldContents);
-  }
-
   @Override
   public void changeTextField(String contents) {
-        this.textField.setText(contents);
-    }
+    this.textField.setText(contents);
+  }
 
   @Override
   public void expand(int numCellsToExpand) {
     int currentWidth = this.getPreferredSize().width;
     this.setPreferredSize(
-        new Dimension(currentWidth + ViewConstants.CELL_WIDTH * numCellsToExpand, 30));
+            new Dimension(currentWidth + ViewConstants.CELL_WIDTH * numCellsToExpand, 30));
   }
 
   @Override

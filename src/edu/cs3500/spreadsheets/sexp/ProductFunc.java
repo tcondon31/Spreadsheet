@@ -42,12 +42,10 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
       try {
         total *= Double.parseDouble(
                 new EvaluateCell(this.worksheet).apply(new SList(l)).toString());
-      }
-      catch (NumberFormatException e) {
+      } catch (NumberFormatException e) {
         throw new IllegalArgumentException("Not a valid S-Expression");
       }
-    }
-    else {
+    } else {
       for (Sexp s : l) {
         total *= new ProductFunc(this.worksheet).apply(s);
       }
@@ -61,23 +59,19 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
       WorksheetCell c = this.worksheet.getCellAt(s);
       try {
         return Double.parseDouble(this.worksheet.evaluateCell(s).toString());
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         if (e.getMessage().equals("Cyclic reference in cell")) {
           throw e;
-        }
-        else {
+        } else {
           return 0.0;
         }
       }
-    }
-    else if (s.contains(":")) {
+    } else if (s.contains(":")) {
       String left = s.substring(0, s.indexOf(":"));
       String right = s.substring(s.indexOf(":") + 1);
       if (!(this.worksheet.isValidName(left) && this.worksheet.isValidName(right))) {
         return 0.0;
-      }
-      else {
+      } else {
         String leftCol = "";
         String rightCol = "";
         int leftRow = 0;
@@ -101,8 +95,7 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
         if (left.toUpperCase().compareTo(right.toUpperCase()) <= 0) {
           topLeft = new Coord(Coord.colNameToIndex(leftCol), leftRow);
           bottomRight = new Coord(Coord.colNameToIndex(rightCol), rightRow);
-        }
-        else {
+        } else {
           return 0.0;
         }
         List<Sexp> references = this.worksheet.getAllReferences(topLeft, bottomRight);
@@ -113,11 +106,9 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
         return total;
 
       }
-    }
-    else if (this.worksheet.isValidName(s)) {
+    } else if (this.worksheet.isValidName(s)) {
       return 0.0;
-    }
-    else {
+    } else {
       return 0.0;
     }
   }

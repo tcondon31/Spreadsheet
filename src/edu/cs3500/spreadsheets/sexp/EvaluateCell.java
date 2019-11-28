@@ -9,11 +9,10 @@ import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetCell;
 
 /**
- * Function object designed to evaluate a cell, then delegates to other objects
- * depending on what function it should call, or evaluates it here if it is
- * not a formula.
+ * Function object designed to evaluate a cell, then delegates to other objects depending on what
+ * function it should call, or evaluates it here if it is not a formula.
  */
-public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
+public class EvaluateCell implements Func<Sexp, Sexp>, SexpVisitor<Sexp> {
 
   private Worksheet worksheet;
 
@@ -42,15 +41,12 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
       WorksheetCell c = this.worksheet.getCellAt(s);
       try {
         return this.worksheet.evaluateCell(s);
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         throw new IllegalArgumentException("Could not evaluate symbol");
       }
-    }
-    else if (this.worksheet.isValidName(s)) {
+    } else if (this.worksheet.isValidName(s)) {
       return new SString("");
-    }
-    else {
+    } else {
       throw new IllegalArgumentException("Could not evaluate symbol");
     }
   }
@@ -63,21 +59,18 @@ public class EvaluateCell implements Func<Sexp, Sexp>,SexpVisitor<Sexp> {
   @Override
   public Sexp visitSList(List l) {
     try {
-      SSymbol first = (SSymbol)l.get(0);
+      SSymbol first = (SSymbol) l.get(0);
       String firstString = first.toString();
       List<Sexp> rest = l.subList(1, l.size());
       if (rest.size() < 1) {
         throw new IllegalArgumentException("Not enough arguments");
-      }
-      else if (rest.size() == 1) {
+      } else if (rest.size() == 1) {
         return SexpFunction.executeFunction(firstString, rest.get(0), this.worksheet);
-      }
-      else {
+      } else {
         return SexpFunction.executeFunction(
                 firstString, new SList(this.getValidList(rest)), this.worksheet);
       }
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       if (e.getMessage().equals("Cyclic reference in cell")) {
         throw e;
       }

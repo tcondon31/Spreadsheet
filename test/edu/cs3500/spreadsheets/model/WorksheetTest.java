@@ -4,6 +4,7 @@ import edu.cs3500.spreadsheets.sexp.SBoolean;
 import edu.cs3500.spreadsheets.sexp.SNumber;
 import edu.cs3500.spreadsheets.sexp.SString;
 import edu.cs3500.spreadsheets.sexp.SSymbol;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -123,12 +124,12 @@ public class WorksheetTest {
     assertEquals(new SNumber(0), w1.evaluateCell("A14"));
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void evaluateCyclic1() {
     w1.evaluateCell("A7");
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void evaluateCyclic2() {
     w1.evaluateCell("A8");
   }
@@ -148,11 +149,11 @@ public class WorksheetTest {
     initCells();
     assertEquals(new ArrayList<SSymbol>(Arrays.asList(new SSymbol("A1"),
             new SSymbol("A2"))),
-        w1.getAllReferences(new Coord(1, 1), new Coord(1, 2)));
+            w1.getAllReferences(new Coord(1, 1), new Coord(1, 2)));
     assertEquals(new ArrayList<SSymbol>(Arrays.asList(new SSymbol("A1"),
             new SSymbol("A2"),
-        new SSymbol("B1"), new SSymbol("B2"))),
-        w1.getAllReferences(new Coord(1, 1), new Coord(2, 2)));
+            new SSymbol("B1"), new SSymbol("B2"))),
+            w1.getAllReferences(new Coord(1, 1), new Coord(2, 2)));
 
   }
 

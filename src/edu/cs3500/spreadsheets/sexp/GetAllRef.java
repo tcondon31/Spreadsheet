@@ -18,7 +18,8 @@ public class GetAllRef implements Func<Sexp, List<String>>, SexpVisitor<List<Str
 
   /**
    * Constructor for the function object.
-   * @param w the worksheet to be referenced
+   *
+   * @param w    the worksheet to be referenced
    * @param list the list of references to be passed along and added to
    */
   public GetAllRef(Worksheet w, List<String> list) {
@@ -58,14 +59,12 @@ public class GetAllRef implements Func<Sexp, List<String>>, SexpVisitor<List<Str
         this.list.addAll(this.worksheet.getListOfReferences(c, this.list));
         return this.list;
       }
-    }
-    else if (s.contains(":")) {
+    } else if (s.contains(":")) {
       String left = s.substring(0, s.indexOf(":"));
       String right = s.substring(s.indexOf(":") + 1);
       if (!(this.worksheet.isValidName(left) && this.worksheet.isValidName(right))) {
         return this.list;
-      }
-      else {
+      } else {
         String leftCol = "";
         String rightCol = "";
         int leftRow = 0;

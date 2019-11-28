@@ -2,12 +2,31 @@ package edu.cs3500.spreadsheets.view;
 
 import edu.cs3500.spreadsheets.controller.Features;
 
+/**
+ * represents a panel that includes controls such as buttons and text fields for editing the
+ * Worksheet.
+ */
 public interface EditBarPanel {
 
-    void changeTextField(String contents);
+  /**
+   * changes the text in the text field.
+   *
+   * @param contents contents to change it to
+   */
+  void changeTextField(String contents);
 
-    void expand(int numCellsToExpand);
+  /**
+   * expands the size of the edit bar panel.
+   *
+   * @param numCellsToExpand how many cells to expand it by
+   */
+  void expand(int numCellsToExpand);
 
-    void addFeatures(Features features);
+  /**
+   * used to communicate listeners/callbacks to controller.
+   *
+   * @param features the controller
+   */
+  void addFeatures(Features features);
 
 }

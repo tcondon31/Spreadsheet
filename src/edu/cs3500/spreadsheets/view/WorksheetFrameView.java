@@ -26,6 +26,7 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
 
   /**
    * constructs a GUI view.
+   *
    * @param worksheet IWorksheet to base the view off of
    */
   public WorksheetFrameView(IWorksheet worksheet) throws IOException {
@@ -41,7 +42,7 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
     setLocation(200, 200);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setResizable(true);
-    this.setMinimumSize(new Dimension(300,300));
+    this.setMinimumSize(new Dimension(300, 300));
     this.setLayout(new BorderLayout());
 
     this.columnHeaderPanel = new ScrollColumnHeaderPanel(ViewConstants.STARTING_SIZE);
@@ -54,20 +55,21 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
             new Dimension(ViewConstants.CELL_WIDTH,
                     ViewConstants.CELL_HEIGHT * ViewConstants.STARTING_SIZE));
 
-    this.gridPanel = new WorksheetGridPanel(ViewConstants.STARTING_SIZE, ViewConstants.STARTING_SIZE);
+    this.gridPanel =
+            new WorksheetGridPanel(ViewConstants.STARTING_SIZE, ViewConstants.STARTING_SIZE);
     this.gridPanel.setPreferredSize(new Dimension(
             ViewConstants.CELL_WIDTH * ViewConstants.STARTING_SIZE,
             ViewConstants.CELL_HEIGHT * ViewConstants.STARTING_SIZE));
 
     this.scrollPane = new JScrollPane(this.gridPanel,
-        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-        JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+            JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     this.scrollPane.setColumnHeaderView(this.columnHeaderPanel);
     this.scrollPane.setRowHeaderView(this.rowHeaderPanel);
     this.add(this.scrollPane, BorderLayout.CENTER);
 
     this.render();
-    this.gridPanel.changeSelected(0,0);
+    this.gridPanel.changeSelected(0, 0);
   }
 
   @Override
@@ -93,20 +95,19 @@ public class WorksheetFrameView extends JFrame implements IWorksheetView {
         this.columnHeaderPanel.expand(col - this.columnHeaderPanel.numHeaders());
       }
       this.gridPanel.setPreferredSize(new Dimension(
-          this.columnHeaderPanel.numHeaders() * ViewConstants.CELL_WIDTH,
-          this.rowHeaderPanel.numHeaders() * ViewConstants.CELL_HEIGHT));
+              this.columnHeaderPanel.numHeaders() * ViewConstants.CELL_WIDTH,
+              this.rowHeaderPanel.numHeaders() * ViewConstants.CELL_HEIGHT));
       this.scrollPane.revalidate();
       this.scrollPane.repaint();
       try {
         cell = this.worksheet.evaluateCell(key).toString();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         cell = "#VALUE!";
       }
       this.gridPanel.setCell(
-          cell,
-          this.worksheet.getColumnIndex(key),
-          this.worksheet.getRowIndex(key));
+              cell,
+              this.worksheet.getColumnIndex(key),
+              this.worksheet.getRowIndex(key));
     }
   }
 

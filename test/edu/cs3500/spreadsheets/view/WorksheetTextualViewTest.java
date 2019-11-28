@@ -6,6 +6,7 @@ import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetBuilderClass;
 import edu.cs3500.spreadsheets.model.WorksheetCell;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -89,12 +90,12 @@ public class WorksheetTextualViewTest {
     assertEquals(w2.evaluateCell("B1"), w1.evaluateCell("B1"));
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testNull1() {
     IWorksheetView view = new WorksheetTextualView(null, sb);
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testNull2() {
     IWorksheetView view = new WorksheetTextualView(w1, null);
   }

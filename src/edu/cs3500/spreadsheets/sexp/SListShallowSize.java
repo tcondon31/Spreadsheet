@@ -5,8 +5,8 @@ import java.util.List;
 import edu.cs3500.spreadsheets.model.Func;
 
 /**
- * represents a function object for finding the size of an SList.
- * Does NOT check lists within the top level SList. These are counted as 1 towards the size.
+ * represents a function object for finding the size of an SList. Does NOT check lists within the
+ * top level SList. These are counted as 1 towards the size.
  */
 public class SListShallowSize implements Func<Sexp, Double>, SexpVisitor<Double> {
 
@@ -27,7 +27,7 @@ public class SListShallowSize implements Func<Sexp, Double>, SexpVisitor<Double>
 
   @Override
   public Double visitSList(List<Sexp> l) {
-    return (double)l.size();
+    return (double) l.size();
   }
 
   @Override

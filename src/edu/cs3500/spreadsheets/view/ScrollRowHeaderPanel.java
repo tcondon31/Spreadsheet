@@ -16,6 +16,7 @@ public class ScrollRowHeaderPanel extends JPanel implements ScrollHeader {
 
   /**
    * constructor for the ScrollRowHeaderPanel class.
+   *
    * @param length int rows to add
    */
   public ScrollRowHeaderPanel(int length) {
@@ -42,10 +43,10 @@ public class ScrollRowHeaderPanel extends JPanel implements ScrollHeader {
     int length = this.rowHeaders.size();
     for (int i = length + 1; i <= length + numToExpand; i++) {
       this.rowHeaders.add(
-          new WorksheetCellPanel(Integer.toString(i),
-              0,
-              (i - 1) * ViewConstants.CELL_HEIGHT,
-              true));
+              new WorksheetCellPanel(Integer.toString(i),
+                      0,
+                      (i - 1) * ViewConstants.CELL_HEIGHT,
+                      true));
     }
     this.setPreferredSize(new Dimension(
             ViewConstants.CELL_WIDTH,
