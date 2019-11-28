@@ -17,4 +17,12 @@ using the scroll bars on the sides of the frame. It is also able to handle a mou
 that selects the cell that is clicked on. This will be useful when dealing with controllers
 and editing contents of cells.
 
-Assignment 7:
+Our controller takes in a model that is an IWorksheet and a view which is an IWorksheetView.
+It contains methods that would result in altering the model in anyway and changing the state.
+These methods are controlled by clicking either of the two buttons on the top to select changes
+or revert changes, or by clicking specific key inputs. The user is able to move the selected
+cell through the use of arrow keys and change the contents of a cell using the given text box above.
+
+The only big changes we made since the last assignment were adding methods to interfaces in order
+to give us more access to information across all classes and to be able to do new things with
+our previously created classes. No other major changes were made to the design or the code.
