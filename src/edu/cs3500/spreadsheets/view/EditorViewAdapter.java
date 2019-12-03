@@ -25,6 +25,6 @@ public class EditorViewAdapter extends EditableWorksheetFrameView implements IWo
 
   @Override
   public void addFeatures(Features features) {
-    this.view.addFeatures(features);
+    this.view.addFeatures((edu.cs3500.spreadsheets.provider.Features) features);
   }
 }

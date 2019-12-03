@@ -3,7 +3,6 @@ package edu.cs3500.spreadsheets.provider;
 import java.util.Stack;
 
 import edu.cs3500.spreadsheets.model.Coord;
-import edu.cs3500.spreadsheets.model.formula.ValueFormula;
 
 
 /**

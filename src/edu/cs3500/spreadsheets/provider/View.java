@@ -2,7 +2,7 @@ package edu.cs3500.spreadsheets.provider;
 
 import java.io.IOException;
 
-import edu.cs3500.spreadsheets.controller.Features;
+import edu.cs3500.spreadsheets.provider.Features;
 
 /**
  * Creates a visualization of the worksheet.

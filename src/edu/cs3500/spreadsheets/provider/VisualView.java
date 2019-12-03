@@ -3,7 +3,7 @@ package edu.cs3500.spreadsheets.provider;
 import javax.swing.JFrame;
 
 
-import edu.cs3500.spreadsheets.controller.Features;
+import edu.cs3500.spreadsheets.provider.Features;
 
 /**
  * This is a VisualView class, that is a view that represents a model in gui form. Represents a

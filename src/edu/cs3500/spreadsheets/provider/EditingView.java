@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 
-import edu.cs3500.spreadsheets.controller.Features;
+import edu.cs3500.spreadsheets.provider.Features;
 import edu.cs3500.spreadsheets.model.Coord;
 
 /**
