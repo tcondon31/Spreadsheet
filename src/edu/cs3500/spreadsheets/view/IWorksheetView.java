@@ -14,7 +14,7 @@ public interface IWorksheetView {
    *
    * @throws IOException if the appendable cannot be appended onto
    */
-  void render();
+  void render() throws IOException;
 
   /**
    * Display this view.

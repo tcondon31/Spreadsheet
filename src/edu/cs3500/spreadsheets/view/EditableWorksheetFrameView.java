@@ -94,7 +94,7 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
    * @throws IOException if the appendable cannot be appended onto
    */
   @Override
-  public void render() {
+  public void render() throws IOException {
     List<String> allKeys = new ArrayList<>(this.worksheet.getAllCellIndices());
 
     for (int i = 0; i < allKeys.size(); i++) {

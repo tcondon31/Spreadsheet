@@ -5,6 +5,7 @@ import java.util.Objects;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.SpreadSheetModel;
 
+
 /**
  * An adaptor that represents a viewable model, a SpreadSheetModel that is for viewing purposes,
  * and does not have public methods that allow for mutating the model.
