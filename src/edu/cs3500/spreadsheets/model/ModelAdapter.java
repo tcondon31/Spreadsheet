@@ -1,95 +1,100 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.provider.CellInterface;
 import edu.cs3500.spreadsheets.provider.SpreadSheetModel;
-import edu.cs3500.spreadsheets.sexp.Sexp;
+import edu.cs3500.spreadsheets.provider.ValueFormula;
 
-import java.util.List;
 import java.util.Set;
 
-public class ModelAdapter extends Worksheet implements IWorksheet{
+public class ModelAdapter implements SpreadSheetModel{
 
-  SpreadSheetModel ivm;
+  IWorksheet w;
 
-  public ModelAdapter(SpreadSheetModel ivm) {
-    super();
-    this.ivm = ivm;
+  public ModelAdapter(IWorksheet w) {
+    this.w = w;
+  }
+
+
+  @Override
+  public void createCell(int col, int row, String contents) {
+    this.w.addCell(col, row, new Cell(contents));
   }
 
   @Override
-  public WorksheetCell getCellAt(String key) {
-    return null;
+  public void editCellContents(Coord coordinates, String contents) {
+    String key = Coord.colIndexToName(coordinates.col);
+    key += coordinates.row;
+    this.w.editCell(key, contents);
   }
 
   @Override
-  public WorksheetCell getCellAt(int col, int row) {
-    return null;
+  public String cellOriginalContents(Coord coordinates) {
+    String key = Coord.colIndexToName(coordinates.col);
+    key += coordinates.row;
+    return this.w.getCellAt(key).getContents();
   }
 
   @Override
-  public void addCell(int col, int row, WorksheetCell c) {
-    String contents = c.getContents();
-    this.ivm.createCell(col, row, contents);
+  public ValueFormula evaluatedContents(Coord cell) {
+    //TODO: this
+    String key = Coord.colIndexToName(cell.col);
+    key += cell.row;
+    return null; //this.w.evaluateCell(key);
   }
 
   @Override
-  public Sexp evaluateCell(String key) {
-    return null;
+  public String getEvaluatedContentsAsString(Coord coord) {
+    String key = Coord.colIndexToName(coord.col);
+    key += coord.row;
+    return this.w.evaluateCell(key).toString();
   }
 
   @Override
-  public List<Sexp> evaluateAllCells() {
-    return null;
+  public void deleteCellContents(Coord coord) {
+    String key = Coord.colIndexToName(coord.col);
+    key += coord.row;
+    this.w.editCell(key, "");
   }
 
   @Override
-  public boolean isValidName(String cell) {
-    return false;
+  public CellInterface getCell(Coord coord) {
+    String key = Coord.colIndexToName(coord.col);
+    key += coord.row;
+    CellInterface cell = new CellAdapter(this.w.getCellAt(key));
+    return cell;
   }
 
   @Override
-  public Set<String> getListOfReferences(WorksheetCell c, List<String> list) {
-    return null;
+  public Coord getUpperBound() {
+    int col = 1;
+    int row = 1;
+    for (String s : this.w.getAllCellIndices()) {
+      int tempCol = this.w.getColumnIndex(s);
+      int tempRow = this.w.getRowIndex(s);
+      if (tempCol > col) {
+        col = tempCol;
+      }
+      if (tempRow > row) {
+        row = tempRow;
+      }
+    }
+    return new Coord(col, row);
   }
 
   @Override
-  public List<Sexp> getAllReferences(Coord tl, Coord br) {
-    return null;
-  }
-
-  @Override
-  public boolean containsKey(String key) {
-    return false;
-  }
-
-  @Override
-  public Set<String> getAllCellIndices() {
-    return null;
-  }
-
-  @Override
-  public int getColumnIndex(String key) {
-    return 0;
-  }
-
-  @Override
-  public int getRowIndex(String key) {
-    return 0;
-  }
-
-  @Override
-  public void editCell(String key, String contents) {
-    int row = this.getRowIndex(key);
-    int col = this.getColumnIndex(key);
-    this.ivm.editCellContents(new Coord(col, row), contents);
-  }
-
-  @Override
-  public void removeCell(String key) {
-
-  }
-
-  @Override
-  public int getNumCells() {
-    return 0;
+  public Coord getLowerBound() {
+    int col = this.getUpperBound().col;
+    int row = this.getUpperBound().row;
+    for (String s : this.w.getAllCellIndices()) {
+      int tempCol = this.w.getColumnIndex(s);
+      int tempRow = this.w.getRowIndex(s);
+      if (tempCol < col) {
+        col = tempCol;
+      }
+      if (tempRow < row) {
+        row = tempRow;
+      }
+    }
+    return new Coord(col, row);
   }
 }

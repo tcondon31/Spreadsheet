@@ -76,12 +76,11 @@ public class BeyondGood {
           IWorksheetView editableWorksheet = new EditableWorksheetFrameView(w);
           Features controller = new BasicEditableWorksheetController(w, editableWorksheet);
         } else if (args[2].equals("-provider")) {
-//
-//          SpreadSheetModel ssm = new ModelAdapter(w);
-//          IViewModel ivm = new ViewModel();
-//          View prov = new EditingView(ivm);
-//          IWorksheetView view = new EditorViewAdapter(editable);
-//          Features controller = new BasicEditableWorksheetController(w, editable);
+          SpreadSheetModel ssm = new ModelAdapter(w);
+          IViewModel ivm = new ViewModel(ssm);
+          View prov = new EditingView(ivm);
+          IWorksheetView editable = new EditorViewAdapter(prov);
+          Features controller = new BasicEditableWorksheetController(w, editable);
         } else {
           throw new IllegalArgumentException("Invalid command line");
         }

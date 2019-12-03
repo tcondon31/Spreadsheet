@@ -33,7 +33,7 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
    *
    * @param worksheet the model to base it off of
    */
-  public EditableWorksheetFrameView(IWorksheet worksheet) {
+  public EditableWorksheetFrameView(IWorksheet worksheet) throws IOException{
     super("GO CRAZY AHH GO STUPID AHH");
 
     if (worksheet == null) {
@@ -183,7 +183,11 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
           features.changeSelected("right");
         } else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE
                 || e.getKeyCode() == KeyEvent.VK_DELETE) {
-          features.clearCell(gridPanel.getSelectedCellKey());
+          try {
+            features.clearCell(gridPanel.getSelectedCellKey());
+          } catch (IOException ex) {
+            ex.printStackTrace();
+          }
         }
       }
 
@@ -195,7 +199,7 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
   }
 
   @Override
-  public void expand(int numRows, int numCols) {
+  public void expand(int numRows, int numCols) throws IOException{
     this.gridPanel.expand(numRows, numCols);
     this.columnHeaderPanel.expand(numCols);
     this.rowHeaderPanel.expand(numRows);

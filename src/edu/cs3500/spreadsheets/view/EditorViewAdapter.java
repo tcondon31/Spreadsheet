@@ -1,17 +1,15 @@
 package edu.cs3500.spreadsheets.view;
 
 import edu.cs3500.spreadsheets.controller.Features;
-import edu.cs3500.spreadsheets.model.IWorksheet;
 import edu.cs3500.spreadsheets.provider.View;
 
 import java.io.IOException;
 
-public class EditorViewAdapter extends EditableWorksheetFrameView implements IWorksheetView {
+public class EditorViewAdapter implements IWorksheetView {
 
   View view;
 
-  public EditorViewAdapter(IWorksheet model, View view) {
-    super(model);
+  public EditorViewAdapter(View view) {
     if (view == null) {
       throw new IllegalArgumentException("Can not adapt null view");
     }
@@ -24,7 +22,42 @@ public class EditorViewAdapter extends EditableWorksheetFrameView implements IWo
   }
 
   @Override
+  public void display() {
+
+  }
+
+  @Override
+  public String getSelectedCellContents() {
+    return null;
+  }
+
+  @Override
+  public void changeSelected(int up, int right) {
+
+  }
+
+  @Override
   public void addFeatures(Features features) {
     this.view.addFeatures((edu.cs3500.spreadsheets.provider.Features) features);
+  }
+
+  @Override
+  public void expand(int numRows, int numCols) {
+
+  }
+
+  @Override
+  public void resetFocus() {
+
+  }
+
+  @Override
+  public void repaintImmediately() {
+
+  }
+
+  @Override
+  public void updateTextField() {
+
   }
 }

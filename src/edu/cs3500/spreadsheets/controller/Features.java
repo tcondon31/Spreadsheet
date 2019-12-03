@@ -1,5 +1,7 @@
 package edu.cs3500.spreadsheets.controller;
 
+import java.io.IOException;
+
 /**
  * Interface for a controller. Contains methods that can alter the state of a model.
  */
@@ -11,7 +13,7 @@ public interface Features {
    * @param cellKey     the location of the cell to be changed
    * @param newContents the new contents of the cell
    */
-  void changeCellContents(String cellKey, String newContents);
+  void changeCellContents(String cellKey, String newContents) throws IOException;
 
   /**
    * Returns a cell's contents to its original. Acts as a cancel to an edit.
@@ -36,6 +38,6 @@ public interface Features {
   /**
    * clears the contents of the currently selected cell.
    */
-  void clearCell(String cellKey);
+  void clearCell(String cellKey) throws IOException;
 
 }

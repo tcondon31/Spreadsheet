@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -39,14 +40,14 @@ public class BasicEditableWorksheetControllerTest {
   }
 
   @Test
-  public void changeCellContents() {
+  public void changeCellContents() throws IOException {
     assertEquals("4.0", this.model.evaluateCell("A1").toString());
     this.contr.changeCellContents("A1", "hello");
     assertEquals("\"hello\"", this.model.evaluateCell("A1").toString());
   }
 
   @Test
-  public void changeCellContents2() {
+  public void changeCellContents2() throws IOException {
     assertEquals("", this.model.evaluateCell("D80").toString());
     this.contr.changeCellContents("D80", "=(SUM 4 5)");
     assertEquals("9.0", this.model.evaluateCell("D80").toString());

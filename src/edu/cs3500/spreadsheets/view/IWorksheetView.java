@@ -49,7 +49,7 @@ public interface IWorksheetView {
    * @param numRows number of rows to add
    * @param numCols number of columns to add
    */
-  void expand(int numRows, int numCols);
+  void expand(int numRows, int numCols) throws IOException;
 
   /**
    * resets the focus of the view for keyEvents.
