@@ -2,6 +2,7 @@ package edu.cs3500.spreadsheets.view;
 
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.io.IOException;
 
 /**
  * represents a class used for infinite scrolling by knowing when the scrollbar reaches the end and
@@ -23,10 +24,18 @@ public class ScrollAdjuster implements AdjustmentListener {
     int orientation = e.getAdjustable().getOrientation();
     if (max - value <= size) {
       if (orientation == 0) { // Horizontal
-        this.view.expand(0, 10);
+        try {
+          this.view.expand(0, 10);
+        } catch (IOException ex) {
+          ex.printStackTrace();
+        }
         e.getAdjustable().setValue(0);
       } else if (orientation == 1) { //Vertical
-        this.view.expand(10, 0);
+        try {
+          this.view.expand(10, 0);
+        } catch (IOException ex) {
+          ex.printStackTrace();
+        }
         e.getAdjustable().setValue(0);
       }
     }

@@ -2,10 +2,17 @@ package edu.cs3500.spreadsheets;
 
 import edu.cs3500.spreadsheets.controller.BasicEditableWorksheetController;
 import edu.cs3500.spreadsheets.controller.Features;
+import edu.cs3500.spreadsheets.model.ModelAdapter;
 import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetBuilderClass;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
+import edu.cs3500.spreadsheets.provider.EditingView;
+import edu.cs3500.spreadsheets.provider.IViewModel;
+import edu.cs3500.spreadsheets.provider.SpreadSheetModel;
+import edu.cs3500.spreadsheets.provider.View;
+import edu.cs3500.spreadsheets.provider.ViewModel;
 import edu.cs3500.spreadsheets.view.EditableWorksheetFrameView;
+import edu.cs3500.spreadsheets.view.EditorViewAdapter;
 import edu.cs3500.spreadsheets.view.IWorksheetView;
 import edu.cs3500.spreadsheets.view.WorksheetFrameView;
 import edu.cs3500.spreadsheets.view.WorksheetTextualView;
@@ -68,6 +75,12 @@ public class BeyondGood {
         } else if (args[2].equals("-edit")) {
           IWorksheetView editableWorksheet = new EditableWorksheetFrameView(w);
           Features controller = new BasicEditableWorksheetController(w, editableWorksheet);
+        } else if (args[2].equals("-provider")) {
+          SpreadSheetModel ssm = new ModelAdapter(w);
+          IViewModel ivm = new ViewModel(ssm);
+          View prov = new EditingView(ivm);
+          IWorksheetView editable = new EditorViewAdapter(prov);
+          Features controller = new BasicEditableWorksheetController(w, editable);
         } else {
           throw new IllegalArgumentException("Invalid command line");
         }

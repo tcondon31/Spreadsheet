@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * Represents the top bar of a view. Contains JButtons with abilities and a text box.
@@ -64,7 +65,11 @@ public class BasicEditBarPanel extends JPanel implements EditBarPanel {
       public void actionPerformed(ActionEvent e) {
         String newCellContents = textField.getText();
         String selectedCell = gridPanel.getSelectedCellKey();
-        features.changeCellContents(selectedCell, newCellContents);
+        try {
+          features.changeCellContents(selectedCell, newCellContents);
+        } catch (IOException ex) {
+          ex.printStackTrace();
+        }
         features.resetFocus();
       }
     });

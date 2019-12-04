@@ -4,6 +4,8 @@ import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.IWorksheet;
 import edu.cs3500.spreadsheets.view.IWorksheetView;
 
+import java.io.IOException;
+
 /**
  * Implementation of a controller for an Editable worksheet. Contains methods that are able to alter
  * cells, change the selected cell, and revert cell contents back to normal.
@@ -27,7 +29,7 @@ public class BasicEditableWorksheetController implements Features {
   }
 
   @Override
-  public void changeCellContents(String cellKey, String newContents) {
+  public void changeCellContents(String cellKey, String newContents) throws IOException {
     if (this.worksheet.containsKey(cellKey)) {
       this.worksheet.editCell(cellKey, newContents);
     } else {
@@ -72,7 +74,7 @@ public class BasicEditableWorksheetController implements Features {
   }
 
   @Override
-  public void clearCell(String cellKey) {
+  public void clearCell(String cellKey) throws IOException{
     this.worksheet.removeCell(cellKey);
     this.view.render();
     this.view.updateTextField();
