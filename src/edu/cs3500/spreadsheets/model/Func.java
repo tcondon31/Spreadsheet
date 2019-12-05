@@ -8,7 +8,10 @@ package edu.cs3500.spreadsheets.model;
  */
 public interface Func<A, R> {
 
-  // applies the given argument to this class.
+  /**
+   * Applies the given visitor to the specified class.
+   * @param argument visitor to apply
+   */
   R apply(A argument);
 
 }
