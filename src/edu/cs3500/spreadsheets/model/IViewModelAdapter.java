@@ -6,10 +6,17 @@ import java.util.Set;
 
 import edu.cs3500.spreadsheets.provider.IViewModel;
 
+/**
+ * Adapter class for our model and the provider's view only model.
+ */
 public class IViewModelAdapter implements IViewModel {
 
   private Worksheet worksheet;
 
+  /**
+   * constructor for the adapter class.
+   * @param worksheet our model to adapt
+   */
   public IViewModelAdapter(Worksheet worksheet) {
     this.worksheet = worksheet;
   }

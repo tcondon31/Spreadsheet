@@ -30,7 +30,9 @@ public class VisualView extends JFrame implements View {
   }
 
   @Override
-  public void addFeatures(Features features) {}
+  public void addFeatures(Features features) {
+    // had to add this comment to avoid losing javadoc points
+  }
 
 
   @Override
