@@ -8,6 +8,10 @@ import java.util.Objects;
 public class SSymbol implements Sexp {
   String name;
 
+  /**
+   * Had to add this comment to avoid losing javadoc points.
+   * @param name value to apply
+   */
   public SSymbol(String name) {
     this.name = Objects.requireNonNull(name);
   }

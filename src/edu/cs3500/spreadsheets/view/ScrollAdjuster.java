@@ -12,6 +12,10 @@ public class ScrollAdjuster implements AdjustmentListener {
 
   private IWorksheetView view;
 
+  /**
+   * Constructs a ScrollAdjuster that listens to adjustments in the view.
+   * @param view value to apply
+   */
   public ScrollAdjuster(IWorksheetView view) {
     this.view = view;
   }

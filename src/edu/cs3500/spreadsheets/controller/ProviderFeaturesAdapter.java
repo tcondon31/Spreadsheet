@@ -2,15 +2,22 @@ package edu.cs3500.spreadsheets.controller;
 
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.JTextField;
 
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.provider.Features;
 
+/**
+ * Adapter class for our Features interface and the provider's Features interface.
+ */
 public class ProviderFeaturesAdapter implements Features {
 
   edu.cs3500.spreadsheets.controller.Features ourController;
 
+  /**
+   * Constructor for the adapter class.
+   * @param ourController our version of the controller to adapt
+   */
   public ProviderFeaturesAdapter(edu.cs3500.spreadsheets.controller.Features ourController) {
     this.ourController = ourController;
   }

@@ -79,7 +79,7 @@ public class BasicEditableWorksheetController implements Features {
   }
 
   @Override
-  public void clearCell(String cellKey) throws IOException{
+  public void clearCell(String cellKey) throws IOException {
     this.worksheet.removeCell(cellKey);
     this.view.render();
     this.view.updateTextField();

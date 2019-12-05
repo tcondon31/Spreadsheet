@@ -13,7 +13,7 @@ public class ViewModel implements IViewModel {
   private SpreadSheetModel model;
 
   /**
-   * Constructs a ViewModel
+   * Constructs a ViewModel.
    * @param model a model that this view model is representing as a read only model
    */
   public ViewModel(SpreadSheetModel model) {

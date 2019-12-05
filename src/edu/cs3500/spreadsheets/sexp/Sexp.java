@@ -17,5 +17,9 @@ package edu.cs3500.spreadsheets.sexp;
  * </p>
  */
 public interface Sexp {
+
+  /**
+   * Had to add this comment to avoid losing javadoc point.
+   */
   <R> R accept(SexpVisitor<R> visitor);
 }

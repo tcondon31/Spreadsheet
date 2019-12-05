@@ -8,6 +8,10 @@ import java.util.Objects;
 public class SNumber implements Sexp {
   double num;
 
+  /**
+   * Had to add this comment to avoid losing javadoc points.
+   * @param num value to apply
+   */
   public SNumber(double num) {
     this.num = num;
   }

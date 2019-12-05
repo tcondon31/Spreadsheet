@@ -33,7 +33,7 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
    *
    * @param worksheet the model to base it off of
    */
-  public EditableWorksheetFrameView(IWorksheet worksheet) throws IOException{
+  public EditableWorksheetFrameView(IWorksheet worksheet) throws IOException {
     super("GO CRAZY AHH GO STUPID AHH");
 
     if (worksheet == null) {
@@ -199,7 +199,7 @@ public class EditableWorksheetFrameView extends JFrame implements IWorksheetView
   }
 
   @Override
-  public void expand(int numRows, int numCols) throws IOException{
+  public void expand(int numRows, int numCols) throws IOException {
     this.gridPanel.expand(numRows, numCols);
     this.columnHeaderPanel.expand(numCols);
     this.rowHeaderPanel.expand(numRows);

@@ -15,6 +15,10 @@ public class SumFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
 
   protected Worksheet worksheet;
 
+  /**
+   * Had to add this comment to avoid losing javadoc points.
+   * @param w value to apply
+   */
   public SumFunc(Worksheet w) {
     this.worksheet = w;
   }

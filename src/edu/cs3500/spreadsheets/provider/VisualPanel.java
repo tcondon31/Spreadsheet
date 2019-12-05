@@ -227,14 +227,18 @@ public class VisualPanel extends JPanel implements ActionListener {
    * Returns the offset of the row, how much the grid is off the origin vertically, up or down.
    * @return the offset of the row, how much the grid is off the origin vertically, up or down
    */
-  protected int getOffsetRow() { return offsetRow;}
+  protected int getOffsetRow() {
+    return offsetRow;
+  }
 
   /**
    * Returns the offset of the column, how much the grid is off the origin horizontally, left or
    * right.
    * @return the offset of the row, how much the grid is off the origin horizontally, left or right
    */
-  protected int getOffsetCol() { return offsetCol;}
+  protected int getOffsetCol() {
+    return offsetCol;
+  }
 
 
   @Override

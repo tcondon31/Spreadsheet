@@ -8,6 +8,10 @@ import java.util.Objects;
 public class SBoolean implements Sexp {
   boolean val;
 
+  /**
+   * Had to add this comment to avoid losing javadoc points.
+   * @param val value to apply
+   */
   public SBoolean(boolean val) {
     this.val = val;
   }
