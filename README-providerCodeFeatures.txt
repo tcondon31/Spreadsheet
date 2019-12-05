@@ -1,0 +1,3 @@
+Our provider's view works almost perfectly at this point. All functionality is retained from their implementation with the exception of saving a file through the save button. This is because our view did not have a method to support this feature so it could not be implemented through the adapters.
+
+The functionality that does still work is the mouse listener to select a cell, the ability to update cells, and those that reference them, the ability to reject the edits to a cell, and navigating through the worksheet. Whereas our view made use of scrolling to get to new cells, this view implemented button handlers to scroll in each direction. This implementation works perfectly and had no problems when used with our model.
