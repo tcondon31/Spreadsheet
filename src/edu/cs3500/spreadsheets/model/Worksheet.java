@@ -24,6 +24,9 @@ public class Worksheet implements IWorksheet {
 
   private HashMap<String, WorksheetCell> sheet;
 
+  /**
+   * constructs a new Worksheet represented by a blank hashmap.
+   */
   public Worksheet() {
     this.sheet = new HashMap<>();
   }

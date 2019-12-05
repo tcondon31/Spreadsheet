@@ -15,6 +15,10 @@ public class ProductFunc implements Func<Sexp, Double>, SexpVisitor<Double> {
 
   private Worksheet worksheet;
 
+  /**
+   * Constructor for the product visitor.
+   * @param worksheet Worksheet to pass in
+   */
   public ProductFunc(Worksheet worksheet) {
     this.worksheet = worksheet;
   }

@@ -9,7 +9,9 @@ import edu.cs3500.spreadsheets.model.Coord;
  */
 public interface SpreadSheetModel {
 
-
+  /**
+   * had to add this comment to avoid losing javadoc points.
+   */
   void createCell(int col, int row, String contents);
 
   /**

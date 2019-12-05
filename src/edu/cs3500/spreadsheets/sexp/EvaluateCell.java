@@ -16,6 +16,10 @@ public class EvaluateCell implements Func<Sexp, Sexp>, SexpVisitor<Sexp> {
 
   private Worksheet worksheet;
 
+  /**
+   * Constructor for the visitor class that evaluates cells.
+   * @param w Worksheet to pass in
+   */
   public EvaluateCell(Worksheet w) {
     this.worksheet = w;
   }

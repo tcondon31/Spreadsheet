@@ -17,6 +17,10 @@ public class LessThanComparator implements Func<Sexp, Double>, SexpVisitor<Doubl
 
   private Worksheet worksheet;
 
+  /**
+   * Constructor for the less than visitor.
+   * @param worksheet Worksheet to pass in
+   */
   public LessThanComparator(Worksheet worksheet) {
     this.worksheet = worksheet;
   }

@@ -8,6 +8,7 @@ package edu.cs3500.spreadsheets.model;
  */
 public interface Func<A, R> {
 
+  // applies the given argument to this class.
   R apply(A argument);
 
 }

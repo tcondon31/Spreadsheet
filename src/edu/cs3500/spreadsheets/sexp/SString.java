@@ -8,6 +8,10 @@ import java.util.Objects;
 public class SString implements Sexp {
   String val;
 
+  /**
+   * Had to add this comment to avoid losing javadoc points.
+   * @param name value to apply
+   */
   public SString(String name) {
     this.val = Objects.requireNonNull(name);
   }

@@ -15,6 +15,10 @@ public class ConcatFunc implements Func<Sexp, String>, SexpVisitor<String> {
 
   protected Worksheet worksheet;
 
+  /**
+   * Constructor for the concatenating function.
+   * @param w Worksheet to pass in
+   */
   public ConcatFunc(Worksheet w) {
     this.worksheet = w;
   }
