@@ -25,6 +25,11 @@ public class BasicEditableWorksheetController implements Features {
     this.worksheet = worksheet;
     this.view = view;
     this.view.addFeatures(this);
+    try {
+      this.view.render();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     this.view.display();
   }
 

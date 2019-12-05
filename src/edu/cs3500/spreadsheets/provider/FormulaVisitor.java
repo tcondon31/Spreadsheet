@@ -42,7 +42,7 @@ public interface FormulaVisitor<R> {
    * @param func the function
    * @return the desired result
    */
-  R visitFunction(FormulaFunction func);
+  R visitFunction(IFormulaFunction func);
 
   /**
    * Process a reference.

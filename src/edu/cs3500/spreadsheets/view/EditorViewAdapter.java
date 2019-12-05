@@ -1,13 +1,15 @@
 package edu.cs3500.spreadsheets.view;
 
 import edu.cs3500.spreadsheets.controller.Features;
+import edu.cs3500.spreadsheets.controller.ProviderFeaturesAdapter;
+import edu.cs3500.spreadsheets.provider.MouseListener;
 import edu.cs3500.spreadsheets.provider.View;
 
 import java.io.IOException;
 
 public class EditorViewAdapter implements IWorksheetView {
 
-  View view;
+  private View view;
 
   public EditorViewAdapter(View view) {
     if (view == null) {
@@ -23,7 +25,7 @@ public class EditorViewAdapter implements IWorksheetView {
 
   @Override
   public void display() {
-
+    // this is taken care of in the draw function of their visual panel
   }
 
   @Override
@@ -38,7 +40,9 @@ public class EditorViewAdapter implements IWorksheetView {
 
   @Override
   public void addFeatures(Features features) {
-    this.view.addFeatures((edu.cs3500.spreadsheets.provider.Features) features);
+    edu.cs3500.spreadsheets.provider.Features controllerAdapter
+            = new ProviderFeaturesAdapter(features);
+    this.view.addFeatures(controllerAdapter);
   }
 
   @Override

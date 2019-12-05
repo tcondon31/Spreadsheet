@@ -2,7 +2,7 @@ package edu.cs3500.spreadsheets;
 
 import edu.cs3500.spreadsheets.controller.BasicEditableWorksheetController;
 import edu.cs3500.spreadsheets.controller.Features;
-import edu.cs3500.spreadsheets.model.ModelAdapter;
+import edu.cs3500.spreadsheets.model.IViewModelAdapter;
 import edu.cs3500.spreadsheets.model.Worksheet;
 import edu.cs3500.spreadsheets.model.WorksheetBuilderClass;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
@@ -76,11 +76,9 @@ public class BeyondGood {
           IWorksheetView editableWorksheet = new EditableWorksheetFrameView(w);
           Features controller = new BasicEditableWorksheetController(w, editableWorksheet);
         } else if (args[2].equals("-provider")) {
-          SpreadSheetModel ssm = new ModelAdapter(w);
-          IViewModel ivm = new ViewModel(ssm);
-          View prov = new EditingView(ivm);
-          IWorksheetView editable = new EditorViewAdapter(prov);
-          Features controller = new BasicEditableWorksheetController(w, editable);
+          View providerView = new EditingView(new IViewModelAdapter(w));
+          IWorksheetView ourView = new EditorViewAdapter(providerView);
+          Features controller = new BasicEditableWorksheetController(w, ourView);
         } else {
           throw new IllegalArgumentException("Invalid command line");
         }
